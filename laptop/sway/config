@@ -1,0 +1,316 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+
+# Color settings
+
+set $bg-color            #29798a
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #424242
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #424242
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #424242
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #424242
+
+
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term tilix
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu j4-dmenu-desktop 
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+         timeout 10 "export BRIGHT=$(brightnessctl -c backlight get) && brightnessctl -c backlight set 5%" \
+              resume "brightnessctl -c backlight set $BRIGHT" \
+	 timeout 300 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         timeout 310 '/home/mina/.bin/scripts/i3lock.sh' \
+         before-sleep '/home/mina/.bin/scripts/i3lock.sh'
+
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+
+# Lock screen
+bindsym $mod+Mod1+l exec /home/mina/.bin/scripts/i3lock.sh
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+
+bindsym $mod+d exec $menu
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+odiaeresis focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move u
+bindsym $mod+Shift+odiaeresis move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#s split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+
+# !! CUSTOM KEYBINDIGS !!
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle 
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86MonBrightnessUp exec brightnessctl -c backlight set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl -c backlight set 5%-
+
+    # Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
+
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Start polybar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+exec_always /home/mina/.config/waybar/launch.sh
+# i3-gaps settings
+
+# Disable border
+smart_gaps on
+#smart_borders on
+#for_window [class="^.*"] border pixel 2 
+default_border pixel 2
+default_floating_border normal 5
+for_window [floating] border normal 5
+floating_modifier Mod1
+hide_edge_borders smart
+
+gaps inner 5 
+gaps outer 2
+
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
+
+
+# Keybord layout
+input "type:keyboard" {
+    xkb_layout fi
+    xkb_variant ,nodeadkeys
+}
+# Touchpad 
+input "type:touchpad" {
+    tap enabled
+    natural_scroll enabled
+}
+
+#Screenshots
+
+set $photo_folder $(xdg-user-dir PICTURES)/Screenshots/$(date +'%Y-%m-%d-%H%M%S.png')
+
+bindsym Print exec --no-startup-id grimshot save screen $photo_folder
+bindsym Ctrl+Print exec --no-startup-id grimshot copy screen
+bindsym Mod1+Print exec --no-startup-id grimshot save active $photo_folder
+bindsym Ctrl+Mod1+Print exec --no-startup-id grimshot copy active 
+bindsym --release Shift+Print exec --no-startup-id grimshot save area $photo_folder
+bindsym Ctrl+Shift+Print exec --no-startup-id grimshot copy area 
+
+#GTK themes
+
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+
+    dbus-launch gsettings set $gnome-schema icon-theme 'Mint-Y-Aqua'
+    dbus-launch gsettings set $gnome-schema cursor-theme 'DMZ-Black'
+    dbus-launch gsettings set $gnome-schema gtk-theme 'CBlack'
+}
+
+
+
+# CUSTOM STARTUP
+#
+#xsettingsd
+exec_always --no-startup-id /usr/bin/xsettingsd
+
+exec_always --no-startup-id /usr/bin/xmodmap
+#exec_always --no-startup-id dex -ae sway
+exec --no-startup-id nm-applet --indicator 
+#exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
+#exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-a11y-settings
+
+#Polkit 
+exec --no-startup-id dbus-launch /usr/bin/lxpolkit
+#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
+
+google-drive-ocamlfuse /media/GoogleDrive/
+
+# Floating programs
+for_window [class="Pavucontrol"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="About"] floating enable
+# steam floating
+for_window [class="Steam" title="Friends List"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+
+# Program exec
+bindsym $mod+F5 exec pavucontrol
+#exec dbus-run-session sway
+
+include /etc/sway/conhtmlfig.d/*
