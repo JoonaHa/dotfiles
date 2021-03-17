@@ -56,7 +56,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
-Plug 'lervag/vimtex'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 
@@ -89,10 +89,21 @@ nmap <silent> <A-C-Tab> gt
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
+" System Clipboard
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 map <C-v> "+P
 map <C-s> :w<CR>
+" WSL clipboard
+if has('wsl')
+    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+    augroup Yank
+        autocmd!
+        autocmd TextYankPost * call system('/mnt/c/Windows/System32/clip.exe ',@")"autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    augroup END
+    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
+endif
+
 
 
 " Don't open NERDTree in a saved session "
@@ -143,7 +154,6 @@ function! s:CloseBracket()
     endif
 endfunction
 inoremap <expr> {<Enter> <SID>CloseBracket()
-
 
 
 """""""""""" COC Vim """"""""""""""""
