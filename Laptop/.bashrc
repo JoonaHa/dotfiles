@@ -133,6 +133,7 @@ fi
 if [ $WAYLAND_DISPLAY ]; then
     export CLUTTER_BACKEND="wayland"
     export MOZ_ENABLE_WAYLAND=1
+    export GDK_BACKEND="wayland"
     export XDG_SESSION_TYPE="wayland"
     export ECORE_EVAS_ENGINE="wayland_egl"
     export ELM_ENGINE="wayland_egl"
