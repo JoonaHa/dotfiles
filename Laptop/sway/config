@@ -55,8 +55,8 @@ output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-160
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 10 "export BRIGHT=$(brightnessctl -c backlight get) && brightnessctl -c backlight set 5%" \
-              resume "brightnessctl -c backlight set $BRIGHT" \
+         timeout 60 '/home/mina/.bin/scripts/brightnessctrl.sh 5' \
+              resume '/home/mina/.bin/scripts/brightnessctrl.sh' \
 	 timeout 300 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
          timeout 310 '/home/mina/.bin/scripts/i3lock.sh' \
@@ -289,7 +289,7 @@ exec --no-startup-id dbus-launch /usr/bin/lxpolkit
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 
-google-drive-ocamlfuse /media/GoogleDrive/
+exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive/
 
 # Floating programs
 for_window [class="Pavucontrol"] floating enable
