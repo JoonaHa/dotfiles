@@ -89,6 +89,14 @@ nmap <silent> <A-C-Tab> gt
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
+nnoremap <C-w>, <C-w><
+nnoremap <C-w>. <C-w>>
+nnoremap <A-,> <C-w><
+nnoremap <A-.> <C-w>>
+
+nnoremap <A-+> <C-w>+
+nnoremap <A--> <C-w>-
+
 " System Clipboard
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
