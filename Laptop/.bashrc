@@ -129,18 +129,6 @@ if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
 
-# Custom Wayland varibale exports
-if [ $WAYLAND_DISPLAY ]; then
-    export CLUTTER_BACKEND="wayland"
-    export MOZ_ENABLE_WAYLAND=1
-    export GDK_BACKEND="wayland"
-    export XDG_SESSION_TYPE="wayland"
-    export ECORE_EVAS_ENGINE="wayland_egl"
-    export ELM_ENGINE="wayland_egl"
-    export SDL_VIDEODRIVER="wayland"      
-    export _JAVA_AWT_WM_NONREPARENTING=1
-fi
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source /home/mina/.tmc-autocomplete.sh || true
 source /home/mina/.tmc-autocomplete.sh || true
