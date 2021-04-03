@@ -225,14 +225,18 @@ exec_always /home/mina/.config/waybar/launch.sh
 # Disable border
 smart_gaps on
 #smart_borders on
-#for_window [class="^.*"] border pixel 2 
+for_window [app_id=".*"] border pixel 2
 default_border pixel 2
-default_floating_border normal 5
-for_window [floating] border normal 5
+
+# Everything floating
+hide_edge_borders both
+default_floating_border normal 3
+for_window [floating] border normal 3
 floating_modifier Mod1
 hide_edge_borders smart
+no_focus [window_role="pop-up"]
+for_window [floating] resize set 640 480
 
-gaps inner 5 
 gaps outer 2
 
 bindsym $mod+z		gaps outer current plus 5
