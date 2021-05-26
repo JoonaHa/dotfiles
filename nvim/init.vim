@@ -5,6 +5,10 @@ set mousefocus
 set mousehide
 set mousemodel=popup_setpos
 
+set ts=8
+set ai sw=4
+set expandtab
+" replace tab with spaces
 set nocompatible
 set hlsearch
 set number
@@ -25,9 +29,7 @@ set ruler
 set showcmd
 set laststatus=2
 
-set ts=8
-set ai sw=4
-" replace tab with spaces
+
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:indent_guides_enable_on_vim_startup = 1
@@ -47,7 +49,7 @@ Plug 'dbakker/vim-lint'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'gryf/wombat256grf'
-Plug '/morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'hzchirs/vim-material'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -57,6 +59,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 
@@ -291,3 +294,49 @@ packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
+
+
+""""""""""""HexMode""""""""""""""""
+
+" ex command for togling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    silent :e " this will reload the file without trickeries 
+              "(DOS line endings will be shown entirely )
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
