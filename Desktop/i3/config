@@ -9,7 +9,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $terminal tilix
+set $terminal alacritty
 
 # Monitor setup with xrandr
 
@@ -58,6 +58,8 @@ bindsym $mod+Shift+Return exec $terminal --quake
 
 # kill focused window
 bindsym $mod+Shift+q kill
+#bindsym Mod1+F4 kill 
+bindsym Mod1+F4 exec ~/.config/i3/kill9_focused.sh 
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -217,8 +219,10 @@ bindsym $mod+Print exec --no-startup-id gnome-screenshot -i
 
 bindsym Print exec --no-startup-id maim $shot_path
 bindsym Ctrl+Print exec --no-startup-id maim | $xclip
-bindsym --release Mod1+Print exec --no-startup-id maim --window $(xdotool getactivewindow) $shot_path
-bindsym --release Ctrl+Mod1+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | $xclip
+#bindsym --release Alt_L+Ctrl+Print exec --no-startup-id ~/.config/i3/ss_window_clip.sh 
+bindsym Mod1+Print exec --no-startup-id/home/mina/.config/i3/ss_window_file.sh $shot_path 
+#bindsym --release Ctrl+Mod1+Print exec --no-startup-id tilix
+bindsym Ctrl+Mod1+Print exec --no-startup-id /home/mina/.config/i3/ss_window_clip.sh
 bindsym --release Shift+Print exec --no-startup-id maim -s $shot_path
 bindsym --release Ctrl+Shift+Print exec --no-startup-id maim -s | $xclip
 
@@ -231,12 +235,6 @@ bindsym --release Ctrl+Shift+Print exec --no-startup-id maim -s | $xclip
 smart_gaps on
 #smart_borders on
 for_window [class="^.*"] border pixel 2 
-default_border pixel 2
-default_floating_border normal 5
-for_window [floating] border normal 5
-floating_modifier Mod1
-hide_edge_borders smart
-
 gaps inner 15 
 gaps outer 2
 
@@ -267,7 +265,6 @@ exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive
 exec_always --no-startup-id xinput --set-prop 'Logitech Gaming Mouse G400' 'Accel Speed ' 0
 exec_always --no-startup-id xinput --set-prop 'Logitech Gaming Mouse G400' 'libinput Accel Profile Enabled' 0, 1
 
-exec_always --no-startup-id /usr/bin/xsettingsd
 
 #Picom
 exec_always --no-startup-id picom
