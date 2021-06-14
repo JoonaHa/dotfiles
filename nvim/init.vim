@@ -12,6 +12,7 @@ set expandtab
 set nocompatible
 set hlsearch
 set number
+set ignorecase
 set smartcase
 syntax enable 
 filetype plugin indent on
