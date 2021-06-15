@@ -93,7 +93,7 @@ bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
+bindsym Mod1+F4 exec ~/.bin/scripts/kill9_focused.sh 
 
 bindsym $mod+d exec $menu
 
@@ -224,7 +224,7 @@ exec_always /home/mina/.config/waybar/launch.sh
 
 # Disable border
 smart_gaps on
-#smart_borders on
+smart_borders on
 for_window [app_id=".*"] border pixel 2
 default_border pixel 2
 
