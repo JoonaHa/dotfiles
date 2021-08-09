@@ -2,17 +2,17 @@
     //"layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 25, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
+    "width": 1920,
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media", "tray"],
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["cpu", "memory", "temperature", "backlight","network", "pulseaudio", "battery", "battery#bat2", "clock"],
+    "modules-right": ["cpu", "memory", "temperature", "backlight","network", "pulseaudio", "battery", "clock", "tray"],
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
+//     "sway/workspaces": {
+//         "disable-scroll": true,
+//         "all-outputs": true,
+//         "format": "{name}: {icon}",
+ //
     //         "1": "",
     //         "2": "",
     //         "3": "",
@@ -22,7 +22,7 @@
     //         "focused": "",
     //         "default": ""
     //     }
-    // },
+//        },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -61,7 +61,8 @@
     },
     "tray": {
          "icon-size": 21,
-        "spacing": 10
+        "spacing": 10,
+        "show-passive-items": "true"
     },
     "clock": {
         // "timezone": "America/New_York",
@@ -97,7 +98,7 @@
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -144,5 +145,6 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
-}
 
+
+}

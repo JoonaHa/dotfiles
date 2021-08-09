@@ -135,8 +135,8 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+
+
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -217,9 +217,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Start polybar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-exec_always /home/mina/.config/waybar/launch.sh
+bar {
+
+  swaybar_command /home/mina/.config/waybar/launch.sh
+}
 # i3-gaps settings
 
 # Disable border
@@ -227,15 +228,22 @@ smart_gaps on
 smart_borders on
 for_window [app_id=".*"] border pixel 2
 default_border pixel 2
+for_window [tiling] border pixel 2
+#for_window [tiling_from="user"] border pixel 2
 
 # Everything floating
 hide_edge_borders both
 default_floating_border normal 3
 for_window [floating] border normal 3
+#for_window [floating_from="user"] border normal 3
 floating_modifier Mod1
 hide_edge_borders smart
 no_focus [window_role="pop-up"]
-for_window [floating] resize set 640 480
+
+bindsym $mod+Shift+space floating toggle; \
+    [tiling con_id=__focused__] border pixel 2; \
+    [floating con_id=__focused__] border normal 3
+
 
 gaps outer 2
 
@@ -284,7 +292,7 @@ exec_always --no-startup-id /usr/bin/xsettingsd
 
 exec_always --no-startup-id /usr/bin/xmodmap
 #exec_always --no-startup-id dex -ae sway
-exec --no-startup-id nm-applet --indicator 
+exec --no-startup-id dbus-launch nm-applet --indicator 
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-a11y-settings
 
@@ -312,6 +320,8 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
+# No swayidle when fullscreen
+for_window [class="[.]*"] inhibit_idle fullscreen
 
 # Program exec
 bindsym $mod+F5 exec pavucontrol
