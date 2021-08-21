@@ -14,7 +14,7 @@ set hlsearch
 set number
 set ignorecase
 set smartcase
-syntax enable 
+syntax enable
 filetype plugin indent on
 set showmatch
 set autoindent
@@ -22,28 +22,35 @@ set smartindent
 set nowrap
 set backspace=indent,eol,start " make backspace work like most other programs
 :inoremap jk <esc>
-
 let g:rustfmt_file_lines = 1
 "" Change map leader to dot
 :let mapleader = "."
 set ruler
 set showcmd
 set laststatus=2
-
+set foldmethod=syntax
+set nofoldenable
+if has('win32')
+    set nofsync
+endif
 
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:indent_guides_enable_on_vim_startup = 1
+let g:airline_powerline_fonts = 1
 set spelllang=en_us
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
-
 " ========== Plugins ==================="
 call plug#begin()
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-prettier'
+Plug 'neoclide/coc-snippets'
+Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
 Plug 'scrooloose/syntastic'
 Plug 'dbakker/vim-lint'
@@ -61,6 +68,11 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'SirVer/ultisnips'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
+Plug 'pechorin/any-jump.vim'
+Plug 'airblade/vim-rooter'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 
@@ -69,7 +81,8 @@ call plug#end()
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
 
-
+:nnoremap <silent><esc> :noh<CR>
+:nnoremap <esc>[ <esc>[
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
@@ -116,8 +129,7 @@ if has('wsl')
     noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
 endif
 
-
-
+"====NERDTree===="
 " Don't open NERDTree in a saved session "
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
@@ -152,7 +164,29 @@ set background=dark
 let g:one_allow_italics = 1 
 colorscheme one
  	
-
+"function! GitBranch()
+"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"endfunction
+"
+"function! StatuslineGit()
+"  let l:branchname = GitBranch()
+"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+"endfunction
+"
+"set statusline=
+"set statusline+=%#PmenuSel#
+"set statusline+=%{StatuslineGit()}
+"set statusline+=%#LineNr#
+"set statusline+=\ %f
+"set statusline+=%m\
+"set statusline+=%=
+"set statusline+=%#CursorColumn#
+"set statusline+=\ %y
+"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+"set statusline+=\[%{&fileformat}\]
+"set statusline+=\ %p%%
+"set statusline+=\ %l:%c
+"set statusline+=\ 
 "auto close {
 function! s:CloseBracket()
     let line = getline('.')
@@ -183,7 +217,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -295,7 +329,49 @@ packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+"====Anyjump===
+" Normal mode: Jump to definition under cursor
+nnoremap <leader>j :AnyJump<CR>
+
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>j :AnyJumpVisual<CR>
+
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
 
 """"""""""""HexMode""""""""""""""""
 
@@ -341,3 +417,216 @@ function ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction
+
+"===Fzf===
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+map <C-f> :Files<CR>
+map <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>m :Marks<CR>
+
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+
+" Get text in files with Rg
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+" Ripgrep advanced
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" Git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)"
+
+
+"=============Coc-fzf=================
+" mappings
+nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
+nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
+nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <space>e       :<C-u>CocFzfList extensions<CR>
+nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
+nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>"
+
+"====MarkdownPreview====="
+" " set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 0
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+" default: 0
+let g:mkdp_refresh_slow = 1
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it can be use in markdown file
+" default: 0
+let g:mkdp_command_for_global = 0
+
+" set to 1, preview server available to others in your network
+" by default, the server listens on localhost (127.0.0.1)
+" default: 0
+let g:mkdp_open_to_the_world = 0
+
+" use custom IP to open preview page
+" useful when you work in remote vim and preview on local browser
+" more detail see: https://github.com/iamcco/markdown-preview.nvim/pull/9
+" default empty
+let g:mkdp_open_ip = ''
+
+" specify browser to open preview page
+" default: ''
+let g:mkdp_browser = ''
+
+" set to 1, echo preview page url in command line when open preview page
+" default is 0
+let g:mkdp_echo_preview_url = 0
+
+" a custom vim function name to open preview page
+" this function will receive url as param
+" default is empty
+let g:mkdp_browserfunc = ''
+
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+" sequence_diagrams: js-sequence-diagrams options
+" content_editable: if enable content editable for preview page, default: v:false
+" disable_filename: if disable filename header for preview page, default: 0
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 0
+    \ }
+
+" use a custom markdown style must be absolute path
+" like '/Users/username/markdown.css' or expand('~/markdown.css')
+let g:mkdp_markdown_css = ''
+
+" use a custom highlight style must absolute path
+" like '/Users/username/highlight.css' or expand('~/highlight.css')
+let g:mkdp_highlight_css = ''
+
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
+
+" recognized filetypes
+" these filetypes will have MarkdownPreview... commands
+let g:mkdp_filetypes = ['markdown']
+
+"======FZF====
+" This is the default option:
+"   - Preview window on the right with 50% width
+"   - CTRL-/ will toggle preview window.
+" - Note that this array is passed as arguments to fzf#vim#with_preview function.
+" - To learn more about preview window options, see `--preview-window` section of `man fzf`.
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+" Preview window on the upper side of the window with 40% height,
+" hidden by default, ctrl-/ to toggle
+let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
+
+" Empty value to disable preview window altogether
+let g:fzf_preview_window = []"
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+" ======Syntastic=====
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
