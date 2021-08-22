@@ -59,7 +59,7 @@ bindsym $mod+Shift+Return exec $terminal --quake
 # kill focused window
 bindsym $mod+Shift+q kill
 #bindsym Mod1+F4 kill 
-bindsym Mod1+F4 exec ~/.config/i3/kill9_focused.sh 
+bindsym Mod1+F4 exec ~/.bin/scripts/kill9_focused.sh 
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -107,7 +107,9 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+shift+space floating toggle
+bindsym $mod+Shift+space floating toggle; \
+    [tiling con_id=__focused__] border pixel 2; \
+    [floating con_id=__focused__] border normal 3
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -235,11 +237,23 @@ bindsym --release Ctrl+Shift+Print exec --no-startup-id maim -s | $xclip
 smart_gaps on
 #smart_borders on
 for_window [class="^.*"] border pixel 2 
-gaps inner 15 
+default_border pixel 2
+for_window [tiling] border pixel 2 
+gaps inner 10
 gaps outer 2
 
-bindsym $mod+z		gaps outer current plus 5
-bindsym $mod+Shift+z	gaps outer current minus 5
+
+ # Everything floating
+ hide_edge_borders both
+ default_floating_border normal 4
+ for_window [floating] border normal 4
+ floating_modifier Mod1
+ hide_edge_borders smart
+ no_focus [window_role="pop-up"]
+
+
+bindsym $mod+z		gaps outer current plus 2
+bindsym $mod+Shift+z	gaps outer current minus 2
 
 
 # Start polybar to display a workspace bar (plus the system information i3status
@@ -254,7 +268,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always gsettings set $gnome-schema cursor-theme 'elementary'
 
 # CUSTOM STARTUP
-exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet --indicator
 exec_always --no-startup-id feh --bg-scale /home/mina/.local/share/backgrounds/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg
 #exec --no-startup-id /usr/lib/x86_64-linux-gnu/policykit-1-pantheon/io.elementary.desktop.agent-polkit
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Gnome; /usr/lib/gnome-settings-daemon/gsd-xsettings
