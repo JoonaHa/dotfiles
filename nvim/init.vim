@@ -50,6 +50,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-prettier'
 Plug 'neoclide/coc-snippets'
+Plug 'tpope/vim-fugitive'
 Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
 Plug 'scrooloose/syntastic'
@@ -418,8 +419,8 @@ function ToggleHex()
   let &modifiable=l:oldmodifiable
 endfunction
 
-"===Fzf===
-" This is the default extra key bindings
+"=================Fzf================" 
+"This is the default extra key bindings=
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
@@ -430,6 +431,8 @@ let g:fzf_action = {
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+let g:fzf_preview_window = ['right:50%', 'ctrl-\'] 
 
 map <C-f> :Files<CR>
 map <leader>b :Buffers<CR>
@@ -464,7 +467,9 @@ let g:fzf_colors =
 
 "Get Files
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+\ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
 
 
 " Get text in files with Rg
@@ -488,8 +493,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)"
-
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 "=============Coc-fzf=================
 " mappings
@@ -502,6 +506,7 @@ nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
 nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
 nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
 nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>"
+
 
 "====MarkdownPreview====="
 " " set to 1, nvim will open the preview window after entering the markdown buffer
@@ -595,31 +600,6 @@ let g:mkdp_page_title = '「${name}」'
 " these filetypes will have MarkdownPreview... commands
 let g:mkdp_filetypes = ['markdown']
 
-"======FZF====
-" This is the default option:
-"   - Preview window on the right with 50% width
-"   - CTRL-/ will toggle preview window.
-" - Note that this array is passed as arguments to fzf#vim#with_preview function.
-" - To learn more about preview window options, see `--preview-window` section of `man fzf`.
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-
-" Preview window on the upper side of the window with 40% height,
-" hidden by default, ctrl-/ to toggle
-let g:fzf_preview_window = ['up:40%:hidden', 'ctrl-/']
-
-" Empty value to disable preview window altogether
-let g:fzf_preview_window = []"
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
-" [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" [Tags] Command to generate tags file
-let g:fzf_tags_command = 'ctags -R'
-
-" [Commands] --expect expression for directly executing the command
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 " ======Syntastic=====
 set statusline+=%#warningmsg#
