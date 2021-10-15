@@ -23,6 +23,8 @@ set nowrap
 set backspace=indent,eol,start " make backspace work like most other programs
 :inoremap jk <esc>
 let g:rustfmt_file_lines = 1
+let g:syntastic_python_checkers = ['pylint']
+let g:python_host_prog = "/usr/bin/python2" 
 "" Change map leader to dot
 :let mapleader = "."
 set ruler
@@ -32,7 +34,9 @@ set foldmethod=syntax
 set nofoldenable
 if has('win32')
     set nofsync
+    let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
+
 
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -48,17 +52,11 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-prettier'
-Plug 'neoclide/coc-snippets'
-Plug 'tpope/vim-fugitive'
 Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
-Plug 'scrooloose/syntastic'
 Plug 'dbakker/vim-lint'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gryf/wombat256grf'
-Plug 'morhetz/gruvbox'
 Plug 'hzchirs/vim-material'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -68,19 +66,36 @@ Plug 'plasticboy/vim-markdown'
 Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
 Plug 'pechorin/any-jump.vim'
 Plug 'airblade/vim-rooter'
 Plug 'vim-airline/vim-airline'
+Plug 'cjrh/vim-conda'
 call plug#end()
 
-
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-sh',
+  \ 'coc-clangd',
+  \ 'coc-cmake',
+  \ 'coc-jedi',
+  \ 'coc-git',
+  \ 'coc-markdownlint',
+  \ 'coc-sh',
+  \ 'coc-powershell',
+  \ 'coc-powershell',
+  \ ]
 
 " ======= Keybinding ======== 
 map <C-n> :NERDTreeToggle<CR>
-map <C-t> :Vista!!<CR>
+map <C-p> :Vista!!<CR>
 
 :nnoremap <silent><esc> :noh<CR>
 :nnoremap <esc>[ <esc>[
@@ -121,14 +136,14 @@ vnoremap <C-x> "+d
 map <C-v> "+P
 map <C-s> :w<CR>
 " WSL clipboard
-if has('wsl')
-    let s:clip = '/mnt/c/Windows/System32/clip.exe'
-    augroup Yank
-        autocmd!
-        autocmd TextYankPost * call system('/mnt/c/Windows/System32/clip.exe ',@")"autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-    augroup END
-    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
-endif
+"if has('wsl')
+"    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+"    augroup Yank
+"        autocmd!
+"        autocmd TextYankPost * call system('/mnt/c/Windows/System32/clip.exe ',@")"autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+"    augroup END
+"    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
+"endif
 
 "====NERDTree===="
 " Don't open NERDTree in a saved session "
@@ -235,8 +250,7 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -649,6 +663,18 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 5
+
+map <F8> <ESC>:call SyntasticToggle()<CR>
+let g:syntastic_is_open = 0  
+function! SyntasticToggle()
+  let g:wi = getloclist(2, {'winid' : 1})
+  if g:wi != {}
+    lclose
+  else
+    Errors
+  endif
+endfunction
