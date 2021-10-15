@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Material Theme Darker High Contrast",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.zoomLevel": 1,
+    "vsicons.dontShowNewVersionMessage": true,
+    "python.jediEnabled": false,
+    "editor.renderWhitespace": "none"
+}
