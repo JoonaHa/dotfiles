@@ -29,6 +29,7 @@ window:
   # Number of lines/columns (not pixels) in the terminal. The number of columns
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
+  opacity: 0.8
   dimensions:
     columns: 0
     lines: 0
@@ -337,7 +338,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.8
+# Deprecated background_opacity: 0.8
 
 selection:
   # This string contains all characters that are used as separators for
