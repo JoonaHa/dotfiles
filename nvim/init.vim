@@ -4,9 +4,9 @@ set mouse=a
 set mousefocus
 set mousehide
 set mousemodel=popup_setpos
-
+set encoding=UTF-8
 set ts=8
-set ai sw=4
+set ai sw=2
 set expandtab
 " replace tab with spaces
 set nocompatible
@@ -23,6 +23,8 @@ set nowrap
 set backspace=indent,eol,start " make backspace work like most other programs
 :inoremap jk <esc>
 let g:rustfmt_file_lines = 1
+let g:syntastic_python_checkers = ['pylint']
+let g:python_host_prog = "/usr/bin/python2" 
 "" Change map leader to dot
 :let mapleader = "."
 set ruler
@@ -32,12 +34,13 @@ set foldmethod=syntax
 set nofoldenable
 if has('win32')
     set nofsync
+    let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
+
 
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:indent_guides_enable_on_vim_startup = 1
-let g:airline_powerline_fonts = 1
 set spelllang=en_us
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
@@ -48,17 +51,12 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-prettier'
-Plug 'neoclide/coc-snippets'
-Plug 'tpope/vim-fugitive'
 Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
-Plug 'scrooloose/syntastic'
 Plug 'dbakker/vim-lint'
+Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gryf/wombat256grf'
-Plug 'morhetz/gruvbox'
 Plug 'hzchirs/vim-material'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -68,19 +66,44 @@ Plug 'plasticboy/vim-markdown'
 Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install'  }
 Plug 'pechorin/any-jump.vim'
 Plug 'airblade/vim-rooter'
 Plug 'vim-airline/vim-airline'
+Plug 'cjrh/vim-conda'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
 
-
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-sh',
+  \ 'coc-clangd',
+  \ 'coc-cmake',
+  \ 'coc-jedi',
+  \ 'coc-git',
+  \ 'coc-markdownlint',
+  \ 'coc-sh',
+  \ 'coc-powershell',
+  \ 'coc-vetur',
+  \ 'coc-tsserver',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-highlight'
+  \ ]
 
 " ======= Keybinding ======== 
 map <C-n> :NERDTreeToggle<CR>
-map <C-t> :Vista!!<CR>
+map <C-p> :Vista!!<CR>
 
 :nnoremap <silent><esc> :noh<CR>
 :nnoremap <esc>[ <esc>[
@@ -107,6 +130,7 @@ nmap <silent> <A-C-Tab> gt
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
+"Splite sizing 
 nnoremap <C-w>, <C-w><
 nnoremap <C-w>. <C-w>>
 nnoremap <A-,> <C-w><
@@ -120,17 +144,21 @@ vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 map <C-v> "+P
 map <C-s> :w<CR>
+map <C-a> ggVG
 " WSL clipboard
-if has('wsl')
-    let s:clip = '/mnt/c/Windows/System32/clip.exe'
-    augroup Yank
-        autocmd!
-        autocmd TextYankPost * call system('/mnt/c/Windows/System32/clip.exe ',@")"autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-    augroup END
-    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
-endif
+"if has('wsl')
+"    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+"    augroup Yank
+"        autocmd!
+"        autocmd TextYankPost * call system('/mnt/c/Windows/System32/clip.exe ',@")"autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+"    augroup END
+"    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
+"endif
 
 "====NERDTree===="
+
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
 " Don't open NERDTree in a saved session "
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
@@ -138,8 +166,26 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == ""
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 "Close vim if NERDTree is only window open"
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" vim-devicons
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_unite = 1
+let g:webdevicons_enable_vimfiler = 1
+let g:webdevicons_enable_ctrlp = 1
+let g:webdevicons_enable_flagship_statusline = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:webdevicons_enable_denite = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let WebDevIconsUnicodeDecorateFolderNodesExactMatches = 1
 
 " ==== THEMES ===
 "Credit joshdick
@@ -235,8 +281,7 @@ endif
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -261,8 +306,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> >g <Plug>(coc-diagnostic-prev)
+nmap <silent> <g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -361,18 +406,18 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
-"====Anyjump===
-" Normal mode: Jump to definition under cursor
-nnoremap <leader>j :AnyJump<CR>
-
-" Visual mode: jump to selected text in visual mode
-xnoremap <leader>j :AnyJumpVisual<CR>
-
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
-
-" Normal mode: open last closed search window again
-nnoremap <leader>al :AnyJumpLastResults<CR>
+" Show doc or diagnostic when howering
+"function! ShowDocIfNoDiagnostic(timer_id)
+"  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+"    silent call CocActionAsync('doHover')
+"  endif
+"endfunction
+"
+"function! s:show_hover_doc()
+"  call timer_start(500, 'ShowDocIfNoDiagnostic')
+"endfunction
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
 
 """"""""""""HexMode""""""""""""""""
 
@@ -642,13 +687,29 @@ let g:vista#renderer#icons = {
 \  }
 
 "=======Airline================
-let g:airline#extensions#tabline#enabled = 1"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 " ======Syntastic=====
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 5
+
+map <F8> <ESC>:call SyntasticToggle()<CR>
+let g:syntastic_is_open = 0  
+function! SyntasticToggle()
+  let g:wi = getloclist(2, {'winid' : 1})
+  if g:wi != {}
+    lclose
+  else
+    Errors
+  endif
+endfunction
