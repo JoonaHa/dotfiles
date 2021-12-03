@@ -4,9 +4,9 @@ set mouse=a
 set mousefocus
 set mousehide
 set mousemodel=popup_setpos
-
+set encoding=UTF-8
 set ts=8
-set ai sw=4
+set ai sw=2
 set expandtab
 " replace tab with spaces
 set nocompatible
@@ -41,7 +41,6 @@ endif
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:indent_guides_enable_on_vim_startup = 1
-let g:airline_powerline_fonts = 1
 set spelllang=en_us
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
@@ -55,6 +54,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
 Plug 'dbakker/vim-lint'
+Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'hzchirs/vim-material'
@@ -73,6 +73,10 @@ Plug 'pechorin/any-jump.vim'
 Plug 'airblade/vim-rooter'
 Plug 'vim-airline/vim-airline'
 Plug 'cjrh/vim-conda'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -90,7 +94,11 @@ let g:coc_global_extensions = [
   \ 'coc-markdownlint',
   \ 'coc-sh',
   \ 'coc-powershell',
-  \ 'coc-powershell',
+  \ 'coc-vetur',
+  \ 'coc-tsserver',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-highlight'
   \ ]
 
 " ======= Keybinding ======== 
@@ -122,6 +130,7 @@ nmap <silent> <A-C-Tab> gt
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
+"Splite sizing 
 nnoremap <C-w>, <C-w><
 nnoremap <C-w>. <C-w>>
 nnoremap <A-,> <C-w><
@@ -135,6 +144,7 @@ vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 map <C-v> "+P
 map <C-s> :w<CR>
+map <C-a> ggVG
 " WSL clipboard
 "if has('wsl')
 "    let s:clip = '/mnt/c/Windows/System32/clip.exe'
@@ -146,6 +156,9 @@ map <C-s> :w<CR>
 "endif
 
 "====NERDTree===="
+
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
 " Don't open NERDTree in a saved session "
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
@@ -153,8 +166,26 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == ""
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 "Close vim if NERDTree is only window open"
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" vim-devicons
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_unite = 1
+let g:webdevicons_enable_vimfiler = 1
+let g:webdevicons_enable_ctrlp = 1
+let g:webdevicons_enable_flagship_statusline = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+let g:webdevicons_enable_denite = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let WebDevIconsUnicodeDecorateFolderNodesExactMatches = 1
 
 " ==== THEMES ===
 "Credit joshdick
@@ -275,8 +306,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> >g <Plug>(coc-diagnostic-prev)
+nmap <silent> <g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -375,18 +406,18 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
-"====Anyjump===
-" Normal mode: Jump to definition under cursor
-nnoremap <leader>j :AnyJump<CR>
-
-" Visual mode: jump to selected text in visual mode
-xnoremap <leader>j :AnyJumpVisual<CR>
-
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
-
-" Normal mode: open last closed search window again
-nnoremap <leader>al :AnyJumpLastResults<CR>
+" Show doc or diagnostic when howering
+"function! ShowDocIfNoDiagnostic(timer_id)
+"  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
+"    silent call CocActionAsync('doHover')
+"  endif
+"endfunction
+"
+"function! s:show_hover_doc()
+"  call timer_start(500, 'ShowDocIfNoDiagnostic')
+"endfunction
+"autocmd CursorHoldI * :call <SID>show_hover_doc()
+"autocmd CursorHold * :call <SID>show_hover_doc()
 
 """"""""""""HexMode""""""""""""""""
 
@@ -656,7 +687,11 @@ let g:vista#renderer#icons = {
 \  }
 
 "=======Airline================
-let g:airline#extensions#tabline#enabled = 1"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
 " ======Syntastic=====
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
