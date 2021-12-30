@@ -26,7 +26,7 @@ let g:rustfmt_file_lines = 1
 let g:syntastic_python_checkers = ['pylint']
 let g:python_host_prog = "/usr/bin/python2" 
 "" Change map leader to dot
-:let mapleader = "."
+:let mapleader = ","
 set ruler
 set showcmd
 set laststatus=2
@@ -129,6 +129,22 @@ nmap <silent> <A-Tab> gT
 nmap <silent> <A-C-Tab> gt
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
+
+" Move line up or down
+nnoremap <C-S-Down> :m .+1<CR>==
+nnoremap <C-S-Up> :m .-2<CR>==
+inoremap <C-S-Down> <Esc>:m .+1<CR>==gi
+inoremap <C-S-Up>  <Esc>:m .-2<CR>==gi
+vnoremap <C-S-Down> :m '>+1<CR>gv=gv
+vnoremap <C-S-Up>  :m '<-2<CR>gv=gv
+
+nnoremap <C-S-j> :m .+1<CR>==
+nnoremap <C-S-k> :m .-2<CR>==
+inoremap <C-S-j> <Esc>:m .+1<CR>==gi
+inoremap <C-S-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-S-j> :m '>+1<CR>gv=gv
+vnoremap <C-S-k> :m '<-2<CR>gv=gv
+
 
 "Splite sizing 
 nnoremap <C-w>, <C-w><
