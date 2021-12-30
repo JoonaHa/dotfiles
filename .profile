@@ -26,3 +26,7 @@ export PATH=/home/mina/flutter/bin:$PATH
 export PATH=/home/mina/gradle/gradle-3.3/bin:$PATH
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+#Qt5 QGtkStyle
+#https://wiki.archlinux.org/title/Uniform_look_for_Qt_and_GTK_applications#Theme_engines
+export QT_QPA_PLATFORMTHEME=gtk2
