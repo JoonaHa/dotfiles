@@ -32,6 +32,7 @@ set showcmd
 set laststatus=2
 set foldmethod=syntax
 set nofoldenable
+filetype plugin on
 if has('win32')
     set nofsync
     let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
@@ -53,11 +54,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 Plug 'rakr/vim-one'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'jacoborus/tender.vim'
+Plug 'liuchengxu/space-vim-dark'
 Plug 'dbakker/vim-lint'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'hzchirs/vim-material'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rust-lang/rust.vim'
@@ -77,6 +80,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'baverman/vial'
+Plug 'baverman/vial-http'
 call plug#end()
 
 let g:coc_global_extensions = [
@@ -221,12 +226,12 @@ if (empty($TMUX))
 		                    set termguicolors
 				endif
 endif
-		    
-		                      
-set background=dark
-let g:one_allow_italics = 1 
-colorscheme one
- 	
+
+
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'darker' 	
+colorscheme material
+
 "function! GitBranch()
 "  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 "endfunction
