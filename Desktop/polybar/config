@@ -18,7 +18,7 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #DD222
+background = #010a12
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -29,7 +29,7 @@ alert = #bd2c40
 
 [bar/bottom]
 separator ="  "
-monitor = ${env:MONITOR:DP-0}
+monitor = ${env:MONITOR:}
 bottom = true
 monitor-strict = true
 width = 100%
@@ -54,23 +54,24 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Open Sans Condensed:style=Regular:pixelsize=11;3
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-0 = Open Sans Condensed:style=Bold:antialias=true:pixelsize=11;3
+font-1 = unifont:fontformat=truetype:size=11:antialias=true;2
+font-2 = siji:pixelsize=11:antialias=true;1
 
 modules-left = i3
 modules-center = xwindow
 modules-right = spotify pulseaudio memory cpu date powermenu
 
-tray-position =right
+tray-position = ${env:TRAY_POSITION:right}
 tray-padding = 2
 ;override-redirect = false
-tray-detached = false
-tray-maxsize = 20
+;tray-detached = false
+;tray-maxsize = 20
 ;tray-background = ${colors.background}
 ;tray-offset-x = 0
 ;tray-offset-y = 0
 ;tray-scale = 1.0
+
 
 ;wm-restack = bspwm
 wm-restack = i3
@@ -153,7 +154,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -286,10 +287,9 @@ type = internal/date
 interval = 5
 
 date = 
-date-alt = " %Y-%m-%d"
+date-alt = "%a  %d-%m-%C%y"
 
-time = %H:%M
-time-alt = %H:%M:%S
+time= %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
@@ -327,6 +327,7 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+click-left = pavucontrol
 
 [module/alsa]
 type = internal/alsa
