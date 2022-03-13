@@ -6,7 +6,7 @@ killall -q polybar
 # polybar-msg cmd quit
 
 # Launch bar
-echo "---" >> tee -a /tmp/polybar.log
+echo "---" >> /tmp/polybar.log
 
 if type xrandr > /dev/null; then
   PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
