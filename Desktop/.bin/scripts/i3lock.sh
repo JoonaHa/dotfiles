@@ -9,7 +9,7 @@ if [ -e $TEMPDIR/head_1.png ]; then
   convert $TEMPDIR/head_1.png -scale 10% -scale 1000% $TEMPDIR/head_1.png
 #  [[ -f $HOME/Kuvat/dotfiles/qY1nKlP.png ]] && convert $TEMPDIR/head_1.png $HOME/Kuvat/dotfiles/qY1nKlP.png -gravity center -composite -matte $TEMPDIR/head_1.png
   #convert $TEMPDIR/head_0.png $TEMPDIR/head_1.png +append $TEMPDIR/screen.png
-  convert +append -gravity north $TEMPDIR/head_0.png $TEMPDIR/head_1.png $TEMPDIR/screen.png
+  convert +append -gravity center $TEMPDIR/head_0.png $TEMPDIR/head_1.png $TEMPDIR/screen.png
 else
   mv $TEMPDIR/head_0.png $TEMPDIR/screen.png
 fi
