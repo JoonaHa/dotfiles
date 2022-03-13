@@ -19,6 +19,13 @@ fi
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
+if [ -n "$DISPLAY" ]; then
+    export BROWSER="firefox"
+else 
+    export BROWSER="links"
+fi
+export EDITOR="vim"
+export VISUAL="nvim"
 # Flutter PATH
 export PATH=/home/mina/flutter/bin:$PATH
 
@@ -27,6 +34,20 @@ export PATH=/home/mina/gradle/gradle-3.3/bin:$PATH
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
-#Qt5 QGtkStyle
-#https://wiki.archlinux.org/title/Uniform_look_for_Qt_and_GTK_applications#Theme_engines
-export QT_QPA_PLATFORMTHEME=gtk2
+export PATH=~/node-v10.15.0-linux-x64/bin:$PATH
+
+export NXJ_HOME=/home/mina/JohTek/leJOS_NXJ_0.9.1beta-3
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+#
+
+export MANGOHUD=1
+# Nvidia env's
+export __GL_THREADED_OPTIMIZATIONS=1
+#export LD_PRELOAD="libpthread.so.0 libGL.so.1"
+# Use bat for manuals
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+

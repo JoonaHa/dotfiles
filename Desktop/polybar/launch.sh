@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-
+#PS4='$LINENO: '
 # Terminate already running bar instances
 killall -q polybar
 # If all your bars have ipc enabled, you can also use 
 # polybar-msg cmd quit
 
 # Launch bar
-echo "---" | tee -a /tmp/polybar.log
+echo "---" >> tee -a /tmp/polybar.log
 
-if type "xrandr"; then
+if type xrandr > /dev/null; then
   PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
   OTHERS=$(xrandr --query | grep " connected" | grep -v "primary" | cut -d" " -f1)
 

@@ -12,8 +12,7 @@ set $mod Mod4
 set $terminal alacritty
 
 # Monitor setup with xrandr
-
-exec --no-startup-id ~/.config/screenlayout/i3-screens.sh
+#exec --no-startup-id ~/.config/i3/i3-screens.sh
 set $mon1 DP-0
 set $mon2 HDMI-0	
 # Font for window titles. Will also be used by the bar unless a different font
@@ -31,7 +30,9 @@ font pango:monospace 10
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
 # Color settings
 
 set $bg-color            #29798a
@@ -165,9 +166,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # !! CUSTOM KEYBINDIGS !!
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume  alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume  alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute  alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -177,7 +179,9 @@ bindsym XF86AudioStop exec playerctl stop
 
 bindsym $mod+F5 exec pavucontrol
 bindsym $mod+Mod1+l exec /home/mina/.bin/scripts/i3lock.sh
-
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/mina/.bin/scripts/i3lock.sh
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -212,28 +216,14 @@ bindsym $mod+period exec --no-startup-id emoji-keyboard -k
 set $shot_path ~/Kuvat/Kuvakaappaukset/$(date '+%Y-%m-%d_%H:%M:%S').png
 set $xclip xclip -selection clipboard -t image/png
 
-#bindsym Print exec --no-startup-id gnome-screenshot
-bindsym $mod+Print exec --no-startup-id gnome-screenshot -i
-#bindsym Ctrl+Print exec --no-startup-id gnome-screenshot -c
-#bindsym Mod1+Print exec --no-startup-id gnome-screenshot -w
-#bindsym Ctrl+Mod1+Print exec --no-startup-id gnome-screenshot -wc
-#bindsym --release Shift+Print exec --no-startup-id gnome-screenshot -a
-#bindsym --release Ctrl+Shift+Print exec --no-startup-id gnome-screenshot -ac
-
-bindsym Print exec --no-startup-id maim $shot_path
-bindsym Ctrl+Print exec --no-startup-id maim | $xclip
-#bindsym --release Alt_L+Ctrl+Print exec --no-startup-id ~/.config/i3/ss_window_clip.sh 
-bindsym Mod1+Print exec --no-startup-id/home/mina/.config/i3/ss_window_file.sh $shot_path 
-#bindsym --release Ctrl+Mod1+Print exec --no-startup-id tilix
-bindsym Ctrl+Mod1+Print exec --no-startup-id /home/mina/.config/i3/ss_window_clip.sh
-bindsym --release Shift+Print exec --no-startup-id maim -s $shot_path
-bindsym --release Ctrl+Shift+Print exec --no-startup-id maim -s | $xclip
-
-
-
+bindsym Print exec spectacle
+bindsym --release Ctrl+Print exec maim | $xclip && notify-send 'Entire screen screenshot saved to clipboard'
+bindsym --release Mod1+Sys_Req exec maim -i $(xdotool getactivewindow) $shot_path && notify-send 'Active window screenshot saved to a file' $shot_path
+bindsym --release Ctrl+Mod1+Sys_Req exec maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png && notify-send 'Active window screenshot saved to clipboard'
+bindsym --release Shift+Print exec maim -s $shot_path && notify-send 'Selected area screenshot saved to a file' $shot_path
+bindsym --release Ctrl+Shift+Print exec maim -s | $xclip && notify-send 'Selected area screenshot saved to clipboard'
 
 # i3-gaps settings
-
 # Disable border
 smart_gaps on
 #smart_borders on
@@ -271,13 +261,14 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # CUSTOM STARTUP
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id keepassxc
-exec_always --no-startup-id feh --bg-scale /home/mina/.local/share/backgrounds/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg
+exec_always --no-startup-id feh --bg-scale /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Gnome; /usr/lib/gnome-settings-daemon/gsd-xsettings
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Pantheon; /usr/lib/gnome-settings-daemon/gsd-xsetting
 #xsettingsd
 exec_always --no-startup-id /usr/bin/xsettingsd
-exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive
+#exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive
+exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4
 # Notifications
 exec_always --no-startup-id /usr/bin/dunst
 #Mouse
