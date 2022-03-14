@@ -26,6 +26,7 @@ else
 fi
 export EDITOR="vim"
 export VISUAL="nvim"
+export SHELL=/bin/zsh
 # Flutter PATH
 export PATH=/home/mina/flutter/bin:$PATH
 
