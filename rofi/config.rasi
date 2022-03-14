@@ -1,0 +1,8 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Papirus";
+}
+//@theme "/home/mina/.local/share/rofi/themes/slate.rasi"
+@theme "/home/mina/.local/share/rofi/themes/nord.rasi"
