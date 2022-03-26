@@ -2,11 +2,15 @@
 
 TEMPDIR=/tmp
 
-sh $HOME/.bin/scripts/induvidual_scrot.sh
-convert $TEMPDIR/head_0.png -scale 10% -scale 1000% $TEMPDIR/head_0.png
+
+xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
+while IFS=' :x@,' read i w h x y; do
+    import -window root -crop ${w}x$h+$x+$y $TEMPDIR/head_$i.png
+done
+convert $TEMPDIR/head_0.png -scale 5% -scale 2000% $TEMPDIR/head_0.png
 #[[ -f $HOME/Kuvat/dotfiles/qY1nKlP.png ]] && convert $TEMPDIR/head_0.png $HOME/Kuvat/dotfiles/qY1nKlP.png -gravity center -composite -matte $TEMPDIR/head_0.png
 if [ -e $TEMPDIR/head_1.png ]; then
-  convert $TEMPDIR/head_1.png -scale 10% -scale 1000% $TEMPDIR/head_1.png
+  convert $TEMPDIR/head_1.png -scale 5% -scale 2000% $TEMPDIR/head_1.png
 #  [[ -f $HOME/Kuvat/dotfiles/qY1nKlP.png ]] && convert $TEMPDIR/head_1.png $HOME/Kuvat/dotfiles/qY1nKlP.png -gravity center -composite -matte $TEMPDIR/head_1.png
   #convert $TEMPDIR/head_0.png $TEMPDIR/head_1.png +append $TEMPDIR/screen.png
   convert +append -gravity center $TEMPDIR/head_0.png $TEMPDIR/head_1.png $TEMPDIR/screen.png
