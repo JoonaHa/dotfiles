@@ -64,7 +64,7 @@ ZSH_THEME="fishbone++"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
- HIST_STAMPS="dd/mm/yyyy"
+ HIST_STAMPS="%F %T"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -106,8 +106,17 @@ function command_not_found_handler {
 }
 
 # User configuration
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+export HISTFILE=~/.zsh_history
 
-
+# Hanled by oh-my-zsh but kept also here for documentation
+setopt extended_history       
+setopt hist_expire_dups_first 
+setopt hist_ignore_dups       
+setopt hist_ignore_space      
+setopt hist_verify            
+setopt share_history          
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
