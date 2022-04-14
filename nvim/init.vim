@@ -244,6 +244,7 @@ let g:material_terminal_italics = 1
 let g:material_theme_style = 'darker' 	
 colorscheme material
 hi CursorColumn guibg=#856262
+hi Visual gui=none guifg=none guibg=#4d3f3f
 
 "function! GitBranch()
 "  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
