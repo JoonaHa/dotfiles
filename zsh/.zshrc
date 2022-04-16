@@ -12,7 +12,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="jispwoso"
 #ZSH_THEME="spaceship"
-ZSH_THEME="fishbone++"
+#ZSH_THEME="fishbone++"
+ZSH_THEME=""
+
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -56,7 +59,7 @@ ZSH_THEME="fishbone++"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -74,7 +77,23 @@ ZSH_THEME="fishbone++"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z sudo npm)
+plugins=(
+    pure
+    zsh-autosuggestions 
+    gitfast 
+    z 
+    sudo 
+    npm 
+    pip
+    pipenv
+    docker
+    rust
+    command-not-found 
+    zsh-history-substring-search
+    zsh-completions
+    zsh-syntax-highlighting
+    autoupdate
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,6 +123,14 @@ function command_not_found_handler {
         done
     fi
 }
+
+# User configuration
+
+# Pure promt theme
+autoload -U promptinit; promptinit
+prompt pure
+# export MANPATH="/usr/local/man:$MANPATH"
+ 
 
 # User configuration
 export HISTFILESIZE=1000000000
@@ -173,6 +200,4 @@ unset __conda_setup
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
