@@ -87,6 +87,7 @@ Plug 'baverman/vial'
 Plug 'baverman/vial-http'
 Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'
+Plug 'gko/vim-coloresque'
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
 else
