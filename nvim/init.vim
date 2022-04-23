@@ -52,55 +52,68 @@ au FocusGained,BufEnter * :checktime
 
 " ========== Plugins ==================="
 call plug#begin()
+" Must have plugings
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
+Plug 'liuchengxu/vista.vim'
 Plug 'rakr/vim-one'
+Plug 'vim-airline/vim-airline'
+Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+" Tools 
+Plug 'tpope/vim-surround'
+Plug 'pechorin/any-jump.vim'
+Plug 'baverman/vial'
+Plug 'baverman/vial-http'
+Plug 'airblade/vim-rooter'
+Plug 'machakann/vim-highlightedyank'
+Plug 'luochen1990/rainbow'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'gko/vim-coloresque'
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+"if has('nvim') || has('patch-8.0.902')
+"  Plug 'mhinz/vim-signify'
+"else
+"  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+"endif
+" Themes
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
-Plug 'dbakker/vim-lint'
 Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'luochen1990/rainbow'
-Plug 'nathanaelkane/vim-indent-guides'
+" Languages
+Plug 'dbakker/vim-lint'
 Plug 'rust-lang/rust.vim'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'liuchengxu/vista.vim'
-Plug 'tpope/vim-surround'
-Plug 'machakann/vim-highlightedyank'
-"Plug 'SirVer/ultisnips'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
-Plug 'pechorin/any-jump.vim'
-Plug 'airblade/vim-rooter'
-Plug 'vim-airline/vim-airline'
 Plug 'cjrh/vim-conda'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'baverman/vial'
-Plug 'baverman/vial-http'
-Plug 'tpope/vim-fugitive'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
+Plug 'lervag/vimtex'
+" Snippets
+"Plug 'SirVer/ultisnips'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'sheerun/vim-polyglot'
-Plug 'gko/vim-coloresque'
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
 call plug#end()
 
 let g:coc_global_extensions = [
+  \ 'coc-word',
+  \ 'coc-tag',
+  \ 'coc-syntax',
+  \ 'coc-git', 
+  \ 'coc-ultisnips',
+  \ 'coc-neosnippet',
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
+  \ 'coc-rome', 
   \ 'coc-json', 
   \ 'coc-sh',
   \ 'coc-clangd',
@@ -116,7 +129,9 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-highlight',
   \ 'coc-sql',
-  \ 'coc-java'
+  \ 'coc-java',
+  \ 'coc-vimtex',
+  \ 'coc-rust-analyzer'
   \ ]
 
 " ======= Keybinding ======== 
@@ -770,5 +785,30 @@ function! SyntasticToggle()
   endif
 endfunction
 
+"=========Any-Jump===========
+" Normal mode: Jump to definition under cursor
+nnoremap <leader>j :AnyJump<CR>
+
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>j :AnyJumpVisual<CR>
+
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
+
+
+"=========Vimtex===========
+let g:tex_flavor='latex'
+let g:vimtex_view_method = 'zathura'
+autocmd VimEnter *.tex VimtexCompile
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+let maplocalleader = "\\"
+nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 "=========Vim-Signify===========
 set updatetime=250
