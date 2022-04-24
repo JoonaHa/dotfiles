@@ -5,6 +5,7 @@ set mousefocus
 set mousehide
 set mousemodel=popup_setpos
 set encoding=UTF-8
+set updatetime=100
 " replace tab with spaces
 set tabstop=4
 set shiftwidth=4
@@ -25,7 +26,7 @@ set backspace=indent,eol,start " make backspace work like most other programs
 let g:rustfmt_file_lines = 1
 let g:syntastic_python_checkers = ['pylint']
 let g:python_host_prog = "/usr/bin/python2" 
-"" Change map leader to dot
+"" Change map leader to coma
 :let mapleader = ","
 set ruler
 set showcmd
@@ -37,16 +38,36 @@ if has('win32')
     set nofsync
     let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
-
-
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:indent_guides_enable_on_vim_startup = 1
 "Spelling
 set spelllang=en_us
+let g:vimchant_spellcheck_lang = 'fi'
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd FileType gitcommit setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
+autocmd BufRead,BufNewFile *.tex setlocal spell
+" Toggle between finnish and english spelling
+let g:finnish_on = 0
+function! ToggleFinnish()
+  if (&spell == 0 && g:finnish_on == 0) || g:loaded_vimchant == 0
+	echo 'Spelling not active. Run :set spell'
+    return
+  endif
+  if g:finnish_on == 0
+    setlocal nospell
+    VimchantSpellCheckOn
+    let g:finnish_on = 1
+  else
+    VimchantSpellCheckOff
+    setlocal spell
+    let g:finnish_on = 0
+  endif
+endfunction
+command Suomi call ToggleFinnish()
+
+
 "Autoread on bufenter 
 au FocusGained,BufEnter * :checktime
 
@@ -72,6 +93,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'gko/vim-coloresque'
+Plug '~/.config/nvim/plugged/vimchant'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -103,11 +125,10 @@ call plug#end()
 
 let g:coc_global_extensions = [
   \ 'coc-word',
+  \ 'coc-dictionary',
   \ 'coc-tag',
   \ 'coc-syntax',
   \ 'coc-git', 
-  \ 'coc-ultisnips',
-  \ 'coc-neosnippet',
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
@@ -810,5 +831,3 @@ let g:tex_conceal='abdmg'
 " following line. The default is usually fine and is the symbol "\".
 let maplocalleader = "\\"
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
-"=========Vim-Signify===========
-set updatetime=250
