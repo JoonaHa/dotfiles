@@ -1,5 +1,10 @@
-
 " ========== Vim Basic Settings ============="
+" Execute local .vimrc securely when started from whitelisted directory
+" https://vimtricks.com/p/local-vimrc-files
+if getcwd() =~# '^(\/home\/mina\/Projektit\/dotfiles\/)'
+  set secure exrc
+endif
+
 set mouse=a
 set mousefocus
 set mousehide
@@ -67,6 +72,40 @@ function! ToggleFinnish()
 endfunction
 command Suomi call ToggleFinnish()
 
+" https://vimtricks.com/p/word-wrapping/
+let s:wrapenabled = 0
+function! ToggleWrap()
+  set wrap nolist
+  if s:wrapenabled
+    set nolinebreak
+    unmap j
+    unmap <Down>
+    unmap k
+    unmap <Up>
+    unmap 0
+    unmap ^
+    unmap $
+    let s:wrapenabled = 0
+  else
+    set linebreak
+    nnoremap j gj
+    nnoremap <Down> gj
+    nnoremap k gk
+    nnoremap <Up> gk
+    nnoremap 0 g0
+    nnoremap ^ g^
+    nnoremap $ g$
+    vnoremap j gj
+    vnoremap <Down> gj
+    vnoremap k gk
+    vnoremap <Up> gk
+    vnoremap 0 g0
+    vnoremap ^ g^
+    vnoremap $ g$
+    let s:wrapenabled = 1
+  endif
+endfunction
+command Wrap call ToggleWrap()
 
 "Autoread on bufenter 
 au FocusGained,BufEnter * :checktime
