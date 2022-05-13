@@ -248,7 +248,14 @@ nnoremap <A-.> <C-w>>
 nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 
-" System Clipboard
+" Incerement/decrement to alt keys
+nnoremap <A-a> <C-a>
+nnoremap <A-x> <C-x>
+vnoremap <A-a> <C-a>
+vnoremap <A-x> <C-x>
+vnoremap g<A-a> g<C-a>
+vnoremap g<A-x> g<C-x>
+" System Clipboard and select all
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
 map <C-v> "+P
