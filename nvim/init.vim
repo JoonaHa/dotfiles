@@ -238,6 +238,8 @@ inoremap <C-S-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-S-j> :m '>+1<CR>gv=gv
 vnoremap <C-S-k> :m '<-2<CR>gv=gv
 
+" Visual searc in /
+vmap / y/<C-R>"<CR>
 
 "Splite sizing 
 nnoremap <C-w>, <C-w><
@@ -353,18 +355,18 @@ hi Visual gui=none guifg=none guibg=#4d3f3f
 "set statusline+=\ %l:%c
 "set statusline+=\ 
 "auto close {
-function! s:CloseBracket()
-    let line = getline('.')
-    if line =~# '^\s*\(struct\|class\|enum\) '
-        return "{\<Enter>};\<Esc>O"
-    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
-        " Probably inside a function call. Close it off.
-        return "{\<Enter>});\<Esc>O"
-    else
-        return "{\<Enter>}\<Esc>O"
-    endif
-endfunction
-inoremap <expr> {<Enter> <SID>CloseBracket()
+"function! s:CloseBracket()
+"    let line = getline('.')
+"    if line =~# '^\s*\(struct\|class\|enum\) '
+"        return "{\<Enter>};\<Esc>O"
+"    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
+"        " Probably inside a function call. Close it off.
+"        return "{\<Enter>});\<Esc>O"
+"    else
+"        return "{\<Enter>}\<Esc>O"
+"    endif
+"endfunction
+"inoremap <expr> {<Enter> <SID>CloseBracket()
 
 
 """""""""""" COC Vim """"""""""""""""
