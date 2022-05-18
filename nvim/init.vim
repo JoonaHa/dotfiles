@@ -38,6 +38,7 @@ set showcmd
 set laststatus=2
 set foldmethod=syntax
 set nofoldenable
+set relativenumber
 filetype plugin on
 if has('win32')
     set nofsync
