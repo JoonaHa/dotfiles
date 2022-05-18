@@ -49,10 +49,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 "Spelling
 set spelllang=en_us
 let g:vimchant_spellcheck_lang = 'fi'
-autocmd BufRead,BufNewFile *.md setlocal spell
-autocmd FileType gitcommit setlocal spell
-autocmd BufRead,BufNewFile *.txt setlocal spell
-autocmd BufRead,BufNewFile *.tex setlocal spell
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritinSettings() 
+autocmd FileType gitcommit call WritinSettings()
 " Toggle between finnish and english spelling
 let g:finnish_on = 0
 function! ToggleFinnish()
@@ -106,6 +104,11 @@ function! ToggleWrap()
   endif
 endfunction
 command Wrap call ToggleWrap()
+
+function WritinSettings()
+  setlocal spell
+  Wrap
+endfunction
 
 "Autoread on bufenter 
 au FocusGained,BufEnter * :checktime
