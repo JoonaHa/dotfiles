@@ -72,6 +72,8 @@ ZSH_THEME=""
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -93,8 +95,8 @@ plugins=(
     zsh-completions
     zsh-syntax-highlighting
     autoupdate
+    zsh-vi-mode
 )
-
 source $ZSH/oh-my-zsh.sh
 
 #Pacman handler
@@ -131,7 +133,6 @@ autoload -U promptinit; promptinit
 prompt pure
 # export MANPATH="/usr/local/man:$MANPATH"
  
-
 # User configuration
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
@@ -144,6 +145,10 @@ setopt hist_ignore_dups
 setopt hist_ignore_space      
 setopt hist_verify            
 setopt share_history          
+
+# For Vimode
+export KEYTIMEOUT=1
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -179,25 +184,10 @@ if [[ $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh
 fi
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/mina/.miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/mina/.miniconda/etc/profile.d/conda.sh" ]; then
-        . "/home/mina/.miniconda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/mina/.miniconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 #source /home/mina/.tmc-autocomplete.sh || true
 #source /home/mina/.tmc-autocomplete.sh || true
-
+zvm_after_init() {
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
+}
