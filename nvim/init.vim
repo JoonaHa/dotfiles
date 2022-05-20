@@ -124,6 +124,7 @@ Plug 'antoinemadec/coc-fzf'
 Plug 'liuchengxu/vista.vim'
 Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Tools 
@@ -334,45 +335,6 @@ let g:material_theme_style = 'darker'
 colorscheme material
 hi CursorColumn guibg=#856262
 hi Visual gui=none guifg=none guibg=#4d3f3f
-
-"function! GitBranch()
-"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"endfunction
-"
-"function! StatuslineGit()
-"  let l:branchname = GitBranch()
-"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-"endfunction
-"
-"set statusline=
-"set statusline+=%#PmenuSel#
-"set statusline+=%{StatuslineGit()}
-"set statusline+=%#LineNr#
-"set statusline+=\ %f
-"set statusline+=%m\
-"set statusline+=%=
-"set statusline+=%#CursorColumn#
-"set statusline+=\ %y
-"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-"set statusline+=\[%{&fileformat}\]
-"set statusline+=\ %p%%
-"set statusline+=\ %l:%c
-"set statusline+=\ 
-"auto close {
-"function! s:CloseBracket()
-"    let line = getline('.')
-"    if line =~# '^\s*\(struct\|class\|enum\) '
-"        return "{\<Enter>};\<Esc>O"
-"    elseif searchpair('(', '', ')', 'bmn', '', line('.'))
-"        " Probably inside a function call. Close it off.
-"        return "{\<Enter>});\<Esc>O"
-"    else
-"        return "{\<Enter>}\<Esc>O"
-"    endif
-"endfunction
-"inoremap <expr> {<Enter> <SID>CloseBracket()
-
-
 """""""""""" COC Vim """"""""""""""""
 "
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -790,20 +752,6 @@ let g:mkdp_page_title = '「${name}」'
 let g:mkdp_filetypes = ['markdown']
 
 "=================Vista==============
-
-"function! NearestMethodOrFunction() abort
-"  return get(b:, 'vista_nearest_method_or_function', '')
-"endfunction
-"
-"set statusline+=%{NearestMethodOrFunction()}
-"
-"" By default vista.vim never run if you don't call it explicitly.
-""
-"" If you want to show the nearest function in your statusline automatically,
-"" you can add the following line to your vimrc
-"autocmd VimEnter * call NearestMethodOrFunction()
-
-
 " How each level is indented and what to prepend.
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
@@ -834,30 +782,10 @@ let g:vista#renderer#icons = {
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#coc#show_coc_status = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
-" ======Syntastic=====
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height = 5
-
-map <F8> <ESC>:call SyntasticToggle()<CR>
-let g:syntastic_is_open = 0  
-function! SyntasticToggle()
-  let g:wi = getloclist(2, {'winid' : 1})
-  if g:wi != {}
-    lclose
-  else
-    Errors
-  endif
-endfunction
-
 "=========Any-Jump===========
 " Normal mode: Jump to definition under cursor
 nnoremap <leader>j :AnyJump<CR>
