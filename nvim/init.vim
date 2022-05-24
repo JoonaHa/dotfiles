@@ -130,8 +130,8 @@ Plug 'preservim/nerdtree' |
 " Tools 
 Plug 'tpope/vim-surround'
 Plug 'pechorin/any-jump.vim'
-Plug 'baverman/vial'
-Plug 'baverman/vial-http'
+"Plug 'baverman/vial'
+"Plug 'baverman/vial-http'
 Plug 'airblade/vim-rooter'
 Plug 'machakann/vim-highlightedyank'
 Plug 'luochen1990/rainbow'
@@ -140,17 +140,15 @@ Plug 'gko/vim-coloresque'
 Plug '~/.config/nvim/plugged/vimchant'
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-"if has('nvim') || has('patch-8.0.902')
-"  Plug 'mhinz/vim-signify'
-"else
-"  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-"endif
+Plug 'lewis6991/gitsigns.nvim'
+
 " Themes
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 " Languages
 Plug 'dbakker/vim-lint'
 Plug 'rust-lang/rust.vim'
@@ -811,3 +809,17 @@ let g:tex_conceal='abdmg'
 " following line. The default is usually fine and is the symbol "\".
 let maplocalleader = "\\"
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
+
+"=========Gitsigns===========
+lua << END
+require('gitsigns').setup{
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 0,
+    ignore_whitespace = false,
+  },  
+}
+END
+
