@@ -41,14 +41,21 @@ export NXJ_HOME=/home/mina/JohTek/leJOS_NXJ_0.9.1beta-3
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-#
+
+
+#Node user
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 export MANGOHUD=1
 # Nvidia env's
 export __GL_THREADED_OPTIMIZATIONS=1
 #export LD_PRELOAD="libpthread.so.0 libGL.so.1"
+
 # Use bat for manuals
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# MANROFFOPT for ANSI escapes https://github.com/sharkdp/bat/issues/652#issuecomment-529032263
+export MANROFFOPT="-c"; export MANPAGER="sh -c 'col -bx | bat -pl man'"
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 
