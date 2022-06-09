@@ -813,6 +813,8 @@ nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 "=========Gitsigns===========
 lua << END
 require('gitsigns').setup{
+  signcolumn = false,
+  numhl = true,
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
