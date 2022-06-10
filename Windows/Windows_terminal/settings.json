@@ -1,17 +1,11 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
         {
             "command": "find",
             "keys": "ctrl+shift+f"
-        },
-        {
-            "command": 
-            {
-                "action": "copy"
-            },
-            "keys": "ctrl+shift+c"
         },
         {
             "command": "unbound",
@@ -86,13 +80,8 @@
             "keys": "ctrl+alt+9"
         },
         {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "alt+shift+d"
+            "command": "closePane",
+            "keys": "alt+shift+q"
         },
         {
             "command": 
@@ -102,41 +91,15 @@
             "keys": "ctrl+tab"
         },
         {
-            "command": "closePane",
-            "keys": "alt+shift+q"
-        },
-        {
-            "command": "duplicateTab",
-            "keys": "ctrl+shift+d"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab"
-            },
-            "keys": "ctrl+t"
-        },
-        {
-            "command": "openNewTabDropdown",
-            "keys": "ctrl+space"
-        },
-        {
-            "command": 
-            {
-                "action": "scrollDown"
-            },
-            "keys": "ctrl+shift+down"
-        },
-        {
-            "command": 
-            {
-                "action": "openSettings"
-            },
-            "keys": "ctrl+,"
-        },
-        {
             "command": "paste",
             "keys": "ctrl+shift+v"
+        },
+        {
+            "command": 
+            {
+                "action": "copy"
+            },
+            "keys": "ctrl+shift+c"
         },
         {
             "command": 
@@ -146,8 +109,43 @@
             "keys": "ctrl+shift+tab"
         },
         {
+            "command": 
+            {
+                "action": "scrollDown"
+            },
+            "keys": "shift+down"
+        },
+        {
+            "command": "scrollUpPage",
+            "keys": "shift+pgup"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
+        },
+        {
             "command": "scrollDownPage",
             "keys": "ctrl+shift+pgdn"
+        },
+        {
+            "command": 
+            {
+                "action": "newTab"
+            },
+            "keys": "ctrl+t"
+        },
+        {
+            "command": "duplicateTab",
+            "keys": "ctrl+shift+d"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+space"
         },
         {
             "command": 
@@ -157,8 +155,11 @@
             "keys": "ctrl+shift+up"
         },
         {
-            "command": "scrollUpPage",
-            "keys": "ctrl+shift+pgup"
+            "command": 
+            {
+                "action": "openSettings"
+            },
+            "keys": "ctrl+comma"
         }
     ],
     "alwaysShowTabs": false,
@@ -167,11 +168,16 @@
     "defaultProfile": "{2ce99cca-7dc5-451e-9d13-1948b9969846}",
     "profiles": 
     {
-        "defaults": {},
+        "defaults": 
+        {
+            "font": 
+            {
+                "face": "Cascadia Code PL"
+            }
+        },
         "list": 
         [
             {
-                "acrylicOpacity": 0.71999999999999997,
                 "bellStyle": "none",
                 "closeOnExit": "graceful",
                 "colorScheme": "Dark",
@@ -187,23 +193,24 @@
                 "historySize": 9001,
                 "icon": "C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico",
                 "name": "Git Bash",
+                "opacity": 72,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "startingDirectory": "%USERPROFILE%",
                 "useAcrylic": true
             },
             {
-                "acrylicOpacity": 0.75,
                 "closeOnExit": "graceful",
-                "commandline": "powershell.exe",
+                "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
                 "font": 
                 {
-                    "face": "Cascadia Mono PL",
+                    "face": "CaskaydiaCove Nerd Font",
                     "size": 10
                 },
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
+                "opacity": 75,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "source": "Windows.Terminal.PowershellCore",
@@ -211,7 +218,6 @@
                 "useAcrylic": true
             },
             {
-                "acrylicOpacity": 0.71999999999999997,
                 "bellStyle": "none",
                 "closeOnExit": "graceful",
                 "colorScheme": "Dark",
@@ -219,13 +225,14 @@
                 "cursorShape": "bar",
                 "font": 
                 {
-                    "face": "Cascadia Mono PL",
+                    "face": "CaskaydiaCove Nerd Font",
                     "size": 10
                 },
                 "guid": "{68977c03-3495-5837-90fe-335df5b0e063}",
                 "hidden": false,
                 "historySize": 9001,
                 "name": "openSUSE-Leap-15.3",
+                "opacity": 72,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "source": "Windows.Terminal.Wsl",
@@ -233,7 +240,8 @@
                 "useAcrylic": true
             },
             {
-                "acrylicOpacity": 0.71999999999999997,
+                "backgroundImage": null,
+                "backgroundImageStretchMode": "fill",
                 "bellStyle": "none",
                 "closeOnExit": "graceful",
                 "colorScheme": "Dark",
@@ -241,13 +249,14 @@
                 "cursorShape": "bar",
                 "font": 
                 {
-                    "face": "Cascadia Mono PL",
+                    "face": "Cascadia Code PL",
                     "size": 10
                 },
                 "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
                 "historySize": 9001,
                 "name": "Debian",
+                "opacity": 72,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "source": "Windows.Terminal.Wsl",
@@ -255,9 +264,7 @@
                 "useAcrylic": true
             },
             {
-                "acrylicOpacity": 0.75,
                 "closeOnExit": "graceful",
-                "commandline": "cmd.exe",
                 "font": 
                 {
                     "size": 10
@@ -265,17 +272,16 @@
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
                 "name": "cmd",
+                "opacity": 75,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "startingDirectory": "%USERPROFILE%",
                 "useAcrylic": false
             },
             {
-                "acrylicOpacity": 0.5,
                 "background": "#012456",
                 "closeOnExit": "graceful",
                 "colorScheme": "Campbell",
-                "commandline": "powershell.exe",
                 "cursorColor": "#FFFFFF",
                 "cursorShape": "bar",
                 "font": 
@@ -288,13 +294,13 @@
                 "historySize": 9001,
                 "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
                 "name": "Windows PowerShell",
+                "opacity": 50,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "startingDirectory": "%USERPROFILE%",
                 "useAcrylic": false
             },
             {
-                "acrylicOpacity": 0.59999999999999998,
                 "closeOnExit": "never",
                 "colorScheme": "Vintage",
                 "commandline": "Azure",
@@ -311,9 +317,63 @@
                 "historySize": 9001,
                 "icon": "ms-appx:///ProfileIcons/{b453ae62-4e3d-5e58-b989-0a998ec441b8}.png",
                 "name": "Azure Cloud Shell",
+                "opacity": 60,
                 "padding": "0, 0, 0, 0",
                 "snapOnInput": true,
                 "source": "Windows.Terminal.Azure",
+                "startingDirectory": "%USERPROFILE%",
+                "useAcrylic": true
+            },
+            {
+                "guid": "{8e1b9ecc-235d-5a45-b0fd-4eabce1904e3}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{b6015496-918b-5da4-8f46-66ee4a6479fc}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{4d690116-54a0-55fc-97ca-3a34528c584c}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{c2695070-fdf8-5d48-b956-745faaa4a1d4}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{e636fd95-8db6-56fc-969f-5647553fa92b}",
+                "hidden": false,
+                "name": "wsl-vpnkit",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "bellStyle": "none",
+                "closeOnExit": "graceful",
+                "colorScheme": "Dark",
+                "commandline": "\"%PROGRAMFILES%\\git\\usr\\bin\\zsh\" -i -l",
+                "cursorColor": "#FFFFFF",
+                "cursorShape": "bar",
+                "font": 
+                {
+                    "face": "Consolas",
+                    "size": 10
+                },
+                "guid": "{0c56f216-e301-4e60-860d-82af8bee02b4}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "C:\\Program Files\\Git\\mingw64\\share\\git\\git-for-windows.ico",
+                "name": "Git ZSH",
+                "opacity": 72,
+                "padding": "0, 0, 0, 0",
+                "snapOnInput": true,
                 "startingDirectory": "%USERPROFILE%",
                 "useAcrylic": true
             }
