@@ -30,7 +30,7 @@ set backspace=indent,eol,start " make backspace work like most other programs
 :inoremap jk <esc>
 let g:rustfmt_file_lines = 1
 let g:syntastic_python_checkers = ['pylint']
-let g:python_host_prog = "/usr/bin/python2" 
+let g:python_host_prog = "/usr/bin/python2"
 "" Change map leader to coma
 :let mapleader = ","
 set ruler
@@ -41,8 +41,8 @@ set nofoldenable
 set relativenumber
 filetype plugin on
 if has('win32')
-    set nofsync
-    let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
+  set nofsync
+  let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
 "set expandtab
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -50,13 +50,13 @@ let g:indent_guides_enable_on_vim_startup = 1
 "Spelling
 set spelllang=en_us
 let g:vimchant_spellcheck_lang = 'fi'
-autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritinSettings() 
-autocmd FileType gitcommit call WritinSettings()
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritingSettingsToggle()
+autocmd FileType gitcommit call WritingSettingsToggle()
 " Toggle between finnish and english spelling
 let g:finnish_on = 0
 function! ToggleFinnish()
   if (&spell == 0 && g:finnish_on == 0) || g:loaded_vimchant == 0
-	echo 'Spelling not active. Run :set spell'
+    echo 'Spelling not active. Run :set spell'
     return
   endif
   if g:finnish_on == 0
@@ -104,14 +104,19 @@ function! ToggleWrap()
     let s:wrapenabled = 1
   endif
 endfunction
-command Wrap call ToggleWrap()
+command WrapToggle call ToggleWrap()
 
-function WritinSettings()
-  setlocal spell
-  Wrap
+function WritingSettingsToggle()
+  if &spell
+    setlocal nospell
+  else
+    setlocal spell
+  endif
+  WrapToggle
 endfunction
+command WritingToggle call WritingSettingsToggle()
 
-"Autoread on bufenter 
+"Autoread on bufenter
 au FocusGained,BufEnter * :checktime
 
 " ========== Plugins ==================="
@@ -126,9 +131,10 @@ Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin'
-" Tools 
+      \ Plug 'Xuyuanp/nerdtree-git-plugin'
+" Tools
 Plug 'tpope/vim-surround'
+Plug 'michaeljsmith/vim-indent-object'
 Plug 'pechorin/any-jump.vim'
 "Plug 'baverman/vial'
 "Plug 'baverman/vial-http'
@@ -166,38 +172,38 @@ Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 let g:coc_global_extensions = [
-  \ 'coc-word',
-  \ 'coc-dictionary',
-  \ 'coc-tag',
-  \ 'coc-syntax',
-  \ 'coc-git', 
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-rome', 
-  \ 'coc-json', 
-  \ 'coc-sh',
-  \ 'coc-clangd',
-  \ 'coc-cmake',
-  \ 'coc-jedi',
-  \ 'coc-git',
-  \ 'coc-markdownlint',
-  \ 'coc-sh',
-  \ 'coc-powershell',
-  \ 'coc-vetur',
-  \ 'coc-tsserver',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-highlight',
-  \ 'coc-sql',
-  \ 'coc-java',
-  \ 'coc-vimtex',
-  \ 'coc-rust-analyzer'
-  \ ]
+      \ 'coc-word',
+      \ 'coc-dictionary',
+      \ 'coc-tag',
+      \ 'coc-syntax',
+      \ 'coc-git',
+      \ 'coc-snippets',
+      \ 'coc-pairs',
+      \ 'coc-tsserver',
+      \ 'coc-eslint',
+      \ 'coc-prettier',
+      \ 'coc-rome',
+      \ 'coc-json',
+      \ 'coc-sh',
+      \ 'coc-clangd',
+      \ 'coc-cmake',
+      \ 'coc-jedi',
+      \ 'coc-git',
+      \ 'coc-markdownlint',
+      \ 'coc-sh',
+      \ 'coc-powershell',
+      \ 'coc-vetur',
+      \ 'coc-tsserver',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-highlight',
+      \ 'coc-sql',
+      \ 'coc-java',
+      \ 'coc-vimtex',
+      \ 'coc-rust-analyzer'
+      \ ]
 
-" ======= Keybinding ======== 
+" ======= Keybinding ========
 map <C-n> :NERDTreeToggle<CR>
 map <C-p> :Vista!!<CR>
 
@@ -216,10 +222,10 @@ tnoremap <A-Up> <C-\><C-n><C-w>h
 tnoremap <A-Down> <C-\><C-n><C-w>j
 tnoremap <A-Left> <C-\><C-n><C-w>k
 tnoremap <A-Right> <C-\><C-n><C-w>l
-nnoremap <silent> <A-Up> <C-w>h 
-nnoremap <silent> <A-Down> <C-w>j 
-nnoremap <silent> <A-Left> <C-w>k 
-nnoremap <silent> <A-Right> <C-w>l 
+nnoremap <silent> <A-Up> <C-w>h
+nnoremap <silent> <A-Down> <C-w>j
+nnoremap <silent> <A-Left> <C-w>k
+nnoremap <silent> <A-Right> <C-w>l
 
 nmap <silent> <A-Tab> gT
 nmap <silent> <A-C-Tab> gt
@@ -244,7 +250,7 @@ vnoremap <C-S-k> :m '<-2<CR>gv=gv
 " Visual searc in /
 vmap / y/<C-R>"<CR>
 
-"Splite sizing 
+"Splite sizing
 nnoremap <C-w>, <C-w><
 nnoremap <C-w>. <C-w>>
 nnoremap <A-,> <C-w><
@@ -313,23 +319,23 @@ let WebDevIconsUnicodeDecorateFolderNodesExactMatches = 1
 ""Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
 "check and use tmux's 24-bit color support
-""(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.) 
+""(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
 if (empty($TMUX))
-	  if (has("nvim"))
-		    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-		      let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-	  endif
-		          "For Neovim > 0.1.5 and Vim > patch 7.4.1799 <https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-		            "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd > 
-			    " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-		                if (has("termguicolors"))
-		                    set termguicolors
-				endif
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 <https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
 
 
 let g:material_terminal_italics = 1
-let g:material_theme_style = 'darker' 	
+let g:material_theme_style = 'darker'
 colorscheme material
 hi CursorColumn guibg=#856262
 hi Visual gui=none guifg=none guibg=#4d3f3f
@@ -379,7 +385,7 @@ endfunction
 " Use <c-space> to trigger completion.
 if has('nvim')
   "inoremap <silent><expr> <c-space> coc#refresh()
- inoremap <silent><expr> <NUL> coc#refresh() 
+  inoremap <silent><expr> <NUL> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
@@ -387,7 +393,7 @@ endif
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -544,8 +550,8 @@ function ToggleHex()
     let b:oldbin=&bin
     " set new options
     setlocal binary " make sure it overrides any textwidth, etc.
-    silent :e " this will reload the file without trickeries 
-              "(DOS line endings will be shown entirely )
+    silent :e " this will reload the file without trickeries
+    "(DOS line endings will be shown entirely )
     let &ft="xxd"
     " set status
     let b:editHex=1
@@ -568,12 +574,12 @@ function ToggleHex()
   let &modifiable=l:oldmodifiable
 endfunction
 
-"=================Fzf================" 
+"=================Fzf================"
 "This is the default extra key bindings=
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 
 " Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
@@ -581,7 +587,7 @@ let g:fzf_action = {
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-let g:fzf_preview_window = ['right:50%', 'ctrl-\'] 
+let g:fzf_preview_window = ['right:50%', 'ctrl-\']
 
 map <C-f> :Files<CR>
 map <leader>b :Buffers<CR>
@@ -600,32 +606,32 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
 "Get Files
 command! -bang -nargs=? -complete=dir Files
-\ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 
 
 " Get text in files with Rg
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   fzf#vim#with_preview(), <bang>0)
 
 " Ripgrep advanced
 function! RipgrepFzf(query, fullscreen)
@@ -640,9 +646,9 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " Git grep
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+      \ call fzf#vim#grep(
+      \   'git grep --line-number '.shellescape(<q-args>), 0,
+      \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 "=============Coc-fzf=================
 " mappings
@@ -717,18 +723,18 @@ let g:mkdp_browserfunc = ''
 " content_editable: if enable content editable for preview page, default: v:false
 " disable_filename: if disable filename header for preview page, default: 0
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
+      \ 'mkit': {},
+      \ 'katex': {},
+      \ 'uml': {},
+      \ 'maid': {},
+      \ 'disable_sync_scroll': 0,
+      \ 'sync_scroll_type': 'middle',
+      \ 'hide_yaml_meta': 1,
+      \ 'sequence_diagrams': {},
+      \ 'flowchart_diagrams': {},
+      \ 'content_editable': v:false,
+      \ 'disable_filename': 0
+      \ }
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
@@ -763,18 +769,18 @@ let g:vista#finders = ['fzf']
 let g:vista_fzf_preview = ['right:50%']
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
 let g:vista#renderer#enable_icon = 1
- let g:vista_vimwiki_executive = 'markdown'
-  " Use the markdown extension for vimwiki and pandoc filetype.
-  let g:vista_executive_for = {
+let g:vista_vimwiki_executive = 'markdown'
+" Use the markdown extension for vimwiki and pandoc filetype.
+let g:vista_executive_for = {
       \ 'vimwiki': 'markdown',
       \ 'pandoc': 'markdown',
       \ 'markdown': 'toc',
       \ }
 " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
 let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
+      \   "function": "\uf794",
+      \   "variable": "\uf71b",
+      \  }
 
 "=======Airline================
 let g:airline#extensions#tabline#enabled = 1
@@ -813,15 +819,15 @@ nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 "=========Gitsigns===========
 lua << END
 require('gitsigns').setup{
-  signcolumn = false,
-  numhl = true,
-  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-    delay = 0,
-    ignore_whitespace = false,
-  },  
+signcolumn = false,
+numhl = true,
+current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+current_line_blame_opts = {
+  virt_text = true,
+  virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+  delay = 0,
+  ignore_whitespace = false,
+  },
 }
 END
 
