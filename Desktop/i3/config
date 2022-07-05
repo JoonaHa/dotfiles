@@ -60,7 +60,8 @@ bindsym $mod+Shift+Return exec $terminal --quake
 # kill focused window
 bindsym $mod+Shift+q kill
 #bindsym Mod1+F4 kill 
-bindsym Mod1+F4 exec ~/.bin/scripts/kill9_focused.sh 
+bindsym Mod1+F4 exec /home/mina/.bin/scripts/kill9_focused.sh 
+bindsym Mod1+F8 exec /home/mina/.bin/scripts/toggle_second_monitor.sh
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -214,7 +215,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+period exec rofimoji 
 
 # Screenshots
-set $shot_path ~/Kuvat/Kuvakaappaukset/$(date '+%Y-%m-%d_%H:%M:%S').png
+set $shot_path /home/mina/Kuvat/Kuvakaappaukset/$(date '+%Y-%m-%d_%H:%M:%S').png
 set $xclip xclip -selection clipboard -t image/png
 
 bindsym Print exec spectacle
