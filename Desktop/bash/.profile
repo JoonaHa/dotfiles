@@ -59,3 +59,5 @@ export MANROFFOPT="-c"; export MANPAGER="sh -c 'col -bx | bat -pl man'"
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+alias enchant='enchant-2'
+
