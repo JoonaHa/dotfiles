@@ -227,11 +227,13 @@ nnoremap <silent> <A-Down> <C-w>j
 nnoremap <silent> <A-Left> <C-w>k
 nnoremap <silent> <A-Right> <C-w>l
 
-nmap <silent> <A-Tab> gT
-nmap <silent> <A-C-Tab> gt
+nmap <silent> ]t gt
+nmap <silent> [t gT
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
+nmap <silent> ]b :bnext<CR>
+nmap <silent> [b :bprev<Cr>
 " Move line up or down
 nnoremap <C-S-Down> :m .+1<CR>==
 nnoremap <C-S-Up> :m .-2<CR>==
