@@ -452,16 +452,7 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -516,8 +507,33 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-"let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next = '<tab>'
 
+function! MapCocObjects()
+  if CocHasProvider('documentSymbol')
+    " Map function and class text objects
+    " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+    xmap if <Plug>(coc-funcobj-i)
+    omap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    omap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap ac <Plug>(coc-classobj-a)
+  else
+    silent! unmap if
+    silent! unmap if
+    silent! unmap af
+    silent! unmap af
+    silent! unmap ic
+    silent! unmap ic
+    silent! unmap ac
+    silent! unmap ac
+  endif
+endfunction
+
+autocmd User coc.nvim,BufRead,BufNewFile * call MapCocObjects()
 "Show doc or diagnostic when howering
 "function! ShowDocIfNoDiagnostic(timer_id)
 "  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
