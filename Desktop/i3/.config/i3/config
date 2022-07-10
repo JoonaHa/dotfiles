@@ -237,7 +237,7 @@ for_window [class="^.*"] border pixel 2
 default_border pixel 2
 for_window [tiling] border pixel 2 
 gaps inner 10
-gaps outer 2
+gaps outer 0
 
 
 # Everything floating
