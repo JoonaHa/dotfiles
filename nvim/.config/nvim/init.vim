@@ -118,6 +118,18 @@ command WritingToggle call WritingSettingsToggle()
 
 "Autoread on bufenter
 au FocusGained,BufEnter * :checktime
+"Help mappings
+"https://vim.fandom.com/wiki/Learn_to_use_help
+"Press Enter to jump to the subject (topic) under the cursor.
+"Press Backspace to return from the last jump.
+"Press s to find the next subject, or S to find the previous subject.
+"Press o to find the next option, or O to find the previous option.
+autocmd FileType help nnoremap <buffer> <CR> <C-]>
+autocmd FileType help nnoremap <buffer> <BS> <C-T>
+autocmd FileType help nnoremap <buffer> o /'\l\{2,\}'<CR>
+autocmd FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
+autocmd FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
+autocmd FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
 
 " ========== Plugins ==================="
 call plug#begin()
