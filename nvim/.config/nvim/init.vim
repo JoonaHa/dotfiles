@@ -533,7 +533,7 @@ function! MapCocObjects()
   endif
 endfunction
 
-autocmd User coc.nvim,BufRead,BufNewFile * call MapCocObjects()
+autocmd VimEnter,BufRead,BufNewFile call MapCocObjects()
 "Show doc or diagnostic when howering
 "function! ShowDocIfNoDiagnostic(timer_id)
 "  if (coc#float#has_float() == 0 && CocHasProvider('hover') == 1)
