@@ -253,11 +253,8 @@ vnoremap <C-S-k> :m '<-2<CR>gv=gv
 vmap / y/<C-R>"<CR>
 
 "Splite sizing
-nnoremap <C-w>, <C-w><
-nnoremap <C-w>. <C-w>>
-nnoremap <A-,> <C-w><
-nnoremap <A-.> <C-w>>
-
+nnoremap <A-<> <C-w><
+nnoremap <A->> <C-w>>
 nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 
