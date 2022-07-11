@@ -293,6 +293,20 @@ map <C-a> ggVG
 "    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
 "endif
 
+"====Neovide===="
+if exists('g:neovide')
+  if has('win32')
+    set guifont=Cascadia\ Code\ PL,CaskaydiaCove\ NF,CaskaydiaCove\ Nerd\ Font,Iosevka:h12
+  endif
+  let g:neovide_cursor_animation_length=0
+  let g:neovide_cursor_trail_length=0
+  let g:neovide_remember_window_size = v:true
+
+    nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
+    nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
+    nnoremap <C-_> :set guifont=+<CR>
+    nnoremap <C--> :set guifont=-<CR>
+endif
 "====NERDTree===="
 
 let g:NERDTreeShowHidden = 1
