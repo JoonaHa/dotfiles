@@ -71,12 +71,11 @@ function! ToggleFinnish()
 endfunction
 command Suomi call ToggleFinnish()
 
-" https://vimtricks.com/p/word-wrapping/
-let s:wrapenabled = 0
+"https://vimtricks.com/p/word-wrapping/
+"https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping 
 function! ToggleWrap()
-  set wrap nolist
-  if s:wrapenabled
-    set nolinebreak
+  if &wrap
+    setlocal nowrap nolinebreak
     unmap j
     unmap <Down>
     unmap k
@@ -84,9 +83,8 @@ function! ToggleWrap()
     unmap 0
     unmap ^
     unmap $
-    let s:wrapenabled = 0
   else
-    set linebreak
+    setlocal wrap linebreak
     nnoremap j gj
     nnoremap <Down> gj
     nnoremap k gk
@@ -101,7 +99,6 @@ function! ToggleWrap()
     vnoremap 0 g0
     vnoremap ^ g^
     vnoremap $ g$
-    let s:wrapenabled = 1
   endif
 endfunction
 command WrapToggle call ToggleWrap()
