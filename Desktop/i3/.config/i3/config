@@ -64,8 +64,8 @@ bindsym $mod+minus scratchpad show
 # kill focused window
 bindsym $mod+Shift+q kill
 #bindsym Mod1+F4 kill 
-bindsym Mod1+F4 exec /home/mina/.bin/scripts/kill9_focused.sh 
-bindsym Mod1+F8 exec /home/mina/.bin/scripts/toggle_second_monitor.sh
+bindsym Mod1+F4 exec /home/mina/bin/scripts/kill9_focused.sh 
+bindsym Mod1+F8 exec /home/mina/bin/scripts/toggle_second_monitor.sh
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -184,10 +184,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
 bindsym $mod+F5 exec pavucontrol
-bindsym $mod+Mod1+l exec /home/mina/.bin/scripts/i3lock.sh
+bindsym $mod+Mod1+l exec /home/mina/bin/scripts/i3lock.sh
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/mina/.bin/scripts/i3lock.sh
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/mina/bin/scripts/i3lock.sh
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode

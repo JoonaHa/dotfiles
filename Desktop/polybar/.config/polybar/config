@@ -424,7 +424,7 @@ type = custom/script
 interval = 1
 format-prefix = " "
 format = <label>
-exec = python $HOME/.bin/scripts/spotify_status.py -f '{artist}: {song}'
+exec = python $HOME/bin/scripts/spotify_status.py -f '{artist}: {song}'
 format-underline = #1db954
 label-separator = |
 [settings]
