@@ -1,7 +1,5 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not (cmp_status_ok and snip_status_ok) then return end
-local setup = cmp.setup
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 local kind_icons = {
   Text = "",
   Method = "",
@@ -35,6 +33,8 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
+vim.o.completeopt = "menuone,noselect"
+
 cmp.setup {
   preselect = cmp.PreselectMode.None,
   formatting = {
@@ -45,7 +45,29 @@ cmp.setup {
     end,
   },
   snippet = {
-    expand = function(args) luasnip.lsp_expand(args.body) end,
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'luasnip' },
+    { name = 'nvim_lsp_document_symbol' },
+    { name = 'latex_symbols' },
+    { name = 'nvim-lua' },
+    { name = 'buffer' },
+    { name = 'cmdline' },
+    { name = 'path' },
+    { name = 'spell' },
+    { name = 'dictionary' },
+  },
+  source_priority = {
+    nvim_lsp = 1000,
+    luasnip = 750,
+    buffer = 500,
+    path = 250,
   },
   duplicates = {
     nvim_lsp = 1,
@@ -107,5 +129,6 @@ cmp.setup {
       "i",
       "s",
     }),
-  },
+  }
+
 }

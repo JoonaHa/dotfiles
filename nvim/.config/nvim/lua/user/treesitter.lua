@@ -1,17 +1,46 @@
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'typescript', 'rust', 'go', 'python' },
+  ensure_installed = {
+    'lua',
+    'typescript',
+    'rust',
+    'python',
+    'latex',
+    'typescript',
+    'tsx',
+    'javascript',
+    --Scripting
+    'bash',
+  -- Non programming languages
+    'bibtex',
+    'markdown'
+  },
 
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
   indent = { enable = true },
+  autopairs = { enable = true },
+  autotag = { enable = true },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
+  rainbow = {
+    enable = true,
+    disable = { "html" },
+    extended_mode = false,
+    max_file_lines = nil,
+  },
+
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      -- TODO: I'm not sure for this one.
-      scope_incremental = '<c-s>',
-      node_decremental = '<c-backspace>',
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
     },
   },
   textobjects = {
@@ -24,6 +53,11 @@ require('nvim-treesitter.configs').setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
+      },
+      selection_modes = {
+        ['@parameter.outer'] = 'v', -- charwise
+        ['@function.outer'] = 'V', -- linewise
+        ['@class.outer'] = '<c-q>', -- blockwise
       },
     },
     move = {
@@ -53,6 +87,14 @@ require('nvim-treesitter.configs').setup {
       },
       swap_previous = {
         ['<leader>A'] = '@parameter.inner',
+      },
+    },
+    lsp_interop = {
+      enable = true,
+      border = 'none',
+      peek_definition_code = {
+        ["<leader>df"] = "@function.outer",
+        ["<leader>dF"] = "@class.outer",
       },
     },
   },

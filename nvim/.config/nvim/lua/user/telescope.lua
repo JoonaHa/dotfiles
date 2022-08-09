@@ -25,3 +25,5 @@ require('telescope').setup{
     qflist_previewer = require'telescope.previewers'.qflist.new,
   }
 }
+
+
