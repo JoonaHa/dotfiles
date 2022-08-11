@@ -134,6 +134,16 @@ autocmd FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
 call plug#begin()
 " LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
+      \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', 
+      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release 
+       \ && cmake --install build --prefix build' }
+"Cmp
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -145,16 +155,11 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'kdheepak/cmp-latex-symbols'
-Plug 'kdheepak/cmp-latex-symbols'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
-      \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', 
-      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release 
-       \ && cmake --install build --prefix build' }
+Plug 'ray-x/cmp-treesitter'
+" Coq
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq depss'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " Must have plugings
 Plug 'liuchengxu/vista.vim'
 Plug 'rakr/vim-one'
@@ -176,7 +181,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'gko/vim-coloresque'
-Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+Plug 'folke/which-key.nvim'
 Plug '~/.config/nvim/plugged/vimchant'
 " Git
 Plug 'tpope/vim-fugitive'
@@ -187,7 +192,17 @@ Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'onsails/lspkind.nvim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tjdevries/colorbuddy.nvim'
+
+" Snippets
+"Plug 'SirVer/ultisnips'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'sheerun/vim-polyglot'
+" Snippets/LSP
+ Plug 'L3MON4D3/LuaSnip'
+ Plug 'saadparwaiz1/cmp_luasnip'
 
 " Languages
 Plug 'dbakker/vim-lint'
@@ -199,13 +214,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
 Plug 'lervag/vimtex'
-" Snippets
-"Plug 'SirVer/ultisnips'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'sheerun/vim-polyglot'
-" Snippets/LSP
- Plug 'L3MON4D3/LuaSnip'
- Plug 'saadparwaiz1/cmp_luasnip'
 call plug#end()
 
 lua require("init")
@@ -577,5 +585,3 @@ current_line_blame_opts = {
 }
 END
 
-"=========Vim-Whic-Key===========
-autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')

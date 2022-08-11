@@ -1,17 +1,32 @@
-require'lspconfig'
-
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
+local language_servers = {
+    'rust_analyzer',
+    'pyright',
+    'tsserver',
+    'sumneko_lua',
+    --Scripting
+    'bashls',
+    -- Non programming languages
+    'sqls',
+    'texlab',
+    'marksman',
+    'jsonls',
+    'yamlls',
+    --xml
+    'lemminx'
+  }
+require("which-key").setup()
 require('luasnip')
  -- Load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
-require('user.lsp')
+local capabilities_callback = require('user.completion.cmp').init().get_capabilites()
+
+print(capabilities_callback)
+require('user.lsp').init(language_servers, false, require("cmp_nvim_lsp").update_capabilities)
+--require('user.completion.coq')
+
 require('user.treesitter')
 require('user.telescope')
-require('user.cmp')
 require("user.mappings")
 require("user.autopairing")
 require("user.icons")
