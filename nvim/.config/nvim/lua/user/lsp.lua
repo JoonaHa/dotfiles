@@ -89,8 +89,7 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
   if not is_coq and capabilities_reg_func ~= nil then
     local status_ok, comp_capabilities = pcall(capabilities_reg_func, capabilities)
     if status_ok then
-      capabilities= comp_capabilities
-      print("capabiltiese loaded")
+      capabilities = comp_capabilities
     else
       vim.api.nvim_err_writeln("Failed to load comp_capabilities" .. "\n\n" .. comp_capabilities)
     end
@@ -150,7 +149,7 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     }
   else
     for _, lsp in ipairs(servers) do
-      require('lspconfig')[lsp].setup(require("coq").lsp_ensure_capabilities({
+      require('lspconfig')[lsp].setup(capabilities_reg_func({
         on_attach = on_attach,
         root_dir = root_dir,
         capabilities = capabilities,

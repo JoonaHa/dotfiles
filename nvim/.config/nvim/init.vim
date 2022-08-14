@@ -52,6 +52,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 "Spelling
 set spelllang=en_us
 let g:vimchant_spellcheck_lang = 'fi'
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritingSettingsToggle()
 autocmd FileType gitcommit call WritingSettingsToggle()
 " Toggle between finnish and english spelling
@@ -148,7 +149,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
 Plug 'f3fora/cmp-spell'
 Plug 'uga-rosa/cmp-dictionary'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
@@ -194,7 +194,6 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'onsails/lspkind.nvim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'tjdevries/colorbuddy.nvim'
 
 " Snippets
 "Plug 'SirVer/ultisnips'
@@ -221,6 +220,9 @@ lua require("init")
 " ======= Keybinding ========
 map <C-n> :NERDTreeToggle<CR>
 map <C-p> :Vista!!<CR>
+
+nmap hs :split<Return><C-w>w
+nmap vs :vsplit<Return><C-w>w
 
 :nnoremap <silent><esc> :noh<CR>
 :nnoremap <esc>[ <esc>[
@@ -264,7 +266,7 @@ inoremap <C-S-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-S-j> :m '>+1<CR>gv=gv
 vnoremap <C-S-k> :m '<-2<CR>gv=gv
 
-" Visual searc in /
+" Visual search in /
 vmap / y/<C-R>"<CR>
 
 "Splite sizing
@@ -315,13 +317,36 @@ if (empty($TMUX))
   endif
 endif
 
-
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'darker'
 colorscheme material
 hi CursorColumn guibg=#856262
 hi Visual gui=none guifg=none guibg=#4d3f3f
 
+set cursorline 
+set winblend=0
+set wildoptions=pum
+set pumblend=5
+set background=dark
+
+"nvim-cmp groups
+"See https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
 
 "=================Hexmode================"
 " ex command for togling hex mode - define mapping if desired

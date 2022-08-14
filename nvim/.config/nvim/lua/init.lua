@@ -13,21 +13,43 @@ local language_servers = {
     'yamlls',
     --xml
     'lemminx'
-  }
+}
+local nerdtree_grammar = {
+    'lua',
+    'typescript',
+    'rust',
+    'python',
+    'latex',
+    'typescript',
+    'tsx',
+    'javascript',
+    --Scripting
+    'bash',
+    -- Non programming languages
+    'bibtex',
+    'markdown'
+    }
+
+local null_ls_tools = {
+	"formatting.stylua",
+	"diagnostics.eslint",
+	"completion.spell",
+	"formatting.rustfmt",
+	"formatting.fixjson",
+	"formatting.tidy",
+}
+
 require("which-key").setup()
 require('luasnip')
  -- Load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
-local capabilities_callback = require('user.completion.cmp').init().get_capabilites()
+require('user.lsp').init(language_servers, false, require('user.completion.cmp').init().get_capabilites() )
+--require('user.lsp').init(language_servers, true, require('user.completion.coq').init().get_capabilites() )
 
-print(capabilities_callback)
-require('user.lsp').init(language_servers, false, require("cmp_nvim_lsp").update_capabilities)
---require('user.completion.coq')
-
-require('user.treesitter')
+require('user.treesitter').init(nerdtree_grammar)
 require('user.telescope')
 require("user.mappings")
 require("user.autopairing")
 require("user.icons")
-require("user.format")
+require("user.formatting").init(null_ls_tools)

@@ -11,3 +11,8 @@ function cmp_instance.init()
   return cmp_instance
 end
 
+function cmp_instance.get_capabilites()
+  return function(capabilities) return require("coq").lsp_ensure_capabilities(capabilities) end
+end
+
+return cmp_instance
