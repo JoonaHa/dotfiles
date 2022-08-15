@@ -15,9 +15,13 @@ local function treesitter()
   local location = require('nvim-treesitter').statusline{
       indicator_size = vim.o.columns * 2 / 3,
       type_patterns = {'class', 'function', 'method'},
-     -- separator = '  ',
+      separator = "    ",
     }
-  if location ~= nil then return location else return "" end
+    if location ~= nil and  string.len(location) > 0 then
+      return vim.fn.expand('%:t') .. "  " .. location
+    else return vim.fn.expand('%:t')
+    end
+
 end
 
 require('lualine').setup {

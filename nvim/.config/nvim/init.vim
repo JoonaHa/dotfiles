@@ -211,8 +211,8 @@ call plug#end()
 lua require("init")
 
 " =================KEYBINDS================
-nmap hs :split<Return><C-w>w
-nmap vs :vsplit<Return><C-w>w
+nmap <leader>hs :split<Return><C-w>w
+nmap <leader>vs :vsplit<Return><C-w>w
 
 :nnoremap <silent><esc> :noh<CR>
 :nnoremap <esc>[ <esc>[
