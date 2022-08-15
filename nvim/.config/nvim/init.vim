@@ -28,9 +28,6 @@ set smartindent
 set nowrap
 set backspace=indent,eol,start " make backspace work like most other programs
 :inoremap jk <esc>
-let g:rustfmt_file_lines = 1
-let g:syntastic_python_checkers = ['pylint']
-let g:python_host_prog = "/usr/bin/python2"
 "" Change map leader to space
 nnoremap <SPACE> <Nop>
 let g:mapleader = "\<Space>"
@@ -46,15 +43,10 @@ if has('win32')
   set nofsync
   let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
-"set expandtab
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-let g:indent_guides_enable_on_vim_startup = 1
+
 "Spelling
 set spelllang=en_us
 let g:vimchant_spellcheck_lang = 'fi'
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritingSettingsToggle()
-autocmd FileType gitcommit call WritingSettingsToggle()
 " Toggle between finnish and english spelling
 let g:finnish_on = 0
 function! ToggleFinnish()
@@ -73,7 +65,6 @@ function! ToggleFinnish()
   endif
 endfunction
 command Suomi call ToggleFinnish()
-
 "https://vimtricks.com/p/word-wrapping/
 "https://vim.fandom.com/wiki/Move_cursor_by_display_lines_when_wrapping 
 function! ToggleWrap()
@@ -116,6 +107,10 @@ function WritingSettingsToggle()
 endfunction
 command WritingToggle call WritingSettingsToggle()
 
+" Writing autocommands
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritingSettingsToggle()
+autocmd FileType gitcommit call WritingSettingsToggle()
 "Autoread on bufenter
 au FocusGained,BufEnter * :checktime
 "Help mappings
@@ -131,7 +126,7 @@ autocmd FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
 autocmd FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
 autocmd FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
 
-" ========== Plugins ==================="
+" =================PLUGINS================
 call plug#begin()
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -155,22 +150,20 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'kdheepak/cmp-latex-symbols'
-Plug 'ray-x/cmp-treesitter'
 " Coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq depss'}
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " Must have plugings
+Plug 'ray-x/cmp-treesitter'
 Plug 'liuchengxu/vista.vim'
-Plug 'rakr/vim-one'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree' |
-      \ Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'nvim-lualine/lualine.nvim' |
+      \ Plug 'kdheepak/tabline.nvim' |
+      \ Plug 'arkav/lualine-lsp-progress'
+Plug 'kyazdani42/nvim-tree.lua'
 " Tools
 Plug 'tpope/vim-surround'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'pechorin/any-jump.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'jose-elias-alvarez/null-ls.nvim'
@@ -193,7 +186,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'onsails/lspkind.nvim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'rakr/vim-one'
 
 " Snippets
 "Plug 'SirVer/ultisnips'
@@ -217,10 +210,7 @@ call plug#end()
 
 lua require("init")
 
-" ======= Keybinding ========
-map <C-n> :NERDTreeToggle<CR>
-map <C-p> :Vista!!<CR>
-
+" =================KEYBINDS================
 nmap hs :split<Return><C-w>w
 nmap vs :vsplit<Return><C-w>w
 
@@ -246,6 +236,8 @@ nnoremap <silent> <A-Right> <C-w>l
 
 nmap <silent> ]t gt
 nmap <silent> [t gT
+nmap <silent> <Tab> gt
+nmap <silent> <S-Tab> gT
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
@@ -258,7 +250,6 @@ inoremap <C-S-Down> <Esc>:m .+1<CR>==gi
 inoremap <C-S-Up>  <Esc>:m .-2<CR>==gi
 vnoremap <C-S-Down> :m '>+1<CR>gv=gv
 vnoremap <C-S-Up>  :m '<-2<CR>gv=gv
-
 nnoremap <C-S-j> :m .+1<CR>==
 nnoremap <C-S-k> :m .-2<CR>==
 inoremap <C-S-j> <Esc>:m .+1<CR>==gi
@@ -285,7 +276,7 @@ vnoremap g<A-x> g<C-x>
 " System Clipboard and select all
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
-map <C-v> "+P
+map <C-v> "+p
 map <C-s> :w<CR>
 map <C-a> ggVG
 " WSL clipboard
@@ -297,6 +288,11 @@ map <C-a> ggVG
 "    augroup END
 "    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
 "endif
+"
+"=================Languages================
+let g:rustfmt_file_lines = 1
+let g:syntastic_python_checkers = ['pylint']
+let g:python_host_prog = "/usr/bin/python2"
 
 "=================THEMES================
 "Credit joshdick
@@ -391,9 +387,7 @@ function ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction
-
-
-"====Neovide===="
+"=================Neovide================"
 if exists('g:neovide')
   if has('win32')
     set guifont=Cascadia\ Code\ PL,CaskaydiaCove\ NF,CaskaydiaCove\ Nerd\ Font,Iosevka:h12
@@ -407,39 +401,9 @@ if exists('g:neovide')
     nnoremap <C-_> :set guifont=+<CR>
     nnoremap <C--> :set guifont=-<CR>
 endif
-"====NERDTree===="
-
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
-" Don't open NERDTree in a saved session "
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
-"Open NERDTree in a dirctory"
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-"Close vim if NERDTree is only window open"
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" vim-devicons
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_enable_unite = 1
-let g:webdevicons_enable_vimfiler = 1
-let g:webdevicons_enable_ctrlp = 1
-let g:webdevicons_enable_flagship_statusline = 1
-let g:WebDevIconsUnicodeDecorateFileNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-let g:webdevicons_enable_denite = 1
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:DevIconsEnableFolderPatternMatching = 1
-let g:DevIconsEnableFolderExtensionPatternMatching = 1
-let WebDevIconsUnicodeDecorateFolderNodesExactMatches = 1
-
-
+"=================Nvim-tree================"
+map <C-n> :NvimTreeToggle<CR>
+nmap tf :NvimTreeFindFile<CR>
 "=================Telescope================"
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
@@ -538,6 +502,7 @@ let g:mkdp_page_title = '「${name}」'
 let g:mkdp_filetypes = ['markdown']
 
 "=================Vista==============
+map <C-p> :Vista!!<CR>
 " How each level is indented and what to prepend.
 " This could make the display more compact or more spacious.
 " e.g., more compact: ["▸ ", ""]
@@ -564,27 +529,7 @@ let g:vista#renderer#icons = {
       \   "variable": "\uf71b",
       \  }
 
-"=======Airline================
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_powerline_fonts = 1
-let g:webdevicons_enable_airline_tabline = 1
-let g:webdevicons_enable_airline_statusline = 1
-"=========Any-Jump===========
-" Normal mode: Jump to definition under cursor
-nnoremap <leader>j :AnyJump<CR>
-
-" Visual mode: jump to selected text in visual mode
-xnoremap <leader>j :AnyJumpVisual<CR>
-
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
-
-" Normal mode: open last closed search window again
-nnoremap <leader>al :AnyJumpLastResults<CR>
-
-
-"=========Vimtex===========
+"=================Vimtex==============
 let g:tex_flavor='latex'
 let g:vimtex_view_method = 'zathura'
 autocmd VimEnter *.tex VimtexCompile
@@ -595,7 +540,7 @@ let g:tex_conceal='abdmg'
 " following line. The default is usually fine and is the symbol "\".
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 
-"=========Gitsigns===========
+"=================Gitsigns==============
 lua << END
 require('gitsigns').setup{
 signcolumn = false,
@@ -609,4 +554,7 @@ current_line_blame_opts = {
   },
 }
 END
-
+" =================Rainbow (brackets)==============
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+" =================Indent Guides==============
+let g:indent_guides_enable_on_vim_startup = 1

@@ -40,7 +40,7 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     nmap('<leader>df', vim.diagnostic.open_float, '[D]iagnostic [F]loat')
     nmap('<leader>dl', vim.diagnostic.setloclist, '[D]iagnostic [L]ist')
 
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
       vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
       vim.api.nvim_create_autocmd("CursorHold", {
         group = "lsp_document_highlight",

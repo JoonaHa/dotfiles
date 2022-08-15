@@ -4,6 +4,7 @@ function treesitter_instance.init(ensure_installed)
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
 
+    ensure_installed = ensure_installed,
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
@@ -81,8 +82,8 @@ function treesitter_instance.init(ensure_installed)
         enable = true,
         border = 'none',
         peek_definition_code = {
-          ["<leader>df"] = "@function.outer",
-          ["<leader>dF"] = "@class.outer",
+          ["<leader>pf"] = "@function.outer",
+          ["<leader>pF"] = "@class.outer",
         },
       },
     },
