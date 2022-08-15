@@ -136,15 +136,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} |
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', 
-      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release 
-       \ && cmake --install build --prefix build' }
 "Cmp
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'f3fora/cmp-spell'
+Plug 'ray-x/cmp-treesitter'
 Plug 'uga-rosa/cmp-dictionary'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
@@ -155,12 +153,14 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " Must have plugings
-Plug 'ray-x/cmp-treesitter'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lualine/lualine.nvim' |
       \ Plug 'kdheepak/tabline.nvim' |
       \ Plug 'arkav/lualine-lsp-progress'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', 
+      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
+        \ && cmake --build build --config Release && cmake --install build --prefix build' }
 " Tools
 Plug 'tpope/vim-surround'
 Plug 'michaeljsmith/vim-indent-object'
@@ -539,9 +539,8 @@ let g:tex_conceal='abdmg'
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
-
 "=================Gitsigns==============
-lua << END
+lua << EOF
 require('gitsigns').setup{
 signcolumn = false,
 numhl = true,
@@ -553,8 +552,9 @@ current_line_blame_opts = {
   ignore_whitespace = false,
   },
 }
-END
+EOF
 " =================Rainbow (brackets)==============
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " =================Indent Guides==============
 let g:indent_guides_enable_on_vim_startup = 1
+
