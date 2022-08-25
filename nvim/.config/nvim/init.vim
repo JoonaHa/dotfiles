@@ -273,6 +273,9 @@ vnoremap <A-a> <C-a>
 vnoremap <A-x> <C-x>
 vnoremap g<A-a> g<C-a>
 vnoremap g<A-x> g<C-x>
+
+" Remap backtick
+nmap å `
 " System Clipboard and select all
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
@@ -406,7 +409,8 @@ map <C-n> :NvimTreeToggle<CR>
 nmap tf :NvimTreeFindFile<CR>
 "=================Telescope================"
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 "====MarkdownPreview====="
