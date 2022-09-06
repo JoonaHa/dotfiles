@@ -10,7 +10,7 @@ set mousefocus
 set mousehide
 set mousemodel=popup_setpos
 set encoding=UTF-8
-set updatetime=100
+set updatetime=50
 " replace tab with spaces
 set tabstop=4
 set shiftwidth=4
