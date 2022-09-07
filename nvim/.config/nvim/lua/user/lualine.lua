@@ -8,9 +8,6 @@ local function diff_source()
     }
   end
 end
-local function window()
-  return vim.api.nvim_win_get_number(0)
-end
 local function treesitter()
   local location = require('nvim-treesitter').statusline{
       indicator_size = vim.o.columns * 2 / 3,
@@ -75,7 +72,7 @@ require('lualine').setup {
   winbar = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { treesitter },
+    --lualine_c = { treesitter },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
@@ -84,7 +81,7 @@ require('lualine').setup {
   inactive_winbar = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { treesitter },
+    --lualine_c = { treesitter },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
