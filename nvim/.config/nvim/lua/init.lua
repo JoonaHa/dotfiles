@@ -42,10 +42,10 @@ local null_ls_tools = {
 require('luasnip')
  -- Load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
+require("user.formatting").init(null_ls_tools)
 require('user.lsp').init(language_servers, false, require('user.completion.cmp').init().get_capabilites() )
 --require('user.lsp').init(language_servers, true, require('user.completion.coq').init().get_capabilites() )
-require('user.treesitter').init(treesitter_grammar)
-require("user.formatting").init(null_ls_tools)
+require('user.treesitter').init(treesitter_grammar).enableContextHeader()
 
 require("user.lualine")
 require("user.icons")

@@ -134,6 +134,7 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 "Cmp
@@ -276,6 +277,10 @@ vnoremap g<A-x> g<C-x>
 
 " Remap backtick
 nmap å `
+
+" Center cursor when scrolling up or down
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 " System Clipboard and select all
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
