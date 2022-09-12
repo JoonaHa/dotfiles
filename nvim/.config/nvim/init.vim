@@ -267,6 +267,14 @@ nnoremap <A->> <C-w>>
 nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 
+" Primagen leader paste yank
+xnoremap <leader>p "_dP
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nmap <leader>Y "+Y
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 " Incerement/decrement to alt keys
 nnoremap <A-a> <C-a>
 nnoremap <A-x> <C-x>
