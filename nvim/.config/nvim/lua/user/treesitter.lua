@@ -88,6 +88,11 @@ function treesitter_instance.init(ensure_installed)
       },
     },
   }
+
+  -- Set foldmethod to use treesitter
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
   return treesitter_instance
 end
 
