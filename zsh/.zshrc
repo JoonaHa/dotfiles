@@ -187,7 +187,9 @@ fi
 #source /home/mina/.tmc-autocomplete.sh || true
 #source /home/mina/.tmc-autocomplete.sh || true
 zvm_after_init() {
+#source /usr/share/doc/fzf/examples/completion.zsh
+#source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
 source /usr/share/fzf/key-bindings.zsh
+source /usr/share/doc/pkgfile/command-not-found.zsh
 }
