@@ -574,4 +574,7 @@ EOF
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " =================Indent Guides==============
 let g:indent_guides_enable_on_vim_startup = 1
-
+" =================Luasnip==============
+" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
