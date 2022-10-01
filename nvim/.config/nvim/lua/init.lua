@@ -39,6 +39,8 @@ local null_ls_tools = {
 	"formatting.tidy",
 }
 
+require('impatient')
+require("project_nvim").setup()
 require('luasnip')
  -- Load friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -54,3 +56,5 @@ require('user.telescope')
 require("user.autopairing")
 require("user.which-key")
 require("user.mappings")
+require("user.illuminate")
+

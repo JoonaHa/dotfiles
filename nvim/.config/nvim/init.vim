@@ -154,6 +154,7 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " Must have plugings
+Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lualine/lualine.nvim' |
       \ Plug 'kdheepak/tabline.nvim' |
@@ -168,13 +169,15 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'lewis6991/impatient.nvim'
 "Plug 'baverman/vial'
-"Plug 'baverman/vial-http'
+"Plug ''lewis6991/impatient.nvim'baverman/vial-http'
 "Plug 'airblade/vim-rooter'
 Plug 'machakann/vim-highlightedyank'
 Plug 'luochen1990/rainbow'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'gko/vim-coloresque'
+Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
 Plug '~/.config/nvim/plugged/vimchant'
 " Git

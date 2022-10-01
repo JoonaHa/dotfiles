@@ -9,6 +9,12 @@ nvim_tree.setup {
   hijack_directories = {
     enable = true,
   },
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true
+  },
   -- update_to_buf_dir = {
   --   enable = false,
   -- },
@@ -41,8 +47,7 @@ nvim_tree.setup {
   },
 
   view = {
-    width = 30,
-    height = 30,
+    adaptive_size = true,
     hide_root_folder = false,
     side = "left",
     mappings = {
