@@ -61,14 +61,15 @@ function cmp_instance.init()
       { name = 'luasnip' },
       { name = 'treesitter' },
       { name = 'buffer' },
+      { name = 'path' },
 
     },
     sorting = {
         -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
       comparators = {
-        cmp.config.compare.kind,
         cmp.config.compare.scope,
         cmp.config.compare.locality,
+        cmp.config.compare.kind,
         cmp.config.compare.offset,
         cmp.config.compare.score,
         cmp.config.compare.order,
@@ -160,6 +161,7 @@ function cmp_instance.init()
       { name = 'nvim_lsp' },
       { name = 'spell' },
       { name = 'dictionary' },
+      { name = 'path' },
     })
   })
 
@@ -170,6 +172,7 @@ function cmp_instance.init()
       { name = 'dictionary' },
       { name = 'treesitter' },
       { name = 'buffer' },
+      { name = 'path' },
     })
   })
 
