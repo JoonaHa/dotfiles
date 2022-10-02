@@ -172,16 +172,17 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # !! CUSTOM KEYBINDIGS !!
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
+bindsym XF86AudioMute exec --no-startup-id pamixer -t && $refresh_i3status && ~/bin/scripts/volume-notify.sh
+bindsym XF86AudioMicMute exec --no-startup-id pamixer --default-source -t && $refresh_i3status
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioStop exec playerctl stop
+# Sleep so playercrtl can detect the changed status
+bindsym XF86AudioPlay exec playerctl play-pause && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioNext exec playerctl next && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioPrev exec playerctl previous && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioStop exec playerctl stop && sleep 0.2 && ~/bin/scripts/now-playing.sh
 
 bindsym $mod+F5 exec pavucontrol
 bindsym $mod+Mod1+l exec /home/mina/bin/scripts/i3lock.sh
@@ -290,6 +291,7 @@ exec_always --no-startup-id picom
 for_window [class="Pavucontrol"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="About"] floating enable
+for_window [class="KeePassXC"] floating enable
 # steam floating
 for_window [class="Steam" title="Friends List"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
