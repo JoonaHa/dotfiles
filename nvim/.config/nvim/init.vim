@@ -50,8 +50,12 @@ let g:vimchant_spellcheck_lang = 'fi'
 " Toggle between finnish and english spelling
 let g:finnish_on = 0
 function! ToggleFinnish()
-  if (&spell == 0 && g:finnish_on == 0) || g:loaded_vimchant == 0
+  if &spell == 0
     echo 'Spelling not active. Run :set spell'
+    return
+  endif
+  if g:loaded_vimchant == 0
+    echo 'Vimchant is not loaded'
     return
   endif
   if g:finnish_on == 0
@@ -150,9 +154,9 @@ Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'kdheepak/cmp-latex-symbols'
 " Coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+"Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
+"Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+"Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 " Must have plugings
 Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
@@ -185,7 +189,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
 " Themes
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'marko-cerovac/material.nvim'
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -332,11 +336,10 @@ if (empty($TMUX))
   endif
 endif
 
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'darker'
 colorscheme material
-hi CursorColumn guibg=#856262
-hi Visual gui=none guifg=none guibg=#4d3f3f
+let g:material_style = 'darker'
+"hi CursorColumn guibg=#856262
+"hi Visual gui=none guifg=none guibg=#4d3f3f
 
 set cursorline 
 set winblend=0
