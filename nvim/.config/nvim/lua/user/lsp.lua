@@ -94,14 +94,9 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
 
   -- Add additional capabilities supported by user.completion objecet
   -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities
   if not is_coq and capabilities_reg_func ~= nil then
-    local status_ok, comp_capabilities = pcall(capabilities_reg_func, capabilities)
-    if status_ok then
-      capabilities = comp_capabilities
-    else
-      vim.api.nvim_err_writeln("Failed to load comp_capabilities" .. "\n\n" .. comp_capabilities)
-    end
+    capabilities = capabilities_reg_func()
   end
 
   capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }

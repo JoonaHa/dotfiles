@@ -203,7 +203,7 @@ function cmp_instance.init()
 end
 
 function cmp_instance.get_capabilites()
-  return function(capabilities) return require("cmp_nvim_lsp").update_capabilities(capabilities) end
+  return function() return require("cmp_nvim_lsp").default_capabilities() end
 
 end
 
