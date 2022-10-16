@@ -67,6 +67,8 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', vim.lsp.buf.format or vim.lsp.buf.formatting, { desc = 'Format current buffer with LSP' })
 
+    require('user.ui-plugins').lsp_attach(client, bufnr)
+
   end
 
 

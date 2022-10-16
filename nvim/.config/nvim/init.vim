@@ -167,6 +167,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', 
       \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
         \ && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'SmiteshP/nvim-navic'
 " Tools
 Plug 'tpope/vim-surround'
 Plug 'michaeljsmith/vim-indent-object'

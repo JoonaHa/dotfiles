@@ -40,6 +40,7 @@ local null_ls_tools = {
 }
 
 require('impatient')
+require("user.ui-plugins")
 require("project_nvim").setup()
 require('luasnip')
  -- Load friendly-snippets
@@ -49,7 +50,6 @@ require('user.lsp').init(language_servers, false, require('user.completion.cmp')
 --require('user.lsp').init(language_servers, true, require('user.completion.coq').init().get_capabilites() )
 require('user.treesitter').init(treesitter_grammar).enableContextHeader()
 
-require("user.lualine")
 require("user.icons")
 require("user.nvim-tree")
 require('user.telescope')

@@ -55,7 +55,19 @@ function cmp_instance.init()
 
     sources = {
       { name = 'nvim_lsp_signature_help' },
-      { name = 'nvim_lsp' },
+      {
+        name = "nvim_lsp",
+        entry_filter = function(entry, ctx)
+          local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+          if kind == "Snippet" and ctx.prev_context.filetype == "java" then
+            return false
+          end
+          if kind == "Text" then
+            return false
+          end
+          return true
+        end,
+      },
       { name = 'nvim_lua' },
       { name = 'latex_symbols' },
       { name = 'luasnip' },
@@ -197,14 +209,11 @@ function cmp_instance.init()
     })
   })
 
-
-
   return cmp_instance
 end
 
 function cmp_instance.get_capabilites()
   return function() return require("cmp_nvim_lsp").default_capabilities() end
-
 end
 
 return cmp_instance

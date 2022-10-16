@@ -1,5 +1,7 @@
+local M = {}
+
 local function diff_source()
-  local gitsigns = vim.b.gitsigns_status_dict
+local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
     return {
       added = gitsigns.added,
@@ -8,17 +10,38 @@ local function diff_source()
     }
   end
 end
-local function treesitter()
-  local location = require('nvim-treesitter').statusline{
-      indicator_size = vim.o.columns * 2 / 3,
-      type_patterns = {'class', 'function', 'method'},
-      separator = "    ",
-    }
-    if location ~= nil and  string.len(location) > 0 then
-      return vim.fn.expand('%:t') .. "  " .. location
-    else return vim.fn.expand('%:t')
-    end
+--local function treesitter()
+--  local location = require('nvim-treesitter').statusline{
+--      indicator_size = vim.o.columns * 2 / 3,
+--      type_patterns = {'class', 'function', 'method'},
+--      separator = "    ",
+--    }
+--    if location ~= nil and  string.len(location) > 0 then
+--      return vim.fn.expand('%:t') .. "  " .. location
+--    else return vim.fn.expand('%:t')
+--    end
+--end
 
+
+local navic = require('nvim-navic')
+navic.setup{
+      highlight = true,
+      separator = " " .. ">" .. " ",
+      depth_limit = 0,
+      depth_limit_indicator = "..",
+}
+local function navic_wrapper()
+  local location = navic.get_location()
+    if location ~= nil and string.len(location) > 0 then
+      return location
+    else return '%#NavicIconsFile# %*%#NavicText#' .. vim.fn.expand('%:t') .. '%*'
+    end
+end
+
+function M.lsp_attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+      require('nvim-navic').attach(client, bufnr)
+  end
 end
 
 require('lualine').setup {
@@ -72,7 +95,7 @@ require('lualine').setup {
   winbar = {
     lualine_a = {},
     lualine_b = {},
-    --lualine_c = { treesitter },
+    lualine_c = { navic_wrapper },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
@@ -81,7 +104,7 @@ require('lualine').setup {
   inactive_winbar = {
     lualine_a = {},
     lualine_b = {},
-    --lualine_c = { treesitter },
+    lualine_c = { navic_wrapper },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
@@ -90,7 +113,7 @@ require('lualine').setup {
   extensions = { 'fugitive' ,'nerdtree', 'symbols-outline', 'neo-tree' }
 }
 
-require'tabline'.setup {
+require('tabline').setup {
   -- Defaults configuration options
   enable = true,
   options = {
@@ -106,3 +129,5 @@ require'tabline'.setup {
       set sessionoptions+=tabpages,globals " store tabpages and globals in session
     ]]
 
+
+return M
