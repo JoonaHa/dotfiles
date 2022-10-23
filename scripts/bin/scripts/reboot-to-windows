@@ -2,7 +2,13 @@
 # Reboot directly to Windows
 # Inspired by http://askubuntu.com/questions/18170/how-to-reboot-into-windows-from-ubuntu
 # https://unix.stackexchange.com/questions/43196/how-can-i-tell-grub-i-want-to-reboot-into-windows-before-i-reboot
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
 windows_title=$(grep -i windows /boot/grub/grub.cfg | cut -d "'" -f 2)
-sudo grub-reboot "$windows_title" && sudo reboot
+#grub-reboot "$windows_title" && reboot
+echo "yeet"
 
 
