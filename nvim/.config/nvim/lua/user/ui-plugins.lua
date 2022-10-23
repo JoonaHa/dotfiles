@@ -26,7 +26,7 @@ end
 local navic = require('nvim-navic')
 navic.setup{
       highlight = true,
-      separator = " " .. ">" .. " ",
+      separator = " " .. "" .. "  ",
       depth_limit = 0,
       depth_limit_indicator = "..",
 }

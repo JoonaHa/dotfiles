@@ -1,4 +1,4 @@
-#See dunst(5) for all configuration options
+# See dunst(5) for all configuration options
 #https://github.com/dracula/dunst
 [global]
     ### Display ###
@@ -17,7 +17,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = mouse
+    follow = keyboard
 
     ### Geometry ###
 
@@ -68,12 +68,13 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 3
+    transparency = 7
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 1
+    # If gap_size is greater than 0, this setting will be ignored.
+    separator_height = 2
 
     # Padding between text and separator.
     padding = 8
@@ -90,6 +91,12 @@
 
     # Defines color of the frame around the notification window.
     frame_color = "#282a36"
+
+    # Size of gap to display between notifications - requires a compositor.
+    # If value is greater than 0, separator_height will be ignored and a border
+    # of size frame_width will be drawn around each notification instead.
+    # Click events on gaps do not currently propagate to applications below.
+    gap_size = 0
 
     # Define a color for the separator.
     # possible values are:
@@ -111,7 +118,7 @@
 
     ### Text ###
 
-    font = Monospace 10
+    font = Monospace 9
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -205,7 +212,9 @@
     max_icon_size = 128
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/    ### History ###
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    ### History ###
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
@@ -293,7 +302,7 @@
     # dunst will attempt to calculate an appropriate dpi value for each monitor
     # using the resolution and physical size. This might be useful in setups
     # where there are multiple screens with very different dpi values.
-    per_monitor_dpi = true
+    per_monitor_dpi = false
 
 
 [urgency_low]
@@ -346,12 +355,14 @@
 #    set_category
 #    timeout
 #    urgency
+#    icon_position
 #    skip_display
 #    history_ignore
 #    action_name
 #    word_wrap
 #    ellipsize
 #    alignment
+#    hide_text
 #
 # Shell-like globbing will get expanded.
 #
