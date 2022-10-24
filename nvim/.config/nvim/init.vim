@@ -188,6 +188,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
 " Themes
+Plug 'rebelot/kanagawa.nvim' " Vim-Plug
 Plug 'EdenEast/nightfox.nvim' " Vim-Plug
 Plug 'marko-cerovac/material.nvim'
 Plug 'jacoborus/tender.vim'
@@ -336,7 +337,7 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme nightfox
+colorscheme kanagawa
 let g:material_style = 'darker'
 "hi CursorColumn guibg=#856262
 "hi Visual gui=none guifg=none guibg=#4d3f3f
