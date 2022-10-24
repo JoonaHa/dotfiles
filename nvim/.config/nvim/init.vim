@@ -59,12 +59,10 @@ function! ToggleFinnish()
     return
   endif
   if g:finnish_on == 0
-    setlocal nospell
     VimchantSpellCheckOn
     let g:finnish_on = 1
   else
     VimchantSpellCheckOff
-    setlocal spell
     let g:finnish_on = 0
   endif
 endfunction
