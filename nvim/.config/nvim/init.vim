@@ -188,6 +188,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
 " Themes
+Plug 'EdenEast/nightfox.nvim' " Vim-Plug
 Plug 'marko-cerovac/material.nvim'
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
@@ -335,7 +336,7 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme material
+colorscheme nightfox
 let g:material_style = 'darker'
 "hi CursorColumn guibg=#856262
 "hi Visual gui=none guifg=none guibg=#4d3f3f
@@ -561,20 +562,6 @@ let g:tex_conceal='abdmg'
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
-"=================Gitsigns==============
-lua << EOF
-require('gitsigns').setup{
-signcolumn = false,
-numhl = true,
-current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-current_line_blame_opts = {
-  virt_text = true,
-  virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-  delay = 400,
-  ignore_whitespace = false,
-  },
-}
-EOF
 " =================Rainbow (brackets)==============
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " =================Indent Guides==============
