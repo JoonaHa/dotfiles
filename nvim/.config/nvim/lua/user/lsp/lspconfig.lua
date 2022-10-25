@@ -41,15 +41,15 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     nmap('<leader>dl', vim.diagnostic.setloclist, '[D]iagnostic [L]ist')
 
     if client.server_capabilities.document_highlight then
-      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-      vim.api.nvim_create_autocmd("CursorHold", {
-        group = "lsp_document_highlight",
-        pattern = "<buffer>",
+      vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+      vim.api.nvim_create_autocmd('CursorHold', {
+        group = 'lsp_document_highlight',
+        pattern = '<buffer>',
         callback = vim.lsp.buf.document_highlight,
       })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        group = "lsp_document_highlight",
-        pattern = "<buffer>",
+      vim.api.nvim_create_autocmd('CursorMoved', {
+        group = 'lsp_document_highlight',
+        pattern = '<buffer>',
         callback = vim.lsp.buf.clear_references,
       })
     end
@@ -58,11 +58,11 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
 
     -- Use LSP as the handler for formatexpr and tagfunc.
     if client.server_capabilities.goto_definition == true then
-      vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+      vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
     end
 
     if client.server_capabilities.document_formatting == true then
-      vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+      vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
     end
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(
@@ -73,6 +73,7 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     )
 
     require('user.ui-plugins').lsp_attach(client, bufnr)
+    require('user.lsp.inlay-hints').lsp_attach(client, bufnr)
 
   end
 
@@ -84,11 +85,11 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     update_in_insert = true,
     float = {
       focusable = false,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
+      style = 'minimal',
+      border = 'rounded',
+      source = 'always',
+      header = '',
+      prefix = '',
       },
   })
 
@@ -106,7 +107,7 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     capabilities = capabilities_reg_func()
   end
 
-  capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+  capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.preselectSupport = true
   capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
@@ -115,12 +116,12 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
   capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
   capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
   capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = { "documentation", "detail", "additionalTextEdits" },
+    properties = { 'documentation', 'detail', 'additionalTextEdits' },
 }
 
 
-  require("mason").setup()
-  require("mason-lspconfig").setup({
+  require('mason').setup()
+  require('mason-lspconfig').setup({
     ensure_installed = servers
   })
 

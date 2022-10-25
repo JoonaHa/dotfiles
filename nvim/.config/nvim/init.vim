@@ -8,6 +8,7 @@
 set mouse=a
 set mousefocus
 set mousehide
+set mousemoveevent
 set mousemodel=popup_setpos
 set encoding=UTF-8
 set updatetime=50
@@ -139,7 +140,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} |
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'lvimuser/lsp-inlayhints.nvim'
 "Cmp
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -156,16 +157,19 @@ Plug 'kdheepak/cmp-latex-symbols'
 "Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
 "Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 "Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+" Telescope
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'princejoogie/dir-telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', 
+      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
+        \ && cmake --build build --config Release && cmake --install build --prefix build' }
 " Must have plugings
 Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lualine/lualine.nvim' |
-      \ Plug 'kdheepak/tabline.nvim' |
       \ Plug 'arkav/lualine-lsp-progress'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', 
-      \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
-        \ && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'SmiteshP/nvim-navic'
 " Tools
 Plug 'tpope/vim-surround'
@@ -437,6 +441,10 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fdf <cmd>lua require("telescope").extensions.dir.find_files()<cr>
+nnoremap <leader>fds <cmd>lua require('telescope').extensions.dir.live_grep()<cr>
+nnoremap <leader>fds <cmd>lua require('telescope').extensions.dir.live_grep()<cr>
+nnoremap <leader>fp <cmd>Telescope projects<cr>
 "====MarkdownPreview====="
 " " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0

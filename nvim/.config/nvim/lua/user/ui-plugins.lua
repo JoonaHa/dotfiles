@@ -113,21 +113,25 @@ require('lualine').setup {
   extensions = { 'fugitive' ,'nerdtree', 'symbols-outline', 'neo-tree' }
 }
 
-require('tabline').setup {
-  -- Defaults configuration options
-  enable = true,
+vim.opt.termguicolors = true
+require("bufferline").setup{
   options = {
-    show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
-    show_devicons = true, -- this shows devicons in buffer section
-    show_bufnr = true, -- this appends [bufnr] to buffer section,
-    show_filename_only = false, -- shows base filename only instead of relative path in filename
-    show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
+    hover = {
+      enabled = true,
+      delay = 200,
+      reveal = {'close'}
+    },
+    diagnostics = "nvim_lsp",
+    diagnostics_indicator = function(count, level)
+      local icon = level:match("error") and " " or " "
+      return " " .. icon .. count
+      end,
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    show_buffer_default_icon = true,
+    numbers = function(opts)
+      return string.format('%s', opts.raise(opts.id))
+    end,
   }
 }
-    vim.cmd[[
-      set guioptions-=e " Use showtabline in gui vim
-      set sessionoptions+=tabpages,globals " store tabpages and globals in session
-    ]]
-
-
 return M

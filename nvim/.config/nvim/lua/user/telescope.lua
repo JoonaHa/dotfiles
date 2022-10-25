@@ -1,5 +1,6 @@
 local telescope = require('telescope')
 telescope.load_extension('projects')
+telescope.load_extension("dir")
 telescope.setup{
   defaults = {
     prompt_prefix = " ",
