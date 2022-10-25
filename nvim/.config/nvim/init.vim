@@ -1,10 +1,10 @@
 " ========== Vim Basic Settings ============="
-" Execute local .vimrc securely when started from whitelisted directory
-" https://vimtricks.com/p/local-vimrc-files
-if getcwd() =~# '^(\/home\/mina\/Projektit\/dotfiles\/)'
-  set secure exrc
-endif
-
+"" Execute local .vimrc securely when started from whitelisted directory
+"" https://vimtricks.com/p/local-vimrc-files
+"if getcwd() =~# '^(\/home\/mina\/Projektit\/dotfiles\/)'
+"  set secure exrc
+"endif
+"
 set mouse=a
 set mousefocus
 set mousehide
@@ -185,8 +185,9 @@ Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
 Plug '~/.config/nvim/plugged/vimchant'
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'TimUntersberger/neogit'
 
 " Themes
 Plug 'rebelot/kanagawa.nvim' " Vim-Plug

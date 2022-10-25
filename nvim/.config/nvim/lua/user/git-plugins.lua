@@ -1,3 +1,13 @@
+require('diffview').setup{
+  enhanced_diff_hl = true
+}
+
+require('neogit').setup{
+  integrations = {
+    diffview = true
+  }
+}
+
 require('gitsigns').setup{
   signcolumn = false,
   numhl = true,

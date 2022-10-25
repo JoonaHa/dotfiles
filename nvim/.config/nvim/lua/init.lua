@@ -41,7 +41,7 @@ local null_ls_tools = {
 
 require('impatient')
 require("user.ui-plugins")
-require("user.gitsings")
+require("user.git-plugins")
 require("project_nvim").setup()
 require('luasnip')
  -- Load friendly-snippets
