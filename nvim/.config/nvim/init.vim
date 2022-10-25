@@ -38,6 +38,7 @@ set laststatus=2
 set foldmethod=syntax
 set nofoldenable
 set relativenumber
+set splitright
 filetype plugin on
 if has('win32')
   set nofsync
@@ -222,6 +223,8 @@ lua require("init")
 " =================KEYBINDS================
 nmap <leader>hs :split<Return><C-w>w
 nmap <leader>vs :vsplit<Return><C-w>w
+nmap <leader>hS :new<Return><C-w>w
+nmap <leader>vS :vnew<Return><C-w>w
 
 :nnoremap <silent><esc> :noh<CR>
 :nnoremap <esc>[ <esc>[
