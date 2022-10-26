@@ -1,9 +1,7 @@
 -- LSP settings.
 local lsp_instance = {}
 
-
-function lsp_instance.init(servers, is_coq, capabilities_reg_func)
-  local on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible
     -- to define small helper and utility functions so you don't have to repeat yourself
     -- many times.
@@ -77,11 +75,44 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
 
   end
 
+local function custom_lsp_setups(capabilities)
+  -- Example custom configuration for lua
+  -- Make runtime files discoverable to the server
+    local runtime_path = vim.split(package.path, ';')
+    table.insert(runtime_path, 'lua/?.lua')
+    table.insert(runtime_path, 'lua/?/init.lua')
 
+    require('lspconfig').sumneko_lua.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT)
+            version = 'LuaJIT',
+            -- Setup your lua path
+            path = runtime_path,
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = { enable = false, },
+        },
+      },
+    }
+  require('lspconfig').omnisharp.setup {
+    on_attach = on_attach,
+    cmd = { "dotnet", "/home/joona/.local/share/nvim/mason/packages/omnisharp/OmniSharp.dll" },
+    enable_import_completion = true,
+    enable_roslyn_analyzers = true,
+  }
+end
 
+function lsp_instance.init(servers, capabilities_reg_func)
 
-  -- Diagnostic options, see: `:help vim.diagnostic.config`
-  vim.diagnostic.config({
+vim.diagnostic.config({
     update_in_insert = true,
     float = {
       focusable = false,
@@ -92,21 +123,16 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
       prefix = '',
       },
   })
-
   -- Define `root_dir` when needed
   -- See: https://github.com/neovim/nvim-lspconfig/issues/320
   -- This is a workaround, maybe not work with some servers.
   local root_dir = function()
     return vim.fn.getcwd()
   end
-
   -- Add additional capabilities supported by user.completion objecet
   -- See: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
-  local capabilities
-  if not is_coq and capabilities_reg_func ~= nil then
-    capabilities = capabilities_reg_func()
-  end
-
+  local capabilities = capabilities_reg_func()
+  -- TODO: Check if coq returns valid functionalities
   capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -119,81 +145,20 @@ function lsp_instance.init(servers, is_coq, capabilities_reg_func)
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
 }
 
-
   require('mason').setup()
   require('mason-lspconfig').setup({
     ensure_installed = servers
   })
 
-  if not is_coq then
-    for _, lsp in ipairs(servers) do
-      require('lspconfig')[lsp].setup {
-        on_attach = on_attach,
-        root_dir = root_dir,
-        capabilities = capabilities,
-      }
-    end
-  -- Example custom configuration for lua
-  -- Make runtime files discoverable to the server
-    local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, 'lua/?.lua')
-    table.insert(runtime_path, 'lua/?/init.lua')
-
-    require('lspconfig').sumneko_lua.setup {
+  for _, lsp in ipairs(servers) do
+    require('lspconfig')[lsp].setup {
       on_attach = on_attach,
+      root_dir = root_dir,
       capabilities = capabilities,
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-            version = 'LuaJIT',
-            -- Setup your lua path
-            path = runtime_path,
-          },
-          diagnostics = {
-            globals = { 'vim' },
-          },
-          workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-          -- Do not send telemetry data containing a randomized but unique identifier
-          telemetry = { enable = false, },
-        },
-      },
-    }
-  else
-    for _, lsp in ipairs(servers) do
-      require('lspconfig')[lsp].setup(capabilities_reg_func({
-        on_attach = on_attach,
-        root_dir = root_dir,
-        capabilities = capabilities,
-      }))
-    end
-  -- Example custom configuration for lua
-  -- Make runtime files discoverable to the server
-    local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, 'lua/?.lua')
-    table.insert(runtime_path, 'lua/?/init.lua')
-
-    require('lspconfig').sumneko_lua.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-            version = 'LuaJIT',
-            -- Setup your lua path
-            path = runtime_path,
-          },
-          diagnostics = {
-            globals = { 'vim' },
-          },
-          workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-          -- Do not send telemetry data containing a randomized but unique identifier
-          telemetry = { enable = false, },
-        },
-      },
     }
   end
+
+  custom_lsp_setups(capabilities)
 
 end
 
