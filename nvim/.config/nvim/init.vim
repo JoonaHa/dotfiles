@@ -40,6 +40,7 @@ set foldmethod=syntax
 set nofoldenable
 set relativenumber
 set splitright
+set signcolumn=yes:1
 filetype plugin on
 if has('win32')
   set nofsync
