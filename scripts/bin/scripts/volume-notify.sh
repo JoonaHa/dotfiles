@@ -17,4 +17,4 @@ else
     -h int:value:"$volume" "Volume: ${volume}%"
 fi
 # Play the volume changed sound
-canberra-gtk-play -i audio-volume-change -d "changeVolume"
+#canberra-gtk-play -i audio-volume-change -d "changeVolume"
