@@ -184,6 +184,14 @@ if [[ $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh
 fi
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi 
+
+if [ ! -f "$SSH_AUTH_SOCK" ]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
 #source /home/mina/.tmc-autocomplete.sh || true
 #source /home/mina/.tmc-autocomplete.sh || true
 zvm_after_init() {
