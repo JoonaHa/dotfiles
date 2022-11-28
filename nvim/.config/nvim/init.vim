@@ -46,6 +46,12 @@ if has('win32')
   let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
 
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
 "Spelling
 set spelllang=en_us
 let g:vimchant_spellcheck_lang = 'fi'
@@ -218,7 +224,8 @@ Plug 'cjrh/vim-conda'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
 Plug 'lervag/vimtex'
 call plug#end()

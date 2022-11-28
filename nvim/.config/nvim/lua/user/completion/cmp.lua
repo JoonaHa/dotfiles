@@ -180,20 +180,12 @@ function cmp_instance.init()
   cmp.setup.filetype('markdown', {
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+      { name = 'treesitter' },
       { name = 'spell' },
       { name = 'dictionary' },
-      { name = 'treesitter' },
       { name = 'buffer' },
       { name = 'path' },
-    })
-  })
-
-  cmp.setup.filetype('text', {
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'spell' },
-      { name = 'dictionary' },
-      { name = 'buffer' },
     })
   })
 
