@@ -1,5 +1,4 @@
-" ========== Vim Basic Settings ============="
-"" Execute local .vimrc securely when started from whitelisted directory
+" ========== Vim Basic Settings =============" "" Execute local .vimrc securely when started from whitelisted directory
 "" https://vimtricks.com/p/local-vimrc-files
 "if getcwd() =~# '^(\/home\/mina\/Projektit\/dotfiles\/)'
 "  set secure exrc
@@ -195,9 +194,10 @@ Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
 Plug '~/.config/nvim/plugged/vimchant'
 " Git
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'sindrets/diffview.nvim'
-Plug 'TimUntersberger/neogit'
 
 " Themes
 Plug 'rebelot/kanagawa.nvim' " Vim-Plug
@@ -443,15 +443,14 @@ endif
 map <C-n> :NvimTreeToggle<CR>
 nmap tf :NvimTreeFindFile<CR>
 "=================Telescope================"
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>fdf <cmd>lua require("telescope").extensions.dir.find_files()<cr>
-nnoremap <leader>fds <cmd>lua require('telescope').extensions.dir.live_grep()<cr>
-nnoremap <leader>fds <cmd>lua require('telescope').extensions.dir.live_grep()<cr>
-nnoremap <leader>fp <cmd>Telescope projects<cr>
+nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
+nnoremap <leader>tg <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>ts <cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>tdf <cmd>lua require("telescope").extensions.dir.find_files({hidden=true})<cr>
+nnoremap <leader>tds <cmd>lua require('telescope').extensions.dir.live_grep({hidden=true})<cr>
+nnoremap <leader>tp <cmd>Telescope projects<cr>
 "====MarkdownPreview====="
 " " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0

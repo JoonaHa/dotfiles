@@ -1,18 +1,7 @@
 require('diffview').setup{
-  enhanced_diff_hl = true
+  enhanced_diff_hl = false
 }
 
-local neogit = require('neogit')
-neogit.setup{
-  integrations = {
-    diffview = true
-  }
-}
-vim.api.nvim_create_user_command(
-  'Git',
-  function() neogit.open() end,
-  { desc = 'Run version control plugin (=Neogit)' }
-)
 
 require('gitsigns').setup{
   signcolumn = false,
