@@ -20,7 +20,7 @@ fi
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
 if [ -n "$DISPLAY" ]; then
-    export BROWSER="firefox"
+    export BROWSER="firefox-nightly"
 else 
     export BROWSER="links"
 fi
