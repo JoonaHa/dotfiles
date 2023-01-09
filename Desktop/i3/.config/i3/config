@@ -274,7 +274,9 @@ exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Pantheon; /usr/lib/gnome-settings-daemon/gsd-xsetting
 #xsettingsd
 exec_always --no-startup-id /usr/bin/xsettingsd
-#exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive
+# Backup keepass files locally and mount GoogleDrive for normal use
+exec rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/vara_Salasanat.kdbx
+exec rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/vara_Salasanat.old.kdbx
 exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4
 # Notifications
 exec_always --no-startup-id /usr/bin/dunst
