@@ -93,9 +93,9 @@ plugins=(
     command-not-found 
     zsh-history-substring-search
     zsh-completions
-    zsh-syntax-highlighting
     autoupdate
     zsh-vi-mode
+    zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 

@@ -1,0 +1,15 @@
+# See https://github.com/zsh-users/zsh-syntax-highlighting/issues/871#issuecomment-1133445535
+diff --git a/zsh-vi-mode.zsh b/zsh-vi-mode.zsh
+index c8cce0b..abea50f 100644
+--- a/zsh-vi-mode.zsh
++++ b/zsh-vi-mode.zsh
+@@ -3253,7 +3253,8 @@ function zvm_init() {
+   zvm_define_widget zvm_switch_keyword
+ 
+   # Override standard widgets
+-  zvm_define_widget zle-line-pre-redraw zvm_zle-line-pre-redraw
++  autoload add-zle-hook-widget
++  add-zle-hook-widget zle-line-pre-redraw zvm_zle-line-pre-redraw
+ 
+   # Ensure the correct cursor style when an interactive program
+   # (e.g. vim, bash, etc.) starts and exits
