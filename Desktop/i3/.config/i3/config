@@ -275,8 +275,8 @@ exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #xsettingsd
 exec_always --no-startup-id /usr/bin/xsettingsd
 # Backup keepass files locally and mount GoogleDrive for normal use
-exec rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/vara_Salasanat.kdbx
-exec rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/vara_Salasanat.old.kdbx
+exec rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx
+exec rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx
 exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4
 # Notifications
 exec_always --no-startup-id /usr/bin/dunst
