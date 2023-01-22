@@ -7,7 +7,13 @@ function treesitter_instance.init(ensure_installed)
     ensure_installed = ensure_installed,
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
+    },
+    rainbow = {
+      enable = true,
+      disable = { "html" },
+      extended_mode = true,
+      max_file_lines = nil,
     },
     indent = { enable = true },
     autopairs = { enable = true },
@@ -15,12 +21,6 @@ function treesitter_instance.init(ensure_installed)
     context_commentstring = {
       enable = true,
       enable_autocmd = false,
-    },
-    rainbow = {
-      enable = true,
-      disable = { "html" },
-      extended_mode = false,
-      max_file_lines = nil,
     },
 
     incremental_selection = {

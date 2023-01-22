@@ -144,6 +144,8 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/playground'
+Plug 'mrjones2014/nvim-ts-rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lvimuser/lsp-inlayhints.nvim'
 "Cmp
@@ -200,8 +202,9 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'sindrets/diffview.nvim'
 
 " Themes
-Plug 'rebelot/kanagawa.nvim' " Vim-Plug
-Plug 'EdenEast/nightfox.nvim' " Vim-Plug
+Plug 'rebelot/kanagawa.nvim'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'tiagovla/tokyodark.nvim'
 Plug 'marko-cerovac/material.nvim'
 Plug 'jacoborus/tender.vim'
 Plug 'liuchengxu/space-vim-dark'
@@ -334,25 +337,9 @@ let g:syntastic_python_checkers = ['pylint']
 let g:python_host_prog = "/usr/bin/python2"
 
 "=================THEMES================
-"Credit joshdick
-""Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
-"check and use tmux's 24-bit color support
-""(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 <https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+set termguicolors
 
-colorscheme kanagawa
+colorscheme tokyodark
 let g:material_style = 'darker'
 "hi CursorColumn guibg=#856262
 "hi Visual gui=none guifg=none guibg=#4d3f3f
@@ -582,7 +569,12 @@ let g:tex_conceal='abdmg'
 " following line. The default is usually fine and is the symbol "\".
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 " =================Rainbow (brackets)==============
+" Don't let treesitter bracket group override rainbow brackets
+" See: https://github.com/luochen1990/rainbow/issues/163#issuecomment-1341700772
+"lua vim.api.nvim_set_hl(0, "@punctuation.bracket", { link = "" })
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+"FIX: Rainbow not enabled on default for some reason
+autocmd VimEnter * :TSEnable rainbow
 " =================Indent Guides==============
 let g:indent_guides_enable_on_vim_startup = 1
 " =================Luasnip==============
