@@ -27,14 +27,14 @@ set autoindent
 set smartindent
 set nowrap
 set backspace=indent,eol,start " make backspace work like most other programs
-:inoremap jk <esc>
+inoremap jk <esc>
 "" Change map leader to space
 nnoremap <SPACE> <Nop>
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 set ruler
 set showcmd
-set laststatus=2
+set laststatus=3
 set foldmethod=syntax
 set nofoldenable
 set relativenumber
