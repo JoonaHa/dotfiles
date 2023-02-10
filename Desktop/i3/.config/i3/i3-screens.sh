@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-xrandr --output DVI-D-0 --off --output HDMI-1 --off --output HDMI-0 --mode 1920x1080 --pos 2560x180 --rotate normal --output DP-3 --off --output DP-2 --off --output DP-1 --off --output DP-0 --primary --mode 2560x1440 --pos 0x0 --rotate normal
+# Set scaling
+for output in $(xrandr --prop | grep -E -o -i "^[A-Z\-]+-[0-9]+"); do xrandr --output "$output" --set "scaling mode" "Full aspect"; done
+xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 144 --pos 0x0 --rotate normal --set "scaling mode" "Full aspect" --auto --output HDMI-A-1 --mode 1920x1080 --rate 60 --pos 2560x180 --rotate normal --auto --output HDMI-A-0 --off --output DisplayPort-1 --off
+
+

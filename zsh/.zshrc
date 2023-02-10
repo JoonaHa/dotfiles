@@ -152,8 +152,9 @@ export KEYTIMEOUT=1
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias open='xdg-open'
 
-xhost +local:root > /dev/null 2>&1
+
 
 # # ex - archive extractor
 # # usage: ex <file>
@@ -179,6 +180,8 @@ ex ()
   fi
 }
 
+# GUI as root
+xhost +local:root > /dev/null 2>&1
 # Tilix directory fix
 if [[ $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh

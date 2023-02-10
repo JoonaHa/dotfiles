@@ -50,7 +50,7 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 export MANGOHUD=1
 # Nvidia env's
-export __GL_THREADED_OPTIMIZATIONS=1
+#export __GL_THREADED_OPTIMIZATIONS=1
 #export LD_PRELOAD="libpthread.so.0 libGL.so.1"
 
 # Use bat for manuals

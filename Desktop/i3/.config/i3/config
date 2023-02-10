@@ -12,9 +12,9 @@ set $mod Mod4
 set $terminal alacritty
 
 # Monitor setup with xrandr
-#exec --no-startup-id ~/.config/i3/i3-screens.sh
-set $mon1 DP-0
-set $mon2 HDMI-0	
+exec --no-startup-id ~/.config/i3/i3-screens.sh
+set $mon1 DisplayPort-0
+set $mon2 HDMI-A-1	
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 10
@@ -280,7 +280,7 @@ exec rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kd
 exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4
 # Notifications
 exec_always --no-startup-id /usr/bin/dunst
-exec_always --no-startup-id /usr/bin/unclutter
+#exec_always --no-startup-id /usr/bin/unclutter
 #Mouse
 #Disable acceleration
 exec_always xinput --set-prop 'Logitech Gaming Mouse G400' 'libinput Accel Profile Enabled' 0, 1
