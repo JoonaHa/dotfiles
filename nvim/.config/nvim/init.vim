@@ -339,7 +339,7 @@ let g:python_host_prog = "/usr/bin/python2"
 "=================THEMES================
 set termguicolors
 
-colorscheme tokyodark
+colorscheme kanagawa
 let g:material_style = 'darker'
 "hi CursorColumn guibg=#856262
 "hi Visual gui=none guifg=none guibg=#4d3f3f
