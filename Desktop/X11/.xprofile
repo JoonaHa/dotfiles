@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $DESKTOP_SESSION == 'i3' ]]; then
-  export XDG_CURRENT_DESKTOP="KDE"
+  export XDG_CURRENT_DESKTOP="plasma"
   xsettingsd &
 fi
 

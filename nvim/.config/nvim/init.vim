@@ -263,8 +263,6 @@ nnoremap <silent> <A-Right> <C-w>l
 
 nmap <silent> ]t gt
 nmap <silent> [t gT
-nmap <silent> <Tab> gt
-nmap <silent> <S-Tab> gT
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 

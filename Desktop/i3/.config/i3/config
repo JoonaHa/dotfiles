@@ -10,11 +10,16 @@
 
 set $mod Mod4
 set $terminal alacritty
-
+set $execn exec --no-startup-id
 # Monitor setup with xrandr
-exec --no-startup-id ~/.config/i3/i3-screens.sh
 set $mon1 DisplayPort-0
 set $mon2 HDMI-A-1	
+#xsettingsd
+exec_always --no-startup-id /usr/bin/xsettingsd
+# Load Kde screen settings. Needs kded5 to load module
+exec --no-startup-id dbus-launch kded5
+exec --no-startup-id qdbus org.kde.kded5 /kded org.kde.kded5.loadModule kscreen, restart
+#exec --no-startup-id ~/.config/i3/i3-screens.sh, restart
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 10
@@ -30,9 +35,6 @@ font pango:monospace 10
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
 # Color settings
 
 set $bg-color            #29798a
@@ -64,8 +66,8 @@ bindsym $mod+minus scratchpad show
 # kill focused window
 bindsym $mod+Shift+q kill
 #bindsym Mod1+F4 kill 
-bindsym Mod1+F4 exec /home/mina/bin/scripts/kill9_focused.sh 
-bindsym Mod1+F8 exec /home/mina/bin/scripts/toggle_second_monitor.sh
+bindsym Mod1+F4 exec --no-startup-id /home/mina/bin/scripts/kill9_focused.sh 
+bindsym Mod1+F8 exec --no-startup-id /home/mina/bin/scripts/toggle_second_monitor.sh
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -179,13 +181,15 @@ bindsym XF86AudioMicMute exec --no-startup-id pamixer --default-source -t && $re
 
 # Media player controls
 # Sleep so playercrtl can detect the changed status
-bindsym XF86AudioPlay exec playerctl play-pause && sleep 0.2 && ~/bin/scripts/now-playing.sh
-bindsym XF86AudioNext exec playerctl next && sleep 0.2 && ~/bin/scripts/now-playing.sh
-bindsym XF86AudioPrev exec playerctl previous && sleep 0.2 && ~/bin/scripts/now-playing.sh
-bindsym XF86AudioStop exec playerctl stop && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioNext exec --no-startup-id playerctl next && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous && sleep 0.2 && ~/bin/scripts/now-playing.sh
+bindsym XF86AudioStop exec --no-startup-id playerctl stop && sleep 0.2 && ~/bin/scripts/now-playing.sh
 
 bindsym $mod+F5 exec pavucontrol
-bindsym $mod+Mod1+l exec /home/mina/bin/scripts/i3lock.sh
+
+#Locking
+bindsym $mod+Mod1+l exec --no-startup-id /home/mina/bin/scripts/i3lock.sh
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/mina/bin/scripts/i3lock.sh
@@ -254,10 +258,14 @@ bindsym $mod+z		gaps outer current plus 2
 bindsym $mod+Shift+z	gaps outer current minus 2
 
 
+# CUSTOM STARTUP
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
 # Start polybar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 
 #Get gnome themes
 #set $gnome-schema org.gnome.desktop.interface
@@ -265,15 +273,13 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always gsettings set $gnome-schema icon-theme 'Tela-blue'
 #exec_always gsettings set $gnome-schema cursor-theme 'elementary'
 
-# CUSTOM STARTUP
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id keepassxc
 exec_always --no-startup-id feh --bg-scale /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Gnome; /usr/lib/gnome-settings-daemon/gsd-xsettings
 #exec --no-startup-id XDG_CURRENT_DESKTOP=Pantheon; /usr/lib/gnome-settings-daemon/gsd-xsetting
-#xsettingsd
-exec_always --no-startup-id /usr/bin/xsettingsd
+
 # Backup keepass files locally and mount GoogleDrive for normal use
 exec rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx
 exec rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx
