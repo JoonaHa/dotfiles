@@ -18,7 +18,7 @@ set $mon2 HDMI-A-1
 exec_always --no-startup-id /usr/bin/xsettingsd
 # Load Kde screen settings. Needs kded5 to load module
 exec --no-startup-id dbus-launch kded5
-exec --no-startup-id qdbus org.kde.kded5 /kded org.kde.kded5.loadModule kscreen, restart
+exec --no-startup-id sleep 1 && qdbus org.kde.kded5 /kded org.kde.kded5.loadModule kscreen
 #exec --no-startup-id ~/.config/i3/i3-screens.sh, restart
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
