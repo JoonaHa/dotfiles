@@ -194,7 +194,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'gko/vim-coloresque'
 Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
-Plug '~/.config/nvim/plugged/vimchant'
+Plug 'vim-scripts/Vimchant'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
