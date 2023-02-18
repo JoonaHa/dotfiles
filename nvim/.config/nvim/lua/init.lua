@@ -2,7 +2,7 @@ local language_servers = {
     'rust_analyzer',
     'pyright',
     'tsserver',
-    'sumneko_lua',
+    'lua_ls',
     --Scripting
     'bashls',
     -- Non programming languages
