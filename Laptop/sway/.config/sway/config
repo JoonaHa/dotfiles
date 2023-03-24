@@ -261,10 +261,15 @@ bindsym $mod+Shift+z	gaps outer current minus 5
 
 
 # Keybord layout
+#input "type:keyboard" {
+#    xkb_layout fi
+#    xkb_variant ,nodeadkeys
+#    xkb_options caps:escape_shifted_capslock,caps:hyper 
+#}
+
 input "type:keyboard" {
     xkb_layout fi
     xkb_variant ,nodeadkeys
-    xkb_options caps:escape_shifted_capslock,caps:hyper 
 }
 # Touchpad 
 input "type:touchpad" {

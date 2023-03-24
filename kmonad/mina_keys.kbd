@@ -3,7 +3,6 @@
   input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
   output (uinput-sink "My KMonad output" "sleep 1 && setxkbmap -option compose:ralt")
   cmp-seq ralt
-  cmp-seq-delay
 
   ;; For Windows
   ;; input  (low-level-hook)
@@ -67,14 +66,30 @@
 
   -------------------------------------------------------------------------- |#
 
+(defalias
+  capslock (layer-toggle capslock))
+
+
+(defalias
+  arrow (tap-next tab (layer-toggle arrows)))
+
+
 (defsrc
   tab
-  caps h    j    k    l
-  lctl lalt
+  caps  h    j    k    l
 )
 
-(deflayer yeet
+(deflayer base
+  @capslock
+  @arrow  h    j    k    l
+)
+
+(deflayer arrows
   tab
-  a h    j    k    l
-  lctl lalt
+  caps left   down    up    right
+)
+
+(deflayer capslock
+  tab
+  caps  h    j    k    l
 )
