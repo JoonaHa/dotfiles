@@ -88,17 +88,20 @@ function! ToggleWrap()
     unmap $
   else
     setlocal wrap linebreak
-    nnoremap j gj
-    nnoremap <Down> gj
-    nnoremap k gk
-    nnoremap <Up> gk
+    " If [count] is used use normal linewise navigation to ensure thaht
+    " relative linenumbers can still be used for navication.
+    " Without [count] use display line navigation
+    nnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    nnoremap <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    nnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    nnoremap <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
     nnoremap 0 g0
     nnoremap ^ g^
     nnoremap $ g$
-    vnoremap j gj
-    vnoremap <Down> gj
-    vnoremap k gk
-    vnoremap <Up> gk
+    vnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    vnoremap <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    vnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    vnoremap <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
     vnoremap 0 g0
     vnoremap ^ g^
     vnoremap $ g$
