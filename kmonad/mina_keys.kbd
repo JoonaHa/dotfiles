@@ -20,58 +20,14 @@
 )
 
 
-#| --------------------------------------------------------------------------
-                         Necessary: the `defsrc` block
-
-  It is difficult to explain the `defsrc` block without immediately going into
-  `deflayer` blocks as well. Essentially, KMonad maps input-events to various
-  internal actions, many of which generate output events. The `defsrc` block
-  explains the layout on which we specify our `deflayer`s down the line.
-
-  It is important to realize that the `defsrc` block doesn't *necessarily* have
-  to coincide with your actual input keyboard. You can specify a full 100%
-  `defsrc` block, but only use a 40% keyboard. This will mean that every
-  `deflayer` you specify will also have to match your 100% `defsrc`, and that
-  your actual keyboard would be physically unable to trigger about 60% of your
-  keymap, but it would be perfectly valid syntax.
-
-  The dual of this (and more useful) is that it is also perfectly valid to only
-  specify that part of your keyboard in `defsrc` that you want to remap. If you
-  use a 100% keyboard, but don't want to remap the numpad at all you can simply
-  leave the numpad out of your `defsrc`, and it should work just fine. In that
-  particular case you probably want to set `fallthrough` to `true` in your
-  `defcfg` block though.
-
-  In the future we would like to provide support for multiple, named `defsrc`
-  blocks, so that it becomes easier to specify various layers for just the
-  numpad, for example, but at the moment any more or less than 1 `defsrc` block
-  will result in an error.
-
-  The layouting in the `defsrc` block is completely free, whitespace simply gets
-  ignored. We strive to provide a name for every keycode that is no longer than
-  4 characters, so we find that laying out your keymap in columns of 5 works out
-  quite nicely (although wider columns will allow for more informative aliases,
-  see below).
-
-  Most keycodes should be obvious. If you are unsure, check
-  './src/KMonad/Keyboard/Keycode.hs'. Every Keycode has a name corresponding to
-  its Keycode name, but all lower-case and with the 'Key' prefix removed. There
-  are also various aliases for Keycodes starting around line 350. If you are
-  trying to bind a key and there is not a 4-letter alias, please file an issue,
-  or better yet, a pull-request, and it will be added promptly.
-
-  Also, you can consult './keymap/template/' for various input templates to use
-  directly or to look up keycodes by position. Here we use the input-template
-  for 'us_ansi_60.kbd'
-
-  -------------------------------------------------------------------------- |#
+(defalias
+  arrow_toggle (layer-toggle arrows)
+  capslock_on (layer-toggle capslock)
+)
 
 (defalias
-  capslock (layer-toggle capslock))
-
-
-(defalias
-  arrow (tap-next tab (layer-toggle arrows)))
+  caps_tab_toggle (tap-hold-next 165 tab @capslock_on :timeout-button tab)
+)
 
 
 (defsrc
@@ -80,8 +36,8 @@
 )
 
 (deflayer base
-  @capslock
-  @arrow  h    j    k    l
+  @caps_tab_toggle
+  @arrow_toggle  h    j    k    l
 )
 
 (deflayer arrows

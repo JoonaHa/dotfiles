@@ -260,13 +260,6 @@ bindsym $mod+z		gaps outer current plus 5
 bindsym $mod+Shift+z	gaps outer current minus 5
 
 
-# Keybord layout
-#input "type:keyboard" {
-#    xkb_layout fi
-#    xkb_variant ,nodeadkeys
-#    xkb_options caps:escape_shifted_capslock,caps:hyper 
-#}
-
 input "type:keyboard" {
     xkb_layout fi
     xkb_variant ,nodeadkeys
@@ -276,6 +269,12 @@ input "type:touchpad" {
     tap enabled
     natural_scroll enabled
 }
+
+# Function key homerow with Kmonad
+# Sleep to avoid deadlock while getting keyboard device. Kmonad issu
+exec_always --no-startup-id sleep 1 && kmonad ~/dotfiles/kmonad/mina_keys.kbd
+# emojies
+bindsym $mod+period exec rofimoji 
 
 #Screenshots
 
