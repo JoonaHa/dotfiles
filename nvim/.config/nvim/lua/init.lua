@@ -6,7 +6,7 @@ local language_servers = {
     --Scripting
     'bashls',
     -- Non programming languages
-    'sqls',
+    'sqlls',
     'texlab',
     'marksman',
     'jsonls',
