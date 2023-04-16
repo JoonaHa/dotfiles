@@ -47,6 +47,8 @@ export PATH=$HOME/.cargo/bin:$PATH
 NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+# Tell Node about these packages
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
 export MANGOHUD=1
 # Nvidia env's
