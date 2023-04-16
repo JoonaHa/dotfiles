@@ -5,4 +5,6 @@ configuration {
   icon-theme:         "Papirus";
 }
 //@theme "/home/mina/.local/share/rofi/themes/slate.rasi"
-@theme "/home/mina/.local/share/rofi/themes/nord.rasi"
+//@theme "/home/mina/.local/share/rofi/themes/nord.rasi"
+//@theme "/usr/share/rofi/themes/DarkBlue.rasi"
+@theme "/home/mina/.local/share/rofi/themes/spotlight-dark.rasi"
