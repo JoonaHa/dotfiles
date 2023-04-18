@@ -240,7 +240,7 @@ call plug#end()
 lua require("init")
 
 " =================KEYBINDS================
-" ctrl h/l to first/laste non whitespce character
+" ctrl h/l to first/last non whitespce character
 nnoremap <C-h> g^
 nnoremap <C-l> g_
 
