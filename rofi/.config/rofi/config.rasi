@@ -1,8 +1,12 @@
 /** Basic config file **/
 
 configuration {
-  show-icons:         true;
-  icon-theme:         "Papirus";
+    modes: "window,run,ssh,drun";
+    location: 0;
+    yoffset: -400;
+    xoffset: 0;
+    show-icons:         true;
+    icon-theme:         "Papirus";
 }
 //@theme "/home/mina/.local/share/rofi/themes/slate.rasi"
 //@theme "/home/mina/.local/share/rofi/themes/nord.rasi"
