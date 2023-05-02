@@ -38,7 +38,6 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu j4-dmenu-desktop --dmenu="rofi -show drun -show-icons"
 
 ### Output configuration
 #
@@ -100,7 +99,8 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+q kill
 bindsym Mod1+F4 exec ~/bin/scripts/kill9_focused.sh 
 
-bindsym $mod+d exec $menu
+bindsym $mod+d exec rofi -show drun -show-icons
+bindsym $mod+Shift+d exec rofi -show window -show-icons
 
 bindsym mod3+j Down
 bindsym mod3+k Up

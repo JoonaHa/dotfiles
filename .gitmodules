@@ -1,3 +1,9 @@
 [submodule "polybar-spotify"]
-	path = polybar-spotify
+	path = Desktop/polybar/polybar-spotify
 	url = https://github.com/Jvanrhijn/polybar-spotify
+[submodule "rofi/rofi-themes-collection"]
+	path = rofi/rofi-themes-collection
+	url = https://github.com/newmanls/rofi-themes-collection
+[submodule "rofi/rofi"]
+	path = rofi/rofi
+	url = https://github.com/adi1090x/rofi
