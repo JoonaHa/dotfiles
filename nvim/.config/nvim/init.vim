@@ -26,7 +26,8 @@ set showmatch
 set autoindent
 set smartindent
 set nowrap
-set backspace=indent,eol,start " make backspace work like most other programs
+" make backspace work like most other programs
+set backspace=indent,eol,start
 inoremap jk <esc>
 "" Change map leader to space
 nnoremap <SPACE> <Nop>
@@ -44,7 +45,7 @@ if has('win32')
   set nofsync
   let $PATH = "C:\Program Files\Git\usr\bin;" . $PATH
 endif
-
+" Easier visual macro execution
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
@@ -79,32 +80,32 @@ command Suomi call ToggleFinnish()
 function! ToggleWrap()
   if &wrap
     setlocal nowrap nolinebreak
-    unmap j
-    unmap <Down>
-    unmap k
-    unmap <Up>
-    unmap 0
-    unmap ^
-    unmap $
+    unmap <buffer> j
+    unmap <buffer> <Down>
+    unmap <buffer> k
+    unmap <buffer> <Up>
+    unmap <buffer> 0
+    unmap <buffer> ^
+    unmap <buffer> $
   else
     setlocal wrap linebreak
     " If [count] is used use normal linewise navigation to ensure thaht
     " relative linenumbers can still be used for navication.
     " Without [count] use display line navigation
-    nnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    nnoremap <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    nnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
-    nnoremap <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
-    nnoremap 0 g0
-    nnoremap ^ g^
-    nnoremap $ g$
-    vnoremap <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    vnoremap <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    vnoremap <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
-    vnoremap <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
-    vnoremap 0 g0
-    vnoremap ^ g^
-    vnoremap $ g$
+    nnoremap <buffer> <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    nnoremap <buffer> <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    nnoremap <buffer> <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    nnoremap <buffer> <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    nnoremap <buffer> 0 g0
+    nnoremap <buffer> ^ g^
+    nnoremap <buffer> $ g$
+    vnoremap <buffer> <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    vnoremap <buffer> <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+    vnoremap <buffer> <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    vnoremap <buffer> <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+    vnoremap <buffer> 0 g0
+    vnoremap <buffer> ^ g^
+    vnoremap <buffer> $ g$
   endif
 endfunction
 command WrapToggle call ToggleWrap()
