@@ -152,6 +152,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'mrjones2014/nvim-ts-rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lvimuser/lsp-inlayhints.nvim'
+
 "Cmp
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -164,16 +165,19 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'kdheepak/cmp-latex-symbols'
+
 " Coq
 "Plug 'ms-jpq/coq_nvim', {'branch': 'coq','do': 'python3 -m coq deps'}
 "Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 "Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
 " Telescope
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'princejoogie/dir-telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', 
       \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
         \ && cmake --build build --config Release && cmake --install build --prefix build' }
+
 " Must have plugings
 Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
@@ -182,6 +186,7 @@ Plug 'nvim-lualine/lualine.nvim' |
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'SmiteshP/nvim-navic'
+
 " Tools
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
@@ -201,11 +206,15 @@ Plug 'gko/vim-coloresque'
 Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
 Plug 'vim-scripts/Vimchant'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'sindrets/diffview.nvim'
+
+"GUI
+Plug 'vim-scripts/zoom.vim'
 
 " Themes
 Plug 'rebelot/kanagawa.nvim'
@@ -420,18 +429,9 @@ function ToggleHex()
   let &modifiable=l:oldmodifiable
 endfunction
 "=================Neovide================"
+"Neovide doestn't source ginit.vim
 if exists('g:neovide')
-  if has('win32')
-    set guifont=Cascadia\ Code\ PL,CaskaydiaCove\ NF,CaskaydiaCove\ Nerd\ Font,Iosevka:h12
-  endif
-  let g:neovide_cursor_animation_length=0
-  let g:neovide_cursor_trail_length=0
-  let g:neovide_remember_window_size = v:true
-
-    nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
-    nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
-    nnoremap <C-_> :set guifont=+<CR>
-    nnoremap <C--> :set guifont=-<CR>
+  runtime ginit.vim
 endif
 "=================Nvim-tree================"
 map <C-n> :NvimTreeToggle<CR>
