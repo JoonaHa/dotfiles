@@ -106,7 +106,7 @@ function cmp_instance.init()
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
       },
     },
-    mapping = cmp.mapping.preset.insert {
+    mapping = cmp.mapping.preset.insert({
       ["<Up>"] = cmp.mapping.select_prev_item(),
       ["<Down>"] = cmp.mapping.select_next_item(),
       ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -115,11 +115,19 @@ function cmp_instance.init()
       ["<C-j>"] = cmp.mapping.select_next_item(),
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete {},
-      ['<CR>'] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      },
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ["<CR>"] = cmp.mapping({
+        i = function(fallback)
+          if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          else
+            fallback()
+          end
+        end,
+        s = cmp.mapping.confirm({ select = true }),
+        c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+      }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -138,7 +146,7 @@ function cmp_instance.init()
           fallback()
         end
       end, { 'i', 's' }),
-  }
+    })
   }
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
