@@ -569,7 +569,7 @@ let g:vista#renderer#icons = {
 let g:tex_flavor='latex'
 let g:vimtex_view_method = 'zathura'
 autocmd VimEnter *.tex VimtexCompile
-let g:vimtex_quickfix_mode=0
+let g:vimtex_quickfix_mode=2
 set conceallevel=1
 let g:tex_conceal='abdmg'
 " Most VimTeX mappings rely on localleader and this can be changed with the
