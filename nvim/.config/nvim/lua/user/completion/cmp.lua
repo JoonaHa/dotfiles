@@ -152,13 +152,17 @@ function cmp_instance.init()
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
+    completion = { autocomplete = false },
     sources = {
       { name = 'nvim_lsp_document_symbol' },
-      { name = 'buffer' }
+     -- { name = 'buffer' }
+      { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
     }
   })
 
   cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    completion = { autocomplete = false },
     sources = cmp.config.sources({
       { name = 'path' }
     }, {
