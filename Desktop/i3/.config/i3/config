@@ -175,8 +175,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # !! CUSTOM KEYBINDIGS !!
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2 && $refresh_i3status && ~/bin/scripts/volume-notify.sh
 bindsym XF86AudioMute exec --no-startup-id pamixer -t && $refresh_i3status && ~/bin/scripts/volume-notify.sh
 bindsym XF86AudioMicMute exec --no-startup-id pamixer --default-source -t && $refresh_i3status
 
