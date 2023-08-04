@@ -8,16 +8,20 @@ log_output() {
     printf "$(date --iso-8601=seconds): $message\n" | tee -a ${dir}/lg_renew.log
     
     if [[ "$to_telegram" -eq 1 ]]; then
-        telegram_alert $message
+        telegram_alert "$message"
     fi
 }
 
 telegram_alert() {
-    local message=$1
-    # TODO: Fix message quote escaping for telegram
+    local message="$1"
+    # Double escape code block for Telegram API
+    message=$(echo "$message" | sed 's/\([][_*\()~`>#+-=|}{.!]\)/\\\1/g')
+    message=$(echo "$message" | sed 's/\([][_*\()~`>#+-=|}{.!]\)/\\\1/g')
     local api_url="https://api.telegram.org/bot${TELEGRAM_API_TOKEN}/sendMessage"
     local json='{ "chat_id": "%s", "text": "%s", "protect_content": "%s", "parse_mode": "%s" }'
-    local payload=$(printf "$json" "$TELEGRAM_CHANNEL_ID" "Problem with *renew lg devmode*:\n\`"${message//\"/\\\"}"\`" "true" "MarkdownV2")
+    # Escape $messages quotes inside for being inside of JSON
+    local payload=$(printf "$json" "$TELEGRAM_CHANNEL_ID" "Problem with *renew lg devmode*:\n\`${message//\"/\\\"}\`" 'true' 'MarkdownV2')
+
 
     local response=$(curl -s -X POST -H "Content-Type: application/json" -d "$payload" "$api_url")
 
