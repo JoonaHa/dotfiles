@@ -82,8 +82,8 @@ function treesitter_instance.init(ensure_installed)
         enable = true,
         border = 'none',
         peek_definition_code = {
-          ["<leader>pf"] = "@function.outer",
-          ["<leader>pF"] = "@class.outer",
+          ["<leader>Pf"] = "@function.outer",
+          ["<leader>PF"] = "@class.outer",
         },
       },
     },
