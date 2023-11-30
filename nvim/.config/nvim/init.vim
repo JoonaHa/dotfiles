@@ -172,7 +172,7 @@ Plug 'kdheepak/cmp-latex-symbols'
 "Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 " Telescope
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 Plug 'princejoogie/dir-telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', 
       \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
