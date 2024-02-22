@@ -126,9 +126,6 @@ require("bufferline").setup{
       local icon = level:match("error") and " " or " "
       return " " .. icon .. count
       end,
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    show_buffer_default_icon = true,
     numbers = function(opts)
       return string.format('%s', opts.raise(opts.id))
     end,

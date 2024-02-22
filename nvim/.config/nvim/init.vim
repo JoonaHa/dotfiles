@@ -148,7 +148,6 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/playground'
 Plug 'mrjones2014/nvim-ts-rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lvimuser/lsp-inlayhints.nvim'
@@ -172,7 +171,7 @@ Plug 'kdheepak/cmp-latex-symbols'
 "Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 " Telescope
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'princejoogie/dir-telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', 
       \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release 
