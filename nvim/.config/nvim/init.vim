@@ -194,7 +194,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'lewis6991/impatient.nvim'
 "Plug 'baverman/vial'
 "Plug 'baverman/vial-http'
 "Plug 'airblade/vim-rooter'
@@ -205,6 +204,7 @@ Plug 'gko/vim-coloresque'
 Plug 'RRethy/vim-illuminate'
 Plug 'folke/which-key.nvim'
 Plug 'vim-scripts/Vimchant'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -260,23 +260,6 @@ nmap <leader>vS :vnew<Return><C-w>w
 
 nnoremap <silent><esc> :noh<CR>
 nnoremap <esc>[ <esc>[
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-
-tnoremap <A-Up> <C-\><C-n><C-w>h
-tnoremap <A-Down> <C-\><C-n><C-w>j
-tnoremap <A-Left> <C-\><C-n><C-w>k
-tnoremap <A-Right> <C-\><C-n><C-w>l
-nnoremap <silent> <A-Up> <C-w>h
-nnoremap <silent> <A-Down> <C-w>j
-nnoremap <silent> <A-Left> <C-w>k
-nnoremap <silent> <A-Right> <C-w>l
 
 nmap <silent> ]t gt
 nmap <silent> [t gT
@@ -587,3 +570,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 " For changing choices in choiceNodes (not strictly necessary for a basic setup).
 imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
 smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+" =================vim-tmux-navigator==============
+let g:tmux_navigator_no_mappings = 1
+
+noremap <silent> <A-h> :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <A-j> :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <A-k> :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <A-l> :<C-U>TmuxNavigateRight<cr>
+noremap <silent> <A-+> :<C-U>TmuxNavigatePrevious<cr>
