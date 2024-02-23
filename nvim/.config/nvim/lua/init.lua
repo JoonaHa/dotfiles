@@ -39,7 +39,6 @@ local null_ls_tools = {
 	'formatting.tidy',
 }
 
-require('impatient')
 require('user.ui-plugins')
 require('user.git-plugins')
 require('project_nvim').setup()
