@@ -52,8 +52,7 @@ TERM = "xterm-256color"
 size = 11.0
 
 [font.normal]
-family = "monospace"
-style = "Regular"
+family = "Hack Nerd Font Mono"
 
 [font.offset]
 x = 0
