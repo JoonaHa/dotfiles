@@ -44,6 +44,7 @@ require('user.git-plugins')
 require('project_nvim').setup()
 require('luasnip')
 require('project_nvim').setup()
+require('ibl').setup()
 require('dir-telescope').setup({
       hidden = true,
       respect_gitignore = false,
