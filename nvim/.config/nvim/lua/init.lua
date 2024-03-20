@@ -49,6 +49,7 @@ require('dir-telescope').setup({
       hidden = true,
       respect_gitignore = false,
     })
+require('netrw').setup()
  -- Load friendly-snippets
 require('luasnip.loaders.from_vscode').lazy_load()
 require('user.formatting').init(null_ls_tools)

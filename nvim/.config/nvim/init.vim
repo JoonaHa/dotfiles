@@ -182,9 +182,10 @@ Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lualine/lualine.nvim' |
       \ Plug 'arkav/lualine-lsp-progress'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+"Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'SmiteshP/nvim-navic'
+Plug 'prichrd/netrw.nvim'
 
 " Tools
 Plug 'tpope/vim-surround'
