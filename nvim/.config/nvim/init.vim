@@ -244,7 +244,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'tag': 'v2.13' }
 call plug#end()
 
 lua require("init")
