@@ -32,11 +32,11 @@ local treesitter_grammar = {
 
 local null_ls_tools = {
 	'formatting.stylua',
-	'diagnostics.eslint',
 	'completion.spell',
-	'formatting.rustfmt',
-	'formatting.fixjson',
 	'formatting.tidy',
+	'diagnostics.pylint',
+	'formatting.black',
+	'formatting.prettier'
 }
 
 require('user.ui-plugins')
