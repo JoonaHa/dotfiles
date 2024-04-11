@@ -148,7 +148,7 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
       \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'mrjones2014/nvim-ts-rainbow'
+Plug 'HiPhish/rainbow-delimiters.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lvimuser/lsp-inlayhints.nvim'
 
@@ -238,7 +238,6 @@ Plug 'sheerun/vim-polyglot'
 " Languages
 Plug 'dbakker/vim-lint'
 Plug 'rust-lang/rust.vim'
-Plug 'cjrh/vim-conda'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
