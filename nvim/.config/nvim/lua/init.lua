@@ -27,6 +27,7 @@ local treesitter_grammar = {
     'bash',
     -- Non programming languages
     'bibtex',
+    'latex',
     'markdown'
     }
 

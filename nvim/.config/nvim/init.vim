@@ -313,6 +313,8 @@ nmap å `
 " Center cursor when scrolling up or down
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap <C-b> <C-b>zz
+nnoremap <C-f> <C-f>zz
 " System Clipboard and select all
 vnoremap <C-c> "+y
 vnoremap <C-x> "+d
