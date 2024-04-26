@@ -9,12 +9,7 @@ function treesitter_instance.init(ensure_installed)
       enable = true,
       additional_vim_regex_highlighting = true,
     },
-    rainbow = {
-      enable = true,
-      disable = { "html" },
-      extended_mode = true,
-      max_file_lines = nil,
-    },
+
     indent = { enable = true },
     autopairs = { enable = true },
     autotag = { enable = true },
@@ -48,7 +43,9 @@ function treesitter_instance.init(ensure_installed)
           ['@function.outer'] = 'V', -- linewise
           ['@class.outer'] = '<c-q>', -- blockwise
         },
+        include_surrounding_whitespace = true,
       },
+
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
@@ -123,6 +120,11 @@ function treesitter_instance.enableContextHeader()
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil
     })
+  return treesitter_instance
+end
+
+function treesitter_instance.enable_rainbow()
+  local rainbow_delimiters = require 'rainbow-delimiters'
   return treesitter_instance
 end
 return treesitter_instance
