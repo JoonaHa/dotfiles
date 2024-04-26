@@ -64,6 +64,5 @@ require('user.nvim-tree')
 require('user.telescope')
 require('user.autopairing')
 require('user.which-key')
-require('user.mappings')
 require('user.illuminate')
 
