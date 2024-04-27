@@ -138,6 +138,15 @@ autocmd FileType help nnoremap <buffer> o /'\l\{2,\}'<CR>
 autocmd FileType help nnoremap <buffer> O ?'\l\{2,\}'<CR>
 autocmd FileType help nnoremap <buffer> s /\|\zs\S\+\ze\|<CR>
 autocmd FileType help nnoremap <buffer> S ?\|\zs\S\+\ze\|<CR>
+" Vimtex here because currently none-ls breaks g:vimtex_view_method
+"=================Vimtex==============
+let g:tex_flavor='latex'
+let g:vimtex_view_method = 'zathura'
+autocmd VimEnter *.tex VimtexCompile
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 
 " =================PLUGINS================
 call plug#begin()
@@ -545,14 +554,6 @@ let g:vista#renderer#icons = {
       \   "variable": "\uf71b",
       \  }
 
-"=================Vimtex==============
-let g:tex_flavor='latex'
-let g:vimtex_view_method = 'zathura'
-autocmd VimEnter *.tex VimtexCompile
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 " =================Indent Guides==============
 let g:indent_guides_enable_on_vim_startup = 1
 " =================Luasnip==============
