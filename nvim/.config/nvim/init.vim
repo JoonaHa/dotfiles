@@ -145,8 +145,8 @@ call plug#begin()
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | 
-      \ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'HiPhish/rainbow-delimiters.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -199,7 +199,6 @@ Plug 'nvimtools/none-ls.nvim'
 "Plug 'baverman/vial-http'
 "Plug 'airblade/vim-rooter'
 Plug 'machakann/vim-highlightedyank'
-Plug 'luochen1990/rainbow'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'gko/vim-coloresque'
 Plug 'RRethy/vim-illuminate'
@@ -243,15 +242,12 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm ci'  }
-Plug 'lervag/vimtex', { 'tag': 'v2.13' }
+Plug 'lervag/vimtex', { 'tag': 'v2.15' }
 call plug#end()
 
 lua require("init")
 
 " =================KEYBINDS================
-" ctrl h/l to first/last non whitespce character
-nnoremap <C-h> g^
-nnoremap <C-l> g_
 
 nmap <leader>hs :split<Return><C-w>w
 nmap <leader>vs :vsplit<Return><C-w>w
@@ -556,16 +552,7 @@ autocmd VimEnter *.tex VimtexCompile
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
-" Most VimTeX mappings rely on localleader and this can be changed with the
-" following line. The default is usually fine and is the symbol "\".
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
-" =================Rainbow (brackets)==============
-" Don't let treesitter bracket group override rainbow brackets
-" See: https://github.com/luochen1990/rainbow/issues/163#issuecomment-1341700772
-"lua vim.api.nvim_set_hl(0, "@punctuation.bracket", { link = "" })
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTogglelet g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-"FIX: Rainbow not enabled on default for some reason
-autocmd VimEnter * :TSEnable rainbow
 " =================Indent Guides==============
 let g:indent_guides_enable_on_vim_startup = 1
 " =================Luasnip==============
@@ -580,3 +567,4 @@ noremap <silent> <A-j> :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <A-k> :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <A-l> :<C-U>TmuxNavigateRight<cr>
 noremap <silent> <A-+> :<C-U>TmuxNavigatePrevious<cr>
+
