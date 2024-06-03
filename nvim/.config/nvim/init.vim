@@ -187,7 +187,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim',
         \ && cmake --build build --config Release && cmake --install build --prefix build' }
 
 " Must have plugings
-Plug 'ahmedkhalf/project.nvim'
 Plug 'liuchengxu/vista.vim'
 Plug 'nvim-lualine/lualine.nvim' |
       \ Plug 'arkav/lualine-lsp-progress'
@@ -433,7 +432,6 @@ nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>tdf <cmd>lua require("telescope").extensions.dir.find_files({hidden=true})<cr>
 nnoremap <leader>tds <cmd>lua require('telescope').extensions.dir.live_grep({hidden=true})<cr>
-nnoremap <leader>tp <cmd>Telescope projects<cr>
 "====MarkdownPreview====="
 " " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0

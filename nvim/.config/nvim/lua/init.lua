@@ -42,7 +42,6 @@ local null_ls_tools = {
 
 require('user.ui-plugins')
 require('user.git-plugins')
-require('project_nvim').setup()
 require('luasnip')
 require('ibl').setup()
 require('dir-telescope').setup({
