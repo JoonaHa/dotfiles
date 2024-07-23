@@ -17,10 +17,13 @@ return {
     -- Luasnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       local cmp = require("cmp")
+      require('luasnip.loaders.from_vscode').lazy_load()
       local luasnip = require("luasnip")
+
 
 
       vim.opt.completeopt = { "menu", "menuone", "noselect" }

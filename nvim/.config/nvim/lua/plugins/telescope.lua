@@ -11,6 +11,12 @@ return {
     },
 
     config = function()
+
+    require('dir-telescope').setup({
+      hidden = true,
+      respect_gitignore = false,
+    })
+
       local telescope = require("telescope")
       telescope.setup{
         defaults = {

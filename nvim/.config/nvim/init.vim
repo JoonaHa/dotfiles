@@ -210,7 +210,10 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'gko/vim-coloresque'
 Plug 'RRethy/vim-illuminate'
+
+
 Plug 'folke/which-key.nvim'
+
 Plug 'vim-scripts/Vimchant'
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -424,14 +427,7 @@ endif
 "=================Nvim-tree================"
 map <C-n> :NvimTreeToggle<CR>
 nmap tf :NvimTreeFindFile<CR>
-"=================Telescope================"
-nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
-nnoremap <leader>tg <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>ts <cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>
-nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>tdf <cmd>lua require("telescope").extensions.dir.find_files({hidden=true})<cr>
-nnoremap <leader>tds <cmd>lua require('telescope').extensions.dir.live_grep({hidden=true})<cr>
+
 "====MarkdownPreview====="
 " " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
