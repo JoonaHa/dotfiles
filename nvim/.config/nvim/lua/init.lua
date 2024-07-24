@@ -5,12 +5,14 @@ local language_servers = {
     'lua_ls',
     --Scripting
     'bashls',
+    'terraformls',
     -- Non programming languages
     'sqlls',
     'texlab',
     'marksman',
     'jsonls',
     'yamlls',
+    'helm_ls',
     --xml
     'lemminx'
 }
@@ -25,10 +27,14 @@ local treesitter_grammar = {
     'javascript',
     --Scripting
     'bash',
+    'terraform',
     -- Non programming languages
+    'sql',
     'bibtex',
     'latex',
-    'markdown'
+    'markdown',
+    'helm',
+    'yaml',
     }
 
 local null_ls_tools = {
@@ -37,7 +43,9 @@ local null_ls_tools = {
 	'formatting.tidy',
 	'diagnostics.pylint',
 	'formatting.black',
-	'formatting.prettier'
+	'formatting.prettier',
+    'diagnostics.terraform_validate',
+    'formatting.terraform_fmt'
 }
 
 require('user.ui-plugins')
