@@ -2,7 +2,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
       "HiPhish/rainbow-delimiters.nvim"
     },
@@ -10,10 +9,10 @@ return {
     branch = "main",
     lazy = false,
     config = function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.config').setup {
         -- Add languages to be installed here that you want installed for treesitter
     
-        ensure_installed = require('variables.treesitter_grammar'),
+        ensure_installed = require('variables').treesitter_grammar,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = true,
@@ -151,8 +150,14 @@ return {
         separator = nil
       })
       
-      require("rainbow-delimiters").setup()
+    require("rainbow-delimiters.setup").setup()
 
     end,
   },
+  --{ 
+  --    "nvim-treesitter/nvim-treesitter-textobjects",
+  --    dependencies = {
+  --      "nvim-treesitter/nvim-treesitter",
+  --    }
+  --}
 }
