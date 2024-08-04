@@ -17,10 +17,10 @@ return {
           enable = true,
           additional_vim_regex_highlighting = true,
         },
-    
+
         indent = { enable = true },
         autotag = { enable = true },
-    
+
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -33,10 +33,10 @@ return {
         textobjects = {
           select = {
             enable = true,
-    
+
             -- Automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
-    
+
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
               ["af"] = "@function.outer",
@@ -59,7 +59,7 @@ return {
             -- and should return true or false
             include_surrounding_whitespace = true,
           },
-    
+
           move = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
@@ -98,7 +98,7 @@ return {
               ["[d"] = "@conditional.outer",
             }
           },
-    
+
           swap = {
             enable = true,
             swap_next = {
@@ -118,7 +118,7 @@ return {
           },
         },
       })
-    
+
       -- Set foldmethod to use treesitter
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -149,12 +149,12 @@ return {
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil
       })
-      
+
     require("rainbow-delimiters.setup").setup()
 
     end,
   },
-  { 
+  {
       "nvim-treesitter/nvim-treesitter-textobjects",
       dependencies = {
         "nvim-treesitter/nvim-treesitter",

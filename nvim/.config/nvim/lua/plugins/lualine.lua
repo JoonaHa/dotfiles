@@ -3,7 +3,11 @@ return
       "nvim-lualine/lualine.nvim",
       dependencies = {
         "nvim-tree/nvim-web-devicons",
-        "arkav/lualine-lsp-progress"
+        "arkav/lualine-lsp-progress",
+        {
+          "SmiteshP/nvim-navic",
+          dependencies = { "neovim/nvim-lspconfig" },
+        },
       },
       config = function ()
         local function diff_source()
@@ -15,6 +19,21 @@ return
               removed = gitsigns.removed
             }
           end
+        end
+
+        local navic = require('nvim-navic')
+        navic.setup{
+              highlight = true,
+              separator = " " .. "" .. "  ",
+              depth_limit = 0,
+              depth_limit_indicator = "..",
+        }
+        local function navic_wrapper()
+          local location = navic.get_location()
+            if location ~= nil and string.len(location) > 0 then
+              return location
+            else return '%#NavicIconsFile# %*%#NavicText#' .. vim.fn.expand('%:t') .. '%*'
+            end
         end
         require('lualine').setup {
           options = {

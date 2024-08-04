@@ -3,7 +3,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     config = function()
- 
+
       require('gitsigns').setup{
         signcolumn = false,
         numhl = true,
@@ -14,9 +14,6 @@ return {
           delay = 400,
           ignore_whitespace = false,
           },
-        on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
-        end
       }
     end
   },

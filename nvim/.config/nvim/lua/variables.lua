@@ -19,6 +19,8 @@ return {
   },
   treesitter_grammar = {
     'lua',
+    'vim',
+    'vimdoc',
     'typescript',
     'rust',
     'python',

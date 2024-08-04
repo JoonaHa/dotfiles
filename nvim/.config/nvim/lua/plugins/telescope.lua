@@ -54,5 +54,12 @@ return {
          vim.keymap.set('n', '<leader>tdf', require("telescope").extensions.dir.find_files, {})
          vim.keymap.set('n', '<leader>tds', require("telescope").extensions.dir.live_grep, {})
 
+        vim.keymap.set('n', '<leader>tf', function() builtin.find_files({hidden=true}) end, {})
+        vim.keymap.set('n', '<leader>tg', function() builtin.git_files({hidden=true}) end, {})
+        vim.keymap.set('n', '<leader>ts', function() builtin.live_grep({hidden=true}) end, {})
+        vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
+        vim.keymap.set('n', '<leader>tdf', function() require("telescope").extensions.dir.find_files({hidden=true}) end, {})
+        vim.keymap.set('n', '<leader>tds', function() require("telescope").extensions.dir.live_grep({hidden=true}) end , {})
+
     end,
 }
