@@ -18,5 +18,5 @@ return {
       require'colorizer'.setup()
     end,
   },
-  --"RRethy/vim-illuminate",
+  "RRethy/vim-illuminate",
 }

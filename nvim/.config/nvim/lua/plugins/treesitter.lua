@@ -1,17 +1,17 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "HiPhish/rainbow-delimiters.nvim"
     },
     build = ":TSUpdate",
-    branch = "main",
     lazy = false,
-    config = function()
-      require('nvim-treesitter.config').setup {
+    config = function ()
+      local configs = require("nvim-treesitter.configs")
         -- Add languages to be installed here that you want installed for treesitter
-    
+      configs.setup({
         ensure_installed = require('variables').treesitter_grammar,
         highlight = {
           enable = true,
@@ -117,7 +117,7 @@ return {
             },
           },
         },
-      }
+      })
     
       -- Set foldmethod to use treesitter
       vim.opt.foldmethod = "expr"
@@ -154,10 +154,10 @@ return {
 
     end,
   },
-  --{ 
-  --    "nvim-treesitter/nvim-treesitter-textobjects",
-  --    dependencies = {
-  --      "nvim-treesitter/nvim-treesitter",
-  --    }
-  --}
+  { 
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+      }
+  }
 }
