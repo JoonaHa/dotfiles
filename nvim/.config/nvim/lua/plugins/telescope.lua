@@ -47,19 +47,13 @@ return {
           telescope.load_extension("dir")
 
          local builtin = require('telescope.builtin')
-         vim.keymap.set('n', '<leader>tf', builtin.find_files, {})
-         vim.keymap.set('n', '<leader>tg', builtin.git_files, {})
-         vim.keymap.set('n', '<leader>ts', builtin.live_grep, {})
-         vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
-         vim.keymap.set('n', '<leader>tdf', require("telescope").extensions.dir.find_files, {})
-         vim.keymap.set('n', '<leader>tds', require("telescope").extensions.dir.live_grep, {})
 
-        vim.keymap.set('n', '<leader>tf', function() builtin.find_files({hidden=true}) end, {})
-        vim.keymap.set('n', '<leader>tg', function() builtin.git_files({hidden=true}) end, {})
-        vim.keymap.set('n', '<leader>ts', function() builtin.live_grep({hidden=true}) end, {})
-        vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
-        vim.keymap.set('n', '<leader>tdf', function() require("telescope").extensions.dir.find_files({hidden=true}) end, {})
-        vim.keymap.set('n', '<leader>tds', function() require("telescope").extensions.dir.live_grep({hidden=true}) end , {})
+        vim.keymap.set('n', '<leader>tf', function() builtin.find_files({hidden=true}) end, { desc = '[T]elescope [f]iles' })
+        vim.keymap.set('n', '<leader>tg', function() builtin.git_files({hidden=true}) end, { desc = '[T]elescope [g]it' })
+        vim.keymap.set('n', '<leader>ts', function() builtin.live_grep({hidden=true}) end, { desc = '[T]elescope [s]earch' })
+        vim.keymap.set('n', '<leader>tb', builtin.buffers, { desc = '[T]elescope [b]uffers' })
+        vim.keymap.set('n', '<leader>tdf', function() require("telescope").extensions.dir.find_files({hidden=true}) end, { desc = '[T]elescope [d]ir [f]iles' })
+        vim.keymap.set('n', '<leader>tds', function() require("telescope").extensions.dir.live_grep({hidden=true}) end , { desc = '[T]elescope [d]ir [s]earh' })
 
     end,
 }

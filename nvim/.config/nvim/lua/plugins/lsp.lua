@@ -9,7 +9,7 @@ return {
     },
     config = function()
       -- LSP settings.
-  
+
       local on_attach = function(client, bufnr)
         -- NOTE: Remember that lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself
@@ -23,7 +23,7 @@ return {
 		    end
 		    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	    end
-      
+
 	    nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 	    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 	    nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
@@ -41,12 +41,12 @@ return {
 	    nmap("<leader>wl", function()
 		    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	    end, "[W]orkspace [L]ist Folders")
-      
+
 	    nmap("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
 	    nmap("]d", vim.diagnostic.goto_next, "Next diagnostic")
 	    nmap("<leader>df", vim.diagnostic.open_float, "[D]iagnostic [F]loat")
 	    nmap("<leader>dl", vim.diagnostic.setloclist, "[D]iagnostic [L]ist")
-      
+
 	    if client.server_capabilities.document_highlight then
 		    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
 		    vim.api.nvim_create_autocmd("CursorHold", {
@@ -62,12 +62,12 @@ return {
 	    end
 	    -- Enable completion triggered by <c-x><c-o>
 	    vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-      
+
 	    -- Use LSP as the handler for formatexpr and tagfunc.
 	    if client.server_capabilities.goto_definition == true then
 		    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 	    end
-      
+
 	    if client.server_capabilities.document_formatting == true then
 		    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 	    end
@@ -75,9 +75,9 @@ return {
 	    vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
 		    vim.lsp.buf.format({ async = true })
 	    end, { desc = "Format current buffer with LSP" })
-      
+
 	    require("user.ui-plugins").lsp_attach(client, bufnr)
-      
+
 	    local lsp_inlayhints = require('lsp-inlayhints')
 	    lsp_inlayhints.setup()
 	    lsp_inlayhints.on_attach(client, bufnr, false)
@@ -93,13 +93,9 @@ return {
 	      function() lsp_inlayhints.reset() end,
 	      { desc = 'Reset Lsp-inlayhints for current buffer' }
 	    )
-      
-	    if client.server_capabilities.documentSymbolProvider then
-	      require('nvim-navic').attach(client, bufnr)
-        end
-  
+
       end
-  
+
       local function custom_lsp_setups(capabilities, on_attach)
         return {
             -- The first entry (without a key) will be the default handler
@@ -121,6 +117,7 @@ return {
             -- Next, you can provide targeted overrides for specific servers.
             ["rust_analyzer"] = function()
                 require("lspconfig").rust_analyzer.setup({
+                    on_attach = on_attach,
                     settings = {
                         ["rust-analyzer"] = {
                             diagnostics = {
@@ -167,8 +164,8 @@ return {
             end
         }
       end
-  
-  
+
+
       require("mason").setup()
       require("mason-lspconfig").setup({
           ensure_installed = require("variables").language_servers,
@@ -178,7 +175,7 @@ return {
       require("mason-lspconfig").setup_handlers(custom_lsp_setups(capabilities, on_attach))
 
       require("lsp_lines").setup()
-      vim.diagnostic.config { virtual_text = false }
+      vim.diagnostic.config { virtual_text = true }
 
   end,
   },

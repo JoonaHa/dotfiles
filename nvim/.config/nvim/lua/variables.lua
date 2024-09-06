@@ -40,13 +40,16 @@ return {
     'yaml'
   },
   null_ls_tools = {
-    'formatting.stylua',
-    'completion.spell',
-    'formatting.tidy',
-    'diagnostics.pylint',
-    'formatting.black',
-    'formatting.prettier',
-    'diagnostics.terraform_validate',
-    'formatting.terraform_fmt'
+    mason = {
+      'sylua',
+      'tidy',
+      'pylint',
+      'black',
+      'prettier',
+      'terraform_ls'
+    },
+    null_ls = {
+      'builtins.completion.spell',
+    }
   }
 }
