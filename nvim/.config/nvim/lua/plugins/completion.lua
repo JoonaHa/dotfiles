@@ -12,7 +12,8 @@ return {
       "uga-rosa/cmp-dictionary",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
-      "hrsh7th/cmp-nvim-lua", "kdheepak/cmp-latex-symbols",
+      "hrsh7th/cmp-nvim-lua", 
+      "kdheepak/cmp-latex-symbols",
     -- Luasnip
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
@@ -94,16 +95,16 @@ return {
           { name = 'path' },
 
         },
-        sorting = {
-            -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
-          comparators = {
-            cmp.config.compare.locality,
-            cmp.config.compare.score,
-            cmp.config.compare.kind,
-            cmp.config.compare.order,
+        --sorting = {
+        --    -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
+        --  comparators = {
+        --    cmp.config.compare.locality,
+        --    cmp.config.compare.score,
+        --    cmp.config.compare.kind,
+        --    cmp.config.compare.order,
 
-          },
-        },
+        --  },
+        --},
 
         duplicates = {
           nvim_lsp = 1,
