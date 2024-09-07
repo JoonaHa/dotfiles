@@ -159,6 +159,11 @@ lua require("init")
 
 " =================KEYBINDS================
 
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
 nmap <leader>hs :split<Return><C-w>w
 nmap <leader>vs :vsplit<Return><C-w>w
 nmap <leader>hS :new<Return><C-w>w
