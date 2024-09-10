@@ -122,7 +122,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+odiaeresis move left
+bindsym $mod+Shift+h move left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -315,9 +315,9 @@ exec --no-startup-id dbus-launch /usr/bin/lxpolkit
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 # Backup keepass files locally and mount GoogleDrive for normal use
-exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx
-exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx
-exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4
+exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &
+exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &
+exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4 &
 
 # Floating programs
 for_window [class="Pavucontrol"] floating enable
