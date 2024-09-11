@@ -7,6 +7,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
       "f3fora/cmp-spell",
       "ray-x/cmp-treesitter",
       "uga-rosa/cmp-dictionary",
@@ -147,7 +148,7 @@ return {
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          { name = 'cmdline' }
+          name = 'cmdline',
         })
       })
       -- Set configuration for specific filetype.
