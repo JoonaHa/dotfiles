@@ -2,7 +2,7 @@ return {
   language_servers = {
     'rust_analyzer',
     'pyright',
-    'tsserver',
+    'ts_ls',
     'lua_ls',
     --Scripting
     'bashls',
@@ -50,6 +50,7 @@ return {
     },
     null_ls = {
       'builtins.completion.spell',
+      'builtins.diagnostics.terraform_validate'
     }
   }
 }
