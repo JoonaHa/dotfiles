@@ -46,7 +46,9 @@ return {
       'pylint',
       'black',
       'prettier',
-      'terraform_ls'
+      'terraform_ls',
+      'markdownlint'
+
     },
     null_ls = {
       'builtins.completion.spell',
