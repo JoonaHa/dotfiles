@@ -106,10 +106,10 @@ function! ToggleWrap()
     nnoremap <buffer> 0 g0
     nnoremap <buffer> ^ g^
     nnoremap <buffer> $ g$
-    vnoremap <buffer> <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    vnoremap <buffer> <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
-    vnoremap <buffer> <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
-    vnoremap <buffer> <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+"    vnoremap <buffer> <expr> j v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+"    vnoremap <buffer> <expr> <Down> v:count == 0 ? 'gj' : "\<Esc>".v:count.'j'
+"    vnoremap <buffer> <expr> k v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
+"    vnoremap <buffer> <expr> <Up> v:count == 0 ? 'gk' : "\<Esc>".v:count.'k'
     vnoremap <buffer> 0 g0
     vnoremap <buffer> ^ g^
     vnoremap <buffer> $ g$
