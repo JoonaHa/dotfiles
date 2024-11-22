@@ -129,7 +129,7 @@ command WritingToggle call WritingSettingsToggle()
 
 " Writing autocommands
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md,*.txt,*.tex call WritingSettingsToggle()
+autocmd BufRead,BufNewFile *.md,*.txt,*.tex,*.qmd call WritingSettingsToggle()
 autocmd FileType gitcommit call WritingSettingsToggle()
 "Autoread on bufenter
 au FocusGained,BufEnter * :checktime

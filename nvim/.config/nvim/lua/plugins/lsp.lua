@@ -161,7 +161,27 @@ return {
                     enable_import_completion = true,
                     enable_roslyn_analyzers = true,
                 })
-            end
+            end,
+            ["pyright"] = function()
+                 require('lspconfig').pyright.setup {
+                    capabilities = capabilities,
+                    flags = lsp_flags,
+                    settings = {
+                      python = {
+                        analysis = {
+                          autoSearchPaths = true,
+                          useLibraryCodeForTypes = true,
+                          diagnosticMode = 'workspace',
+                        },
+                      },
+                    },
+                    root_dir = function(fname)
+                      util = require('lspconfig.util')
+                      return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
+                    end,
+                 }
+            end,
+
         }
       end
 
