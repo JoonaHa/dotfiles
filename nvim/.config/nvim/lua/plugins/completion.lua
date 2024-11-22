@@ -57,7 +57,7 @@ return {
               nvim_lua = "[api]",
               path = "[path]",
               luasnip = "[snip]",
-              treesitter = "[TS]"
+              treesitter = "[TS]",
             }, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 
             experimental = {
@@ -144,11 +144,16 @@ return {
       })
 
       cmp.setup.cmdline(':', {
-        --mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          name = 'cmdline',
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' }
+            }
+          }
         })
       })
       -- Set configuration for specific filetype.
