@@ -27,7 +27,7 @@ set hlsearch
 set number
 set ignorecase
 set smartcase
-syntax enable
+"syntax enable Breaks netrw URL open
 filetype plugin indent on
 set showmatch
 set autoindent
