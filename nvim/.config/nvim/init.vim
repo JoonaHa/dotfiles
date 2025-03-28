@@ -163,8 +163,6 @@ nmap <leader>vS :vnew<Return><C-w>w
 nnoremap <silent><esc> :noh<CR>
 nnoremap <esc>[ <esc>[
 
-nmap <silent> ]t gt
-nmap <silent> [t gT
 nmap <silent> <A-n> :tabnew<CR>
 nmap <silent> <A-w> :tabclose<CR>
 
