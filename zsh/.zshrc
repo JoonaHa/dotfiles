@@ -113,12 +113,12 @@ function zvm_config() {
     ZVM_VI_EDITOR=nvim
 }
 
-zvm_after_init() {
-  source /usr/share/doc/fzf/examples/completion.zsh
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
-  #source /usr/share/fzf/completion.zsh
-  #source /usr/share/fzf/key-bindings.zsh
-  #source /usr/share/doc/pkgfile/command-not-found.zsh
+ zvm_after_init() {
+    source $HOME/fzf/shell/key-bindings.zsh
+    source $HOME/fzf/shell/completion.zsh
+    #source /usr/share/fzf/completion.zsh
+    #source /usr/share/fzf/key-bindings.zsh
+    #source /usr/share/doc/pkgfile/command-not-found.zsh
 }
 
 # # ex - archive extractor
@@ -164,6 +164,9 @@ plugins=(
     pip
     pipenv
     docker
+    minikube
+    kubectl
+    helm
     rust
     command-not-found 
     zsh-history-substring-search
@@ -172,6 +175,8 @@ plugins=(
     zsh-vi-mode
     zsh-syntax-highlighting
     nix-zsh-completions
+    aws
+    terraform
 )
 source $ZSH/oh-my-zsh.sh
 
