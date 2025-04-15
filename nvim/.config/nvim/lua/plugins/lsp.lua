@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    version = "1.8.0",
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -165,7 +166,6 @@ return {
             ["pyright"] = function()
                  require('lspconfig').pyright.setup {
                     capabilities = capabilities,
-                    flags = lsp_flags,
                     settings = {
                       python = {
                         analysis = {
@@ -176,8 +176,8 @@ return {
                       },
                     },
                     root_dir = function(fname)
-                      util = require('lspconfig.util')
-                      return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
+                      local util = require('lspconfig.util')
+                      return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or vim.fs.dirname(fname)
                     end,
                  }
             end,
@@ -188,6 +188,7 @@ return {
 
       require("mason").setup()
       require("mason-lspconfig").setup({
+	 automatic_installation = false,
           ensure_installed = require("variables").language_servers,
       })
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
