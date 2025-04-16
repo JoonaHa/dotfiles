@@ -12,7 +12,7 @@ return {
     'texlab',
     'marksman',
     'jsonls',
-    'yamlls@1.12.0',
+    'yamlls',
     'helm_ls',
     --xml
     'lemminx'
@@ -37,7 +37,7 @@ return {
     'latex',
     'markdown',
     'helm',
-    --'yaml'
+    'yaml'
   },
   null_ls_tools = {
     mason = {
