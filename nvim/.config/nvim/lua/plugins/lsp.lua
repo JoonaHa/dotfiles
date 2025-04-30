@@ -95,6 +95,12 @@ return {
 	      { desc = 'Reset Lsp-inlayhints for current buffer' }
 	    )
 
+           if vim.bo[bufnr].filetype == "helm" then
+             vim.schedule(function()
+               vim.cmd("LspStop ++force yamlls")
+             end)
+	   end
+
       end
 
       local function custom_lsp_setups(capabilities, on_attach)
@@ -181,6 +187,15 @@ return {
                     end,
                  }
             end,
+	    ["helm_ls"] = function ()
+		require'lspconfig'.helm_ls.setup{
+		  settings = {
+		    yamlls = {
+		      enabled = false
+		    }
+		  }
+		}
+	    end
 
         }
       end
