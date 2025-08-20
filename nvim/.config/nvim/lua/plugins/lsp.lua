@@ -3,8 +3,14 @@ return {
     "neovim/nvim-lspconfig",
     --version = "1.8.0",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      {
+        "williamboman/mason.nvim",
+        version = "v1.11.0"
+      },
+      {
+        "williamboman/mason-lspconfig.nvim",
+        version = "v1.32.0"
+      },
       "lvimuser/lsp-inlayhints.nvim",
       { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
     },
