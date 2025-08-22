@@ -262,7 +262,6 @@ bindsym $mod+Shift+z	gaps outer current minus 5
 
 input "type:keyboard" {
     xkb_layout fi
-    xkb_variant ,nodeadkeys
 }
 # Touchpad 
 input "type:touchpad" {
@@ -272,7 +271,7 @@ input "type:touchpad" {
 
 # Function key homerow with Kmonad
 # Sleep to avoid deadlock while getting keyboard device. Kmonad issu
-exec_always --no-startup-id sleep 1 && kmonad ~/dotfiles/kmonad/mina_keys.kbd
+#exec_always --no-startup-id sleep 1 && kmonad ~/dotfiles/kmonad/mina_keys.kbd
 # Fix issue with Electron apps not respecting xkb_layout
 #exec_always --no-startup-id setxkbmap fi
 # emojies
@@ -294,9 +293,9 @@ bindsym Ctrl+Shift+Print exec --no-startup-id grimshot copy area
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
 
-    dbus-launch gsettings set $gnome-schema icon-theme 'Mint-Y-Aqua'
-    dbus-launch gsettings set $gnome-schema cursor-theme 'DMZ-Black'
-    dbus-launch gsettings set $gnome-schema gtk-theme 'CBlack'
+    gsettings set $gnome-schema icon-theme 'Mint-Y-Aqua'
+    gsettings set $gnome-schema cursor-theme 'DMZ-Black'
+    gsettings set $gnome-schema gtk-theme 'CBlack'
 }
 
 
@@ -308,18 +307,17 @@ exec_always --no-startup-id /usr/bin/xsettingsd
 
 exec_always --no-startup-id /usr/bin/xmodmap
 #exec_always --no-startup-id dex -ae sway
-exec --no-startup-id dbus-launch nm-applet --indicator 
+exec --no-startup-id nm-applet --indicator 
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-a11y-settings
 
 #Polkit 
-exec --no-startup-id dbus-launch /usr/bin/lxpolkit
+exec --no-startup-id /usr/bin/lxpolkit
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 # Backup keepass files locally and mount GoogleDrive for normal use
-exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
-exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
-exec rclone mount GoogleDrive:/ /home/mina/GoogleDrive --vfs-cache-mode full --fast-list --no-modtime --checkers=4 &!
+#exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
+#exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
 
 # Floating programs
 for_window [class="Pavucontrol"] floating enable
@@ -343,6 +341,5 @@ for_window [class="[.]*"] inhibit_idle fullscreen
 
 # Program exec
 bindsym $mod+F5 exec pavucontrol
-#exec dbus-run-session sway
 
-include /etc/sway/conhtmlfig.d/*
+include /etc/sway/config.d/*
