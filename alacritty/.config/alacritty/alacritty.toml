@@ -1,0 +1,140 @@
+[shell]
+program               = "/bin/zsh"
+
+[env]
+TERM                  = "xterm-256color"
+
+[window]
+decorations = "full"
+decorations_theme_variant = "Dark"
+dynamic_padding = true
+opacity = 0.8
+position = {x = 3, y = 3}
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+normal                = { family = "UbuntuMono Nerd Font", style = "Regular" }
+bold                  = { family = "UbuntuMono Nerd Font", style = "Bold" }
+italic                = { family = "UbuntuMono Nerd Font", style = "Italic" }
+bold_italic           = { family = "UbuntuMono Nerd Font", style = "Bold Italic" }
+size                  = 13
+offset                = { x = 0, y = 0 }
+glyph_offset          = { x = 0, y = 0 }
+
+
+[colors.bright]
+black = "0x565656"
+blue = "0x49a4f8"
+cyan = "0x99faf2"
+green = "0xc0e17d"
+magenta = "0xa47de9"
+red = "0xec5357"
+white = "0xffffff"
+yellow = "0xf9da6a"
+
+[colors.normal]
+black = "0x2e2e2e"
+blue = "0x47a0f3"
+cyan = "0x64dbed"
+green = "0xabe047"
+magenta = "0x7b5cb0"
+red = "0xeb4129"
+white = "0xe5e9f0"
+yellow = "0xf6c744"
+
+[colors.primary]
+background = "#090911"
+foreground = "#fffbf6"
+
+[colors.cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.selection]
+background = "CellForeground"
+text = "CellBackground"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+
+[bell]
+animation             = "EaseOutExpo"
+duration              = 0
+color                 = "#C0C5CE"
+#command               = { program = "notify-send", args = ["alacritty", "bell",] }
+
+[selection]
+save_to_clipboard     = true
+
+[cursor.style]
+shape                 = "Beam"
+blinking              = "Always"
+
+[cursor.vi_mode_style]
+shape                 = "Block"
+blinking              = "Off"
+
+[cursor]
+#blink_interval        = 500
+blink_interval        = 750
+blink_timeout         = 0
+
+[terminal]
+#osc52                 = "OnlyCopy"
+
+[mouse]
+hide_when_typing      = true
+bindings = [
+  { mouse = "Middle", action = "PasteSelection" },
+]
+
+[hints]
+alphabet              = "jfkdls;ahgurieowpq"
+
+[[hints.enabled]]
+command               = "xdg-open"
+mouse.enabled         = true
+binding               = { key = "U", mods = "Control|Shift" }
+hyperlinks            = true
+
+[keyboard]
+bindings = [
+  { key = "V",        mods = "Control|Shift", action = "Paste" },
+  { key = "C",        mods = "Control|Shift", action = "Copy" },
+  { key = "Paste",                            action = "Paste" },
+  { key = "Copy",                             action = "Copy" },
+  { key = "Insert",   mods = "Shift",         action = "PasteSelection" },
+  { key = "F",        mods = "Control|Shift", action = "SearchForward",     mode = "~Search" },
+  { key = "B",        mods = "Control|Shift", action = "SearchBackward",    mode = "~Search" },
+  { key = "Key0",     mods = "Control",       action = "ResetFontSize" },
+  { key = "Equals",   mods = "Control",       action = "IncreaseFontSize" },
+  { key = "Minus",    mods = "Control",       action = "DecreaseFontSize" },
+  { key = "L",        mods = "Control",       action = "ClearLogNotice" },
+  { key = "L",        mods = "Control",       chars  = "\f" },
+  { key = "PageUp",   mods = "Shift",         action = "ScrollPageUp",      mode = "~Alt" },
+  { key = "PageDown", mods = "Shift",         action = "ScrollPageDown",    mode = "~Alt" },
+  { key = "Up",       mods = "Shift",         action = "ScrollLineUp",      mode = "~Alt" },
+  { key = "Down",     mods = "Shift",         action = "ScrollLineDown",    mode = "~Alt" },
+  { key = "Home",     mods = "Shift",         action = "ScrollToTop",       mode = "~Alt" },
+  { key = "End",      mods = "Shift",         action = "ScrollToBottom",    mode = "~Alt" },
+]
+
+
+[debug]
+#render_timer          = false
+#persistent_logging    = false
+#log_level             = "Warn"
+#renderer              = "None"
+#print_events          = false
+#highlight_damage      = false
+#prefer_egl            = false
