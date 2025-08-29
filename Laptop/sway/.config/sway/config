@@ -188,8 +188,8 @@ bindsym $mod+Shift+r restart
 
 # !! CUSTOM KEYBINDIGS !!
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle 
 
 # Media player controls
@@ -316,8 +316,8 @@ exec --no-startup-id /usr/bin/lxpolkit
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 # Backup keepass files locally and mount GoogleDrive for normal use
-#exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
-#exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
+exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
+exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
 
 # Floating programs
 for_window [class="Pavucontrol"] floating enable
