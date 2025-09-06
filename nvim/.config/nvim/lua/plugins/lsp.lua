@@ -201,6 +201,11 @@ return {
 		    }
 		  }
 		}
+	    end,
+	    ["texlab"] = function ()
+		require'lspconfig'.texlab.setup{
+                  filetypes = { "tex", "plaintex", "bib", "markdown" }
+		}
 	    end
 
         }
