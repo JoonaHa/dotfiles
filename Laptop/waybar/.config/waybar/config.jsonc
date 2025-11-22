@@ -1,13 +1,17 @@
 {
-    //"layer": "top", // Waybar at top layer
+    "layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 25, // Waybar height (to be removed for auto height)
     "width": 1920,
+    "autohide": true,
+    "autohide-blocked": false,
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
     // Choose the order of the modules
     "modules-left": [
-        "sway/mode", 
         "sway/workspaces",
-        "custom/media"
+        "mpris"
     ],
     "modules-center": [
     "sway/window"
@@ -15,13 +19,16 @@
     "modules-right": [
         "cpu", 
         "memory",
-        "temperature", 
+        //"temperature", 
         "backlight",
         "network", 
+        //"pulseaudio/slider",
         "pulseaudio", 
         "battery", 
+        "power-profiles-daemon", 
         "clock#time", 
         "clock#date", 
+        "idle_inhibitor",
         "tray"
     ],
     // Modules configuration
@@ -159,33 +166,35 @@
 	"tooltip": false,
         "on-click-right": "gsimplecal"
     },
-    "custom/left-arrow-dark": {
-    	"format": "",
-    	"tooltip": false
-    },
-    "custom/left-arrow-light": {
-    	"format": "",
-    	"tooltip": false
-    },
-    "custom/arrow1": {
-    	"format": "",
-    	"tooltip": false
-    },
-    "custom/right-arrow-light": {
-    	"format": "",
-    	"tooltip": false
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    "mpris": {
+	"format": "{player_icon} : {status_icon} {dynamic}",
+	"format-paused": "{player_icon} : {status_icon} <i>{dynamic}</i>",
+	"player-icons": {
+		"default": "🎜",
+		"mpv": "",
+                "vlc": "󰕼",
+                "spotify": "",
+                "firefox": "󰈹",
+                "chromium": "",
+                "chrome": ""
+                
+	},
+	"status-icons": {
+		"paused": "⏸",
+		"playing": "",
+		"stopped": ""
+	}
+   },
+   "power-profiles-daemon": {
+   "format": "{icon}",
+   "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+   "tooltip": true,
+   "format-icons": {
+     "default": "",
+     "performance": "",
+     "balanced": "",
+     "power-saver": ""
+   }
+   }
 
 }
