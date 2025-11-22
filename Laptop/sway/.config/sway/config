@@ -7,8 +7,8 @@
 
 # Color settings
 
-set $bg-color            #29798a
-set $inactive-bg-color   #2f343f
+set $bg-color            #1d81a7
+set $inactive-bg-color   #03202b
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
@@ -43,6 +43,7 @@ set $term alacritty
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg fill
+output eDP-1 mode 1920x1080@60.049HZ
 #
 # Example configuration:
 #
@@ -275,7 +276,7 @@ input "type:touchpad" {
 # Fix issue with Electron apps not respecting xkb_layout
 #exec_always --no-startup-id setxkbmap fi
 # emojies
-bindsym $mod+period exec rofimoji 
+bindsym $mod+period exec ~/bin/wofi-emoji  
 
 #Screenshots
 
