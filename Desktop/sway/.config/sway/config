@@ -7,8 +7,8 @@
 
 # Color settings
 
-set $bg-color            #29798a
-set $inactive-bg-color   #2f343f
+set $bg-color            #1d81a7
+set $inactive-bg-color   #03202b
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
@@ -230,30 +230,30 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 #
 
 mode "resize" {
-# left will shrink the containers width
-# right will grow the containers width
-# up will shrink the containers height
-# down will grow the containers height
-bindsym $left resize shrink width 10px
-bindsym $down resize grow height 10px
-bindsym $up resize shrink height 10px
-bindsym $right resize grow width 10px
-
-# Ditto, with arrow keys
-bindsym Left resize shrink width 10px
-bindsym Down resize grow height 10px
-bindsym Up resize shrink height 10px
-bindsym Right resize grow width 10px
-
-# Return to default mode
-bindsym Return mode "default"
-bindsym Escape mode "default"
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
 bar {
 
-swaybar_command /home/mina/.config/waybar/launch.sh
+  swaybar_command /home/mina/.config/waybar/launch.sh
 }
 # i3-gaps settings
 
@@ -275,8 +275,8 @@ hide_edge_borders smart
 no_focus [window_role="pop-up"]
 
 bindsym $mod+Shift+space floating toggle; \
-[tiling con_id=__focused__] border pixel 2; \
-[floating con_id=__focused__] border normal 3
+    [tiling con_id=__focused__] border pixel 2; \
+    [floating con_id=__focused__] border normal 3
 
 
 gaps outer 2
@@ -325,7 +325,7 @@ exec_always --no-startup-id /usr/bin/xsettingsd
 
 exec_always --no-startup-id /usr/bin/xmodmap
 #exec_always --no-startup-id dex -ae sway
-exec --no-startup-id dbus-launch nm-applet --indicator 
+exec --no-startup-id nm-applet --indicator 
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
 #exec --no-startup-id XDG_CURRENT_DESKTOP=X-Cinnamon; /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-a11y-settings
 
@@ -334,7 +334,6 @@ exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 
-exec --no-startup-id google-drive-ocamlfuse /media/GoogleDrive/
 exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
 exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
 
@@ -364,5 +363,39 @@ for_window [class="[.]*"] inhibit_idle fullscreen
 # Program exec
 bindsym $mod+F5 exec pavucontrol
 #exec dbus-run-session sway
+#
+# SwayFX stuff:
+#
+# SwayFX has window blurring, which gives a blurry transparency to window backgrounds.
+blur enable
+blur_xray disable # Window blurring can either be truly transparent, with other apps visible behind the window, or blur according to the wallpaper. blur_xray enables wallpaper blurring. 
+blur_passes 4
+blur_radius 4
+# blur_noise <float value 0 - 1>
+# blur_brightness <float value 0 - 2>
+# blur_contrast <float value 0 - 2>
+# blur_saturation <float value 0 - 2>
+
+# Window corners can be rounded in SwayFX
+# corner_radius can be any number of pixels
+corner_radius 15
+smart_corner_radius enable
+
+# SwayFX also features window drop shadows, which, of course, can be enabled at any time
+shadows enable
+shadows_on_csd enable
+
+# You can also offset the shadow's position, make unfocused windows have different shadows, give shadows a nondefault color, and blur shadows
+# shadow_inactive_color #0000007F
+# shadow_offset <x offset> <y offset>
+# shadow_blur_radius <integer value 0 - 99>
+# shadow_color <hex color with alpha>
+
+# Dimming
+# default_dim_inactive <float value 0.0 - 1.0>
+# for_window [CRITERIA_HERE] dim_inactive <float value 0.0 - 1.0>
+# dim_inactive_colors.unfocused <hex color>
+# dim_inactive_colors.urgent <hex color> 
+
 
 include /etc/sway/config.d/*
