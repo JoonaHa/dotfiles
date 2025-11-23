@@ -28,6 +28,7 @@ window#waybar.hidden {
 #network,
 #idle_inhibitor,
 #cpu,
+#privacy,
 #language {
   color: #161320;
   margin-top: 1px;
@@ -177,6 +178,10 @@ background-color: #ed615f;
 #idle_inhibitor {
   background: #B5E8E0;
   padding-right: 15px;
+}
+
+#privacy {
+  background: #76dbcb;
 }
 
 #pulseaudio {
