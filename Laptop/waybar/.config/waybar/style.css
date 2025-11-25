@@ -6,7 +6,9 @@
 }
 
 window#waybar {
+  color: #ffffff;
   background: rgba(34, 36, 54, 0.6);
+  transition-duration: .5s;
 }
 
 window#waybar.hidden {
@@ -29,6 +31,7 @@ window#waybar.hidden {
 #idle_inhibitor,
 #cpu,
 #privacy,
+#bluetooth,
 #language {
   color: #161320;
   margin-top: 1px;
@@ -239,4 +242,25 @@ background-color: #ed615f;
 #power-profiles-daemon.power-saver {
     background-color: #2ecc71;
     color: #000000;
+}
+#bluetooth {
+  color: #ffffff;
+  background-color: #0082FC;
+}
+
+
+@keyframes blue-blink {
+    to {
+        background-color: #ffffff;
+        color: #0082FC;
+    }
+}
+
+#bluetooth.discovering {
+    background-color: #0082FC;
+    animation-name: blue-blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }

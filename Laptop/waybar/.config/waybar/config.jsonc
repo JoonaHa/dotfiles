@@ -26,6 +26,7 @@
         "pulseaudio", 
         "battery", 
         "power-profiles-daemon", 
+        "bluetooth",
         "clock#time", 
         "clock#date", 
          "privacy",
@@ -112,7 +113,7 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
     },
     "battery": {
         "states": {
