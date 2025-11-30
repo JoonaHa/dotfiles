@@ -185,7 +185,10 @@
 		"paused": "⏸",
 		"playing": "",
 		"stopped": ""
-	}
+	},
+         "enable-tooltip-len-limits": true,
+         "dynamic-len": 80,
+         "dynamic-importance-order": ["title", "position", "length", "artist", "album"]
    },
    "power-profiles-daemon": {
    "format": "{icon}",
@@ -223,8 +226,8 @@
    },
     "bluetooth": {
         "format": " {status}",
-	"format-connected": " {num_connections} connected",
-	"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+	"format-connected": " {num_connections}",
+	"format-connected-battery": " {num_connections}: {device_battery_percentage}%",
 	// "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
         "format-disabled": "",
         "format-off": "",
