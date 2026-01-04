@@ -243,8 +243,8 @@ for_window [tiling] border pixel 2
 
 # Everything floating
 hide_edge_borders both
-default_floating_border normal 3
-for_window [floating] border normal 3
+default_floating_border pixel 0
+for_window [floating] border pixel 0
 #for_window [floating_from="user"] border normal 3
 floating_modifier Mod1
 hide_edge_borders smart
@@ -302,6 +302,11 @@ exec_always {
 
 
 # CUSTOM STARTUP
+# Notification Daemon
+exec swaync
+
+# Toggle control center
+bindsym $mod+Shift+n exec swaync-client -t -sw
 #
 #xsettingsd
 exec_always --no-startup-id /usr/bin/xsettingsd
