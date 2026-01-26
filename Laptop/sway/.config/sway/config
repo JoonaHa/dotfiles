@@ -44,6 +44,8 @@ set $term alacritty
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg fill
 output eDP-1 mode 1920x1080@60.049HZ
+# Dynamic output
+exec kanshi
 #
 # Example configuration:
 #
