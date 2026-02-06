@@ -4,10 +4,12 @@ profile default {
 
 profile HDMI {
     output eDP-1 mode 1920x1080@60.049Hz
-    output HDMI-A-1 mode 1920x1080@60.000Hz
-    exec swaymsg workspace 2, move workspace to HDMI-A-1
-    exec swaymsg workspace 4, move workspace to HDMI-A-1
-    exec swaymsg workspace 6, move workspace to HDMI-A-1
-    exec swaymsg workspace 8, move workspace to HDMI-A-1
-    exec swaymsg workspace 8, move workspace to HDMI-A-1
+    #output HDMI-A-1 mode 1920x1080@60.000Hz
+    output HDMI-A-1 mode 2560x1440@59.951Hz
+    exec swaymsg workspace 1, move workspace to HDMI-A-1
+    exec swaymsg workspace 3, move workspace to HDMI-A-1
+    exec swaymsg workspace 5, move workspace to HDMI-A-1
+    exec swaymsg workspace 7, move workspace to HDMI-A-1
+    exec swaymsg workspace 9, move workspace to HDMI-A-1
 }
+
