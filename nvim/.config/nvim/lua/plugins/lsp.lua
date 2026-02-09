@@ -11,7 +11,6 @@ return {
         "williamboman/mason-lspconfig.nvim",
         version = "v1.32.0"
       },
-      "lvimuser/lsp-inlayhints.nvim",
       { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
     },
     config = function()
@@ -84,22 +83,6 @@ return {
 	    end, { desc = "Format current buffer with LSP" })
 
 	    require("user.ui-plugins").lsp_attach(client, bufnr)
-
-	    local lsp_inlayhints = require('lsp-inlayhints')
-	    lsp_inlayhints.setup()
-	    lsp_inlayhints.on_attach(client, bufnr, false)
-	    vim.api.nvim_buf_create_user_command(
-	      bufnr,
-	      'LspInlayhintsToggle',
-	      function() lsp_inlayhints.toggle() end,
-	      { desc = 'Toggle Lsp-inlayhints for current buffer' }
-	    )
-	    vim.api.nvim_buf_create_user_command(
-	      bufnr,
-	      'LspInlayhintsReset',
-	      function() lsp_inlayhints.reset() end,
-	      { desc = 'Reset Lsp-inlayhints for current buffer' }
-	    )
 
            if vim.bo[bufnr].filetype == "helm" then
              vim.schedule(function()
@@ -204,7 +187,7 @@ return {
 	    end,
 	    ["texlab"] = function ()
 		require'lspconfig'.texlab.setup{
-                  filetypes = { "tex", "plaintex", "bib", "markdown" }
+                  filetypes = { "tex", "plaintex", "bib", "markdown", "quarto" }
 		}
 	    end
 
