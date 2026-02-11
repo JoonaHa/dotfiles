@@ -184,7 +184,10 @@
 		"paused": "⏸",
 		"playing": "",
 		"stopped": ""
-	}
+	},
+         "enable-tooltip-len-limits": true,
+         "dynamic-len": 80,
+         "dynamic-importance-order": ["title", "position", "length", "artist", "album"]
    },
    "power-profiles-daemon": {
    "format": "{icon}",
@@ -406,7 +409,10 @@
 		"paused": "⏸",
 		"playing": "",
 		"stopped": ""
-	}
+	},
+         "enable-tooltip-len-limits": true,
+         "dynamic-len": 80,
+         "dynamic-importance-order": ["title", "position", "length", "artist", "album"]
    },
    "power-profiles-daemon": {
    "format": "{icon}",
