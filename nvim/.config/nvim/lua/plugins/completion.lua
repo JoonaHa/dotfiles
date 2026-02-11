@@ -4,7 +4,7 @@ return {
     lazy = false,
     dependencies = {
       "onsails/lspkind.nvim",
-      {"hrsh7th/cmp-nvim-lsp", commit = "a8912b8"},
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -13,7 +13,7 @@ return {
       "uga-rosa/cmp-dictionary",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
-      "hrsh7th/cmp-nvim-lua", 
+      "hrsh7th/cmp-nvim-lua",
       "kdheepak/cmp-latex-symbols",
     -- Luasnip
     {

@@ -48,8 +48,8 @@ return {
 		    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	    end, "[W]orkspace [L]ist Folders")
 
-	    nmap("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
-	    nmap("]d", vim.diagnostic.goto_next, "Next diagnostic")
+	    nmap("[d", function() vim.diagnostic.jump({count=-1, float=true}) end, "Previous diagnostic")
+	    nmap("]d", function() vim.diagnostic.jump({count=1, float=true}) end, "Next diagnostic")
 	    nmap("<leader>df", vim.diagnostic.open_float, "[D]iagnostic [F]loat")
 	    nmap("<leader>dl", vim.diagnostic.setloclist, "[D]iagnostic [L]ist")
 
@@ -71,11 +71,11 @@ return {
 
 	    -- Use LSP as the handler for formatexpr and tagfunc.
 	    if client.server_capabilities.goto_definition == true then
-		    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+		    vim.nvim_set_option_value(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 	    end
 
 	    if client.server_capabilities.document_formatting == true then
-		    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+		    vim.nvim_set_option_value(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 	    end
 	    -- Create a command `:Format` local to the LSP buffer
 	    vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
@@ -104,7 +104,7 @@ return {
                 -- local root_dir = function()
                 -- 	return vim.fn.getcwd()
                 -- end
-                require("lspconfig")[server_name].setup({
+                vim.lsp.config(server_name, {
                     on_attach = on_attach,
                 --	root_dir = root_dir,
                     capabilities = capabilities,
@@ -112,15 +112,14 @@ return {
             end,
             -- Next, you can provide targeted overrides for specific servers.
             ["rust_analyzer"] = function()
-                require("lspconfig").rust_analyzer.setup({
-                    on_attach = on_attach,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            diagnostics = {
-                                enable = true,
-                            },
-                        },
-                    },
+                vim.lsp.config('rust_analyzer', {
+                  settings = {
+                    ['rust-analyzer'] = {
+                      diagnostics = {
+                        enable = true;
+                      }
+                    }
+                  }
                 })
             end,
             ["lua_ls"] = function()
@@ -129,7 +128,7 @@ return {
                 local runtime_path = vim.split(package.path, ";")
                 table.insert(runtime_path, "lua/?.lua")
                 table.insert(runtime_path, "lua/?/init.lua")
-                require("lspconfig").lua_ls.setup({
+                vim.lsp.config('lua_ls',{
                     on_attach = on_attach,
                     capabilities = capabilities,
                     settings = {
@@ -151,7 +150,7 @@ return {
                 })
             end,
             ["omnisharp"] = function()
-                require("lspconfig").omnisharp.setup({
+                vim.lsp.config('omnisharp',{
                     on_attach = on_attach,
                     cmd = { "dotnet", "/home/joona/.local/share/nvim/mason/packages/omnisharp/OmniSharp.dll" },
                     enable_import_completion = true,
@@ -159,7 +158,7 @@ return {
                 })
             end,
             ["pyright"] = function()
-                 require('lspconfig').pyright.setup {
+                  vim.lsp.config('pyright',{
                     capabilities = capabilities,
                     settings = {
                       python = {
@@ -174,21 +173,21 @@ return {
                       local util = require('lspconfig.util')
                       return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or vim.fs.dirname(fname)
                     end,
-                 }
+                 })
             end,
 	    ["helm_ls"] = function ()
-		require'lspconfig'.helm_ls.setup{
+		vim.lsp.config('helm_ls', {
 		  settings = {
 		    yamlls = {
 		      enabled = false
 		    }
 		  }
-		}
+		})
 	    end,
 	    ["texlab"] = function ()
-		require'lspconfig'.texlab.setup{
+		vim.lsp.config('texlab', {
                   filetypes = { "tex", "plaintex", "bib", "markdown", "quarto" }
-		}
+		})
 	    end
 
         }
