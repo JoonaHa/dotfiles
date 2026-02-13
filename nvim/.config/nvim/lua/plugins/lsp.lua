@@ -3,15 +3,9 @@ return {
     "neovim/nvim-lspconfig",
     --version = "1.8.0",
     dependencies = {
-      {
-        "williamboman/mason.nvim",
-        version = "v1.11.0"
-      },
-      {
-        "williamboman/mason-lspconfig.nvim",
-        version = "v1.32.0"
-      },
-      { "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
     },
     config = function()
       -- LSP settings.
@@ -93,115 +87,97 @@ return {
       end
 
       local function custom_lsp_setups(capabilities, on_attach)
-        return {
-            -- The first entry (without a key) will be the default handler
-            -- and will be called for each installed server that doesn't have
-            -- a dedicated handler.
-            function(server_name) -- default handler (optional)
-                -- Define `root_dir` when needed
-                -- See: https://github.com/neovim/nvim-lspconfig/issues/320
-                -- This is a workaround, maybe not work with some servers.
-                -- local root_dir = function()
-                -- 	return vim.fn.getcwd()
-                -- end
-                vim.lsp.config(server_name, {
-                    on_attach = on_attach,
-                --	root_dir = root_dir,
-                    capabilities = capabilities,
-                })
-            end,
-            -- Next, you can provide targeted overrides for specific servers.
-            ["rust_analyzer"] = function()
-                vim.lsp.config('rust_analyzer', {
-                  settings = {
-                    ['rust-analyzer'] = {
-                      diagnostics = {
-                        enable = true;
-                      }
-                    }
-                  }
-                })
-            end,
-            ["lua_ls"] = function()
-                -- Example custom configuration for lua
-                -- Make runtime files discoverable to the server
-                local runtime_path = vim.split(package.path, ";")
-                table.insert(runtime_path, "lua/?.lua")
-                table.insert(runtime_path, "lua/?/init.lua")
-                vim.lsp.config('lua_ls',{
-                    on_attach = on_attach,
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-                                version = "LuaJIT",
-                                -- Setup your lua path
-                                path = runtime_path,
-                            },
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-                            -- Do not send telemetry data containing a randomized but unique identifier
-                            telemetry = { enable = false },
-                        },
-                    },
-                })
-            end,
-            ["omnisharp"] = function()
-                vim.lsp.config('omnisharp',{
-                    on_attach = on_attach,
-                    cmd = { "dotnet", "/home/joona/.local/share/nvim/mason/packages/omnisharp/OmniSharp.dll" },
-                    enable_import_completion = true,
-                    enable_roslyn_analyzers = true,
-                })
-            end,
-            ["pyright"] = function()
-                  vim.lsp.config('pyright',{
-                    capabilities = capabilities,
-                    settings = {
-                      python = {
-                        analysis = {
-                          autoSearchPaths = true,
-                          useLibraryCodeForTypes = true,
-                          diagnosticMode = 'workspace',
-                        },
-                      },
-                    },
-                    root_dir = function(fname)
-                      local util = require('lspconfig.util')
-                      return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or vim.fs.dirname(fname)
-                    end,
-                 })
-            end,
-	    ["helm_ls"] = function ()
-		vim.lsp.config('helm_ls', {
-		  settings = {
-		    yamlls = {
-		      enabled = false
-		    }
-		  }
-		})
-	    end,
-	    ["texlab"] = function ()
-		vim.lsp.config('texlab', {
-                  filetypes = { "tex", "plaintex", "bib", "markdown", "quarto" }
-		})
-	    end
+        -- Define `root_dir` when needed
+        -- See: https://github.com/neovim/nvim-lspconfig/issues/320
+        -- This is a workaround, maybe not work with some servers.
+        -- local root_dir = function()
+        -- 	return vim.fn.getcwd()
+        -- end
+        vim.lsp.config('*', {
+            on_attach = on_attach,
+        --	root_dir = root_dir,
+            capabilities = capabilities,
+        })
+        -- Next, you can provide targeted overrides for specific servers.
+        vim.lsp.config('rust_analyzer', {
+          settings = {
+            ['rust-analyzer'] = {
+              diagnostics = {
+                enable = true;
+              }
+            }
+          }
+        })
 
-        }
+        -- Example custom configuration for lua
+        -- Make runtime files discoverable to the server
+        local runtime_path = vim.split(package.path, ";")
+        table.insert(runtime_path, "lua/?.lua")
+        table.insert(runtime_path, "lua/?/init.lua")
+        vim.lsp.config('lua_ls',{
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = {
+                Lua = {
+                    runtime = {
+                        -- Tell the language server which version of Lua you're using (most likely LuaJIT)
+                        version = "LuaJIT",
+                        -- Setup your lua path
+                        path = runtime_path,
+                    },
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                    workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+                    -- Do not send telemetry data containing a randomized but unique identifier
+                    telemetry = { enable = false },
+                },
+            },
+        })
+
+        vim.lsp.config('omnisharp',{
+            on_attach = on_attach,
+            cmd = { "dotnet", "/home/joona/.local/share/nvim/mason/packages/omnisharp/OmniSharp.dll" },
+            enable_import_completion = true,
+            enable_roslyn_analyzers = true,
+        })
+
+          vim.lsp.config('pyright',{
+            capabilities = capabilities,
+            settings = {
+              python = {
+                analysis = {
+                  autoSearchPaths = true,
+                  useLibraryCodeForTypes = true,
+                  diagnosticMode = 'workspace',
+                },
+              },
+            },
+         })
+
+        vim.lsp.config('helm_ls', {
+          settings = {
+            yamlls = {
+              enabled = false
+            }
+          }
+        })
+
+        vim.lsp.config('texlab', {
+          filetypes = { "tex", "plaintex", "bib", "markdown", "quarto" }
+        })
+
       end
 
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-	 automatic_installation = false,
+	 automatic_enable = true,
           ensure_installed = require("variables").language_servers,
       })
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      -- Let Mason call the default handlers. See :h mason-lspconfig-automatic-server-setup
-      require("mason-lspconfig").setup_handlers(custom_lsp_setups(capabilities, on_attach))
+
+      custom_lsp_setups(capabilities, on_attach)
 
       require("lsp_lines").setup()
       vim.diagnostic.config { virtual_text = true }
