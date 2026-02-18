@@ -35,7 +35,6 @@ set smartindent
 set nowrap
 " make backspace work like most other programs
 set backspace=indent,eol,start
-inoremap jk <esc>
 "" Change map leader to space
 nnoremap <SPACE> <Nop>
 let g:mapleader = "\<Space>"
@@ -191,13 +190,10 @@ nnoremap <A->> <C-w>>
 nnoremap <A-+> <C-w>+
 nnoremap <A--> <C-w>-
 
-" Primagen leader paste yank
-xnoremap <leader>p "_dP
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nmap <leader>Y "+Y
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
+" Own spamming register
+noremap <leader>y "zy
+noremap <leader>p "zp
+noremap <leader>d "zd
 
 " Incerement/decrement to alt keys
 nnoremap <A-a> <C-a>
@@ -209,6 +205,10 @@ vnoremap g<A-x> g<C-x>
 
 " Remap backtick
 nmap å `
+
+" Remap terminal exit
+noremap <Esc> <C-\><C-n>
+noremap <C-space> <C-\><C-n>
 
 " Center cursor when scrolling up or down
 nnoremap <C-d> <C-d>zz
