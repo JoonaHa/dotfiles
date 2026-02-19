@@ -99,7 +99,7 @@ function M.init()
       lualine_c = { navic_wrapper },
       lualine_x = {},
       lualine_y = {},
-      lualine_z = {}
+      lualine_z = { require("opencode").statusline }
     },
 
     inactive_winbar = {

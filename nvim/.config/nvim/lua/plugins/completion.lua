@@ -15,13 +15,18 @@ return {
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lua",
       "kdheepak/cmp-latex-symbols",
-    -- Luasnip
-    {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp"
+   {
+      'tzachar/cmp-ai',
+          dependencies = 'nvim-lua/plenary.nvim',
+          config = function ()
+            require("user.cmp-ai").init_local_ai_qwen3()
+         end
+      },
+  {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- install jsregexp (optional!).
+      build = "make install_jsregexp"
     },
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
@@ -59,6 +64,7 @@ return {
             with_text = true,
             menu = {
               buffer = "[buf]",
+              cmp_ai = "[AI]",
               nvim_lsp = "[LSP]",
               nvim_lua = "[api]",
               path = "[path]",
@@ -94,6 +100,7 @@ return {
               return true
             end,
           },
+          --{ name = 'cmp_ai' },
           { name = 'nvim_lua' },
           { name = 'latex_symbols' },
           { name = 'luasnip' },
