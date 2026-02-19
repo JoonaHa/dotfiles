@@ -22,6 +22,9 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 
 
+
+font pango:UbuntuMono Nerd Font 10
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
