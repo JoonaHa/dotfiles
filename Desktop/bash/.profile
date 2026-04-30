@@ -59,7 +59,7 @@ export MANGOHUD=1
 # MANROFFOPT for ANSI escapes https://github.com/sharkdp/bat/issues/652#issuecomment-529032263
 export MANROFFOPT="-c"; export MANPAGER="sh -c 'col -bx | bat -pl man'"
 
-export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORMTHEME=qt6ct
 
 alias enchant='enchant-2'
 
