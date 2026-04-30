@@ -207,8 +207,8 @@ vnoremap g<A-x> g<C-x>
 nmap å `
 
 " Remap terminal exit
-noremap <Esc> <C-\><C-n>
-noremap <C-space> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-space> <C-\><C-n>
 
 " Center cursor when scrolling up or down
 nnoremap <C-d> <C-d>zz
