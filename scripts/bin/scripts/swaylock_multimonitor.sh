@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#set -x
+set -x
 
 MONITOR_DATA=$(wlr-randr | awk '
   /^[^[:space:]]/ {
@@ -19,7 +19,7 @@ MONITOR_DATA=$(wlr-randr | awk '
 LOCKARGS=""
 while read -r monitor _ _ _ _; do
     IMAGE=/tmp/$monitor-lock.png
-    grim -o $monitor $IMAGE
+    grim -o "$monitor" "$IMAGE"
     convert "$IMAGE" -scale 10% -scale 1000% "$IMAGE"
     LOCKARGS="${LOCKARGS} --image ${monitor}:${IMAGE}"
     IMAGES="${IMAGES} ${IMAGE}"
@@ -28,4 +28,4 @@ done <<< "$MONITOR_DATA"
 
 #dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
 swaylock $LOCKARGS -f
-rm $IMAGES
+#rm $IMAGES
