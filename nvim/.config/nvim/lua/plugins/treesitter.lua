@@ -1,24 +1,36 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "HiPhish/rainbow-delimiters.nvim"
     },
     build = ":TSUpdate",
     lazy = false,
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          -- Enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+      local ensureInstalled = require('variables').treesitter_grammar
+      local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+      local parsersToInstall = vim.iter(ensureInstalled)
+        :filter(function(parser)
+          return not vim.tbl_contains(alreadyInstalled, parser)
+        end)
+        :totable()
+      require('nvim-treesitter').install(parsersToInstall)
+    end,
     config = function ()
-      local configs = require("nvim-treesitter.configs")
+      local configs = require("nvim-treesitter")
         -- Add languages to be installed here that you want installed for treesitter
       configs.setup({
-        ensure_installed = require('variables').treesitter_grammar,
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = true,
-        },
 
-        indent = { enable = true },
         autotag = { enable = true },
 
         incremental_selection = {
@@ -170,6 +182,7 @@ return {
   },
   {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main",
       dependencies = {
         "nvim-treesitter/nvim-treesitter",
       }
