@@ -41,11 +41,11 @@ set $term alacritty
 
 ### Output configuration
 #
+# Dynamic output
+exec sleep 1 && kanshi
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg fill
-output eDP-1 mode 1920x1080@60.049HZ
-# Dynamic output
-exec kanshi
+#output eDP-1 mode 1920x1080@60.049HZ
 #
 # Example configuration:
 #
@@ -62,8 +62,8 @@ exec swayidle -w \
               resume '/home/mina/bin/scripts/brightnessctrl.sh' \
 	 timeout 300 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         timeout 310 '/home/mina/bin/scripts/i3lock_laptop.sh' \
-         before-sleep '/home/mina/bin/scripts/i3lock_laptop.sh'
+         timeout 310 '/home/mina/bin/scripts/swaylock_multimonitor-laptop.sh' \
+         before-sleep '/home/mina/bin/scripts/swaylock_multimonitor-laptop.sh'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -71,7 +71,7 @@ exec swayidle -w \
 
 
 # Lock screen
-bindsym $mod+Mod1+l exec /home/mina/bin/scripts/i3lock_laptop.sh
+bindsym $mod+Mod1+l exec /home/mina/bin/scripts/swaylock_multimonitor-laptop.sh
 ### Input configuration
 #
 # Example configuration:
@@ -324,8 +324,8 @@ exec --no-startup-id /usr/bin/lxpolkit
 #exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id /usr/lib/policykit-1/polkitd --no-debug
 # Backup keepass files locally and mount GoogleDrive for normal use
-exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
-exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
+#exec_always rclone copyto GoogleDrive:/Salasanat.kdbx ~/Asiakirjat/Salasanat.kdbx &!
+#exec_always rclone copyto GoogleDrive:/Salasanat.old.kdbx ~/Asiakirjat/Salasanat.old.kdbx &!
 
 # Floating programs
 for_window [class="Pavucontrol"] floating enable
