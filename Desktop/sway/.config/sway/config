@@ -75,8 +75,8 @@ exec swayidle -w \
 #              resume '/home/mina/.bin/scripts/brightnessctrl.sh' \
      timeout 300 'swaymsg "output * dpms off"' \
           resume 'swaymsg "output * dpms on"' \
-     timeout 310 '/home/mina/.bin/scripts/i3lock.sh' \
-     before-sleep '/home/mina/.bin/scripts/i3lock.sh'
+     timeout 310 '/home/mina/bin/scripts/swaylock_multimonitor.sh' \
+     before-sleep '/home/mina/bin/scripts/swaylock_multimonitor.sh'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
