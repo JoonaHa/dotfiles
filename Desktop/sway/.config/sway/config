@@ -51,10 +51,15 @@ set $mon2 HDMI-A-1
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-1600903.jpg fill
 
-output $mon2 mode 1920x1080@60Hz
 output $mon1 mode  2560x1440@144Hz
-output $mon2 pos 0 180
 output $mon1 pos  1920 0
+output $mon1 adaptive_sync on
+output $mon1 allow_tearing yes
+output $mon1 render_bit_depth 10
+output $mon1 hdr off
+output $mon2 mode 1920x1080@60Hz
+output $mon2 pos 0 180
+bindsym $mod+Mod1+h exec swaymsg output $mon1 hdr toggle
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -84,7 +89,7 @@ exec swayidle -w \
 
 
 # Lock screen
-bindsym $mod+Mod1+l exec /home/mina/bin/scripts/i3lock_laptop.sh
+bindsym $mod+Mod1+l exec /home/mina/bin/scripts/swaylock_multimonitor.sh
 ### Input configuration
 #
 # Example configuration:
@@ -376,10 +381,10 @@ bindsym $mod+F5 exec pavucontrol
 # SwayFX stuff:
 #
 # SwayFX has window blurring, which gives a blurry transparency to window backgrounds.
-blur enable
-blur_xray disable # Window blurring can either be truly transparent, with other apps visible behind the window, or blur according to the wallpaper. blur_xray enables wallpaper blurring. 
-blur_passes 4
-blur_radius 4
+#blur enable
+#blur_xray disable # Window blurring can either be truly transparent, with other apps visible behind the window, or blur according to the wallpaper. blur_xray enables wallpaper blurring. 
+#blur_passes 4
+#blur_radius 4
 # blur_noise <float value 0 - 1>
 # blur_brightness <float value 0 - 2>
 # blur_contrast <float value 0 - 2>
@@ -387,12 +392,12 @@ blur_radius 4
 
 # Window corners can be rounded in SwayFX
 # corner_radius can be any number of pixels
-corner_radius 15
-smart_corner_radius enable
+#corner_radius 15
+#smart_corner_radius enable
 
 # SwayFX also features window drop shadows, which, of course, can be enabled at any time
-shadows enable
-shadows_on_csd enable
+#shadows enable
+#shadows_on_csd enable
 
 # You can also offset the shadow's position, make unfocused windows have different shadows, give shadows a nondefault color, and blur shadows
 # shadow_inactive_color #0000007F
