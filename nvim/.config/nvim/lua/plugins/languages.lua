@@ -12,10 +12,23 @@ return {
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     -- See https://github.com/iamcco/markdown-preview.nvim/issues/690
-    build = function() 
-        vim.cmd [[Lazy load markdown-preview.nvim]]
-        vim.fn["mkdp#util#install"]()
-    end,
+    build = ":call mkdp#util#install()",
+    init = function()
+        ---Fixes "No command :MarkdownPreview"
+        ---https://github.com/iamcco/markdown-preview.nvim/issues/585#issuecomment-1724859362
+        local function load_then_exec(cmd)
+          return function()
+            vim.cmd.delcommand(cmd)
+            require("lazy").load({ plugins = { "markdown-preview.nvim" } })
+            vim.api.nvim_exec_autocmds("BufEnter", {}) -- commands appear only after BufEnter
+            vim.cmd(cmd)
+          end
+        end
+
+        for _, cmd in pairs({ "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" }) do
+          vim.api.nvim_create_user_command(cmd, load_then_exec(cmd), {})
+        end
+    end
   },
   {
     "lervag/vimtex",

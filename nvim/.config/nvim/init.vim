@@ -28,6 +28,7 @@ set number
 set ignorecase
 set smartcase
 "syntax enable Breaks netrw URL open
+syntax on
 filetype plugin indent on
 set showmatch
 set autoindent
