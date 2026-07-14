@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#set -x
+set -ex
 
 MONITOR_DATA=$(wlr-randr | awk '
   /^[^[:space:]]/ {
@@ -20,7 +20,7 @@ LOCKARGS=""
 while read -r monitor _ _ _ _; do
     IMAGE=/tmp/$monitor-lock.png
     grim -o "$monitor" "$IMAGE"
-    if [ -f $IMAGE ]
+    if [ -f "$IMAGE" ]
     then 
       convert "$IMAGE" -scale 10% -scale 1000% "$IMAGE"
       LOCKARGS="${LOCKARGS} --image ${monitor}:${IMAGE}"
@@ -28,6 +28,7 @@ while read -r monitor _ _ _ _; do
     else
       LOCKARGS="-c 000000"
       NORM=1
+    fi
 done <<< "$MONITOR_DATA"
 
 
@@ -35,5 +36,5 @@ done <<< "$MONITOR_DATA"
 swaylock -f $LOCKARGS
 if [ -z  "$NORM" ]
 then
-    rm $IMAGES
+    rm "$IMAGES"
 fi
