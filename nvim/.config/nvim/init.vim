@@ -231,7 +231,11 @@ map <C-a> ggVG
 "    augroup END
 "    noremap "+P :r!/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard<CR>
 "endif
-"
+
+" Copy path to clipboard
+nnoremap <leader>fp :let @+=expand("%")<CR>
+nnoremap <leader>fa :let @+=expand("%:p")<CR>
+nnoremap <leader>fn :let @+=fnamemodify(expand("%"), ":~:.") . ":" . line(".")<CR>
 "=================Hexmode================"
 " ex command for togling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()

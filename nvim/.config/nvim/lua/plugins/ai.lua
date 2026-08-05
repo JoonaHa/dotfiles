@@ -3,32 +3,6 @@ return
   {
     "nickjvandyke/opencode.nvim",
     version = "*", -- Latest stable release.
-    dependencies = {
-      {
-        -- `snacks.nvim` integration is recommended, but optional.
-        ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
-        "folke/snacks.nvim",
-        opts = {
-          -- Enhances `ask()`.
-          input = {},
-          -- Enhances `select()`.
-          picker = {
-            actions = {
-              opencode_send = function(...) return require('opencode').snacks_picker_send(...) end,
-            },
-            win = {
-              input = {
-                keys = {
-                  ['<a-a>'] = { 'opencode_send', mode = { 'n', 'i' } },
-                },
-              },
-            },
-          },
-          -- Enables the `snacks` provider.
-          terminal = {},
-        }
-      },
-    },
     config = function()
       ---@type opencode.Opts
       vim.g.opencode_opts = {
@@ -56,9 +30,65 @@ return
     end,
   },
   {
+    "carlos-algms/agentic.nvim",
+
+    opts = {
+      -- Any ACP-compatible provider works. Built-in: "claude-agent-acp" | "gemini-acp" | "codex-acp" | "opencode-acp" | "cursor-acp" | "copilot-acp" | "auggie-acp" | "mistral-vibe-acp" | "cline-acp" | "goose-acp" | "kiro-acp" | "pi-acp"
+      provider = "kiro-acp", -- setting the name here is all you need to get started
+    },
+
+    -- these are just suggested keymaps; customize as desired
+    keys = {
+      {
+        "<leader>at",
+        function() require("agentic").toggle() end,
+        mode = { "n" },
+        desc = "Toggle Agentic Chat"
+      },
+      {
+        "<leader>as",
+        function() require("agentic").add_selection_or_file_to_context() end,
+        mode = { "n", "v" },
+        desc = "Add file or selection to Agentic to Context"
+      },
+      {
+        "<leader>an",
+        function() require("agentic").new_session() end,
+        mode = { "n" },
+        desc = "New Agentic Session"
+      },
+      {
+        "<leader>ar",
+        function()
+            require("agentic").restore_session()
+        end,
+        desc = "Agentic Restore session",
+        silent = true,
+        mode = { "n" },
+      },
+      {
+        "<leader>ad", -- ai Diagnostics
+        function()
+            require("agentic").add_current_line_diagnostics()
+        end,
+        desc = "Add current line diagnostic to Agentic",
+        mode = { "n" },
+      },
+      {
+        "<leader>aD", -- ai all Diagnostics
+        function()
+            require("agentic").add_buffer_diagnostics()
+        end,
+        desc = "Add all buffer diagnostics to Agentic",
+        mode = { "n" },
+      },
+    },
+  },
+  {
     "Cannon07/code-preview.nvim",
     config = function()
       require("code-preview").setup()
     end,
   }
 }
+
