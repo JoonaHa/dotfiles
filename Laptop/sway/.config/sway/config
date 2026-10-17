@@ -60,9 +60,8 @@ output * bg /home/mina/Kuvat/wolf-digital-art-night-dark-calm-blue-night-sky-160
 exec swayidle -w \
          timeout 60 '/home/mina/bin/scripts/brightnessctrl.sh 5' \
               resume '/home/mina/bin/scripts/brightnessctrl.sh' \
-	 timeout 300 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         timeout 310 '/home/mina/bin/scripts/swaylock_multimonitor-laptop.sh' \
+         timeout 90 '/home/mina/bin/scripts/swaylock_multimonitor-laptop.sh' \
+	 timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep '/home/mina/bin/scripts/swaylock_multimonitor-laptop.sh'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
